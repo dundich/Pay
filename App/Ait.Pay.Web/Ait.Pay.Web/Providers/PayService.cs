@@ -51,9 +51,9 @@ namespace Ait.Pay.Web.Providers
             return await cfg.GetPayDoctor<List<PaySlot>, PayGetDoctorVisitSlots>("GetDoctorVisitSlots", criteria);
         }
 
-        public async Task<List<PayVisitInfo>> GetDoctorVisits(PayGetDoctorVisits criteria)
+        public async Task<List<PayDoctorVisitInfo>> GetDoctorVisits(PayGetDoctorVisits criteria)
         {
-            return await cfg.GetPayDoctor<List<PayVisitInfo>, PayGetDoctorVisits>("GetDoctorVisits", criteria);
+            return await cfg.GetPayDoctor<List<PayDoctorVisitInfo>, PayGetDoctorVisits>("GetDoctorVisits", criteria);
         }
 
         public async Task<List<PayIdValue>> GetPatientDoctorVisits(PayCriteria criteria)

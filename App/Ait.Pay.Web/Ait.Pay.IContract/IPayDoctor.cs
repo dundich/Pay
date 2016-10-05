@@ -122,11 +122,24 @@ namespace Ait.Pay.IContract
     }
 
 
-    public class PayGetDoctorVisits : PayGetDoctor
+    /// <summary>
+    /// Получить визиты
+    /// </summary>
+    public class PayGetDoctorVisits : PayGetDoctorVisitDays
     {
         public string PatientId { get; set; }
 
         public string VisitId { get; set; }
+    }
+
+
+    /// <summary>
+    /// Визит
+    /// </summary>
+    public class PayDoctorVisitInfo : PayVisitInfo
+    {
+        public PayIdValue Doctor { get; set; }
+        public PayIdValue Speciality { get; set; }
     }
 
 
@@ -168,6 +181,6 @@ namespace Ait.Pay.IContract
         Task<PayIdValue> DeleteDoctorVisit(PayCriteria criteria);
 
 
-        Task<List<PayVisitInfo>> GetDoctorVisits(PayGetDoctorVisits criteria);
+        Task<List<PayDoctorVisitInfo>> GetDoctorVisits(PayGetDoctorVisits criteria);
     }
 }

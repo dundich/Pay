@@ -111,26 +111,22 @@ namespace Ait.Pay.IContract
 
     public class PayVisitInfo : PayIdValue
     {
+        public PayIdValue Lpu { get; set; }
+
+        public PayIdValue Patient { get; set; }
+
+        public PayServiceItem Service { get; set; }
 
         public string VisitDate { get; set; }
 
         public string VisitTime { get; set; }
 
-        public string ServiceName { get; set; }
-
-        public string PatientFullName { get; set; }
 
         public string PatientCard { get; set; }
 
         public string PatientBirthdate { get; set; }
 
-        public string DoctorFullName { get; set; }
-
-        public string DoctorSpeciality { get; set; }
-
         public string Room { get; set; }
-
-        public string LpuName { get; set; }
 
         public string LpuAddress { get; set; }
 

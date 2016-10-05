@@ -12,15 +12,15 @@ namespace Ait.Pay.Web
             builder.Register<IShellSettings>(b => ShellFileSettings.CreateWebShellSettings()).SingleInstance();
             builder.RegisterType<PayConfig>().As<IPayConfig>().SingleInstance();
 
-            //LoadDemo(builder);
-            LoadService(builder);
+            LoadDemo(builder);
+            //LoadService(builder);
         }
 
         private static void LoadDemo(ContainerBuilder builder)
         {
-            builder.Register(b => PayHelper.GetFakePayDoctorService());
-            builder.Register(b => PayHelper.GetFakePayResearchService());
-            builder.Register(b => PayHelper.GetFakePayIdentService());
+            builder.Register(b => PayHelper.GetFakePayDoctorService()).SingleInstance();
+            builder.Register(b => PayHelper.GetFakePayResearchService()).SingleInstance();
+            builder.Register(b => PayHelper.GetFakePayIdentService()).SingleInstance();
         }
 
         private static void LoadService(ContainerBuilder builder)

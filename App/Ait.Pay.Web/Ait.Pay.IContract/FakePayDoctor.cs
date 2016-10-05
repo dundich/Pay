@@ -694,9 +694,25 @@ About =
         }
 
 
-        public Task<List<PayVisitInfo>> GetDoctorVisits(PayGetDoctorVisits criteria)
+        public Task<List<PayDoctorVisitInfo>> GetDoctorVisits(PayGetDoctorVisits criteria)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(new List<PayDoctorVisitInfo>
+            {
+                new PayDoctorVisitInfo
+                {
+                    Id = "23",
+                    Doctor = new PayIdValue { Id = "1", Value = "Бугаева Антон Васильевич" },
+                    Speciality = new PayIdValue{Id = "1", Value = "Акушер" },
+                    Room = "каб 200",
+                    Lpu = "1".PayValue("ЛПУ"),
+                    Service = new PayServiceItem { Id = "1", Value = "приём в кабинете", Price = "300ye" },
+                    VisitDate = DateTime.Today.ToString("yyyy-MM-dd"),
+                    VisitTime = "12:00",
+                    CreatedAt = "2016-04-02",
+                    PatientCard = "123345",
+                    Patient = "1".PayValue("Иванов Иван Иванович")
+                }
+            });
         }
     }
 }
