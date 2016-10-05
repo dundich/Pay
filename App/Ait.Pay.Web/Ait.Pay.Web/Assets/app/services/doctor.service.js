@@ -7,7 +7,8 @@
             GetVisitDays: 'api/PayDoctor/GetVisitDays',
             GetSpecialityList: 'api/PayDoctor/GetSpecialityList',
             GetVisitSlots: 'api/PayDoctor/GetVisitSlots',
-            CreateVisit: 'api/PayDoctor/CreateVisit'
+            CreateVisit: 'api/PayDoctor/CreateVisit',
+            GetVisit: 'api/PayDoctor/GetVisit',
         });
     };
 

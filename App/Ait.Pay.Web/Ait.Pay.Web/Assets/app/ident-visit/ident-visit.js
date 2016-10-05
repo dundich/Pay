@@ -48,7 +48,7 @@
 
                 var p = this.copy();
 
-                save();
+                saveToLoc();
 
                 return identService
                     .Register(p)
@@ -72,7 +72,7 @@
         };
 
 
-        function save() {
+        function saveToLoc() {
             var ctx = self;
             if (ctx.isLocalStorage) {
                 $storage.patient = state.copy();

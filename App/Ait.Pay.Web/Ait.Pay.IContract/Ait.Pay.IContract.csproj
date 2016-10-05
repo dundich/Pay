@@ -40,14 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Fake.cs" />
     <Compile Include="FakeIdent.cs" />
-    <Compile Include="FakePayResearch.cs" />
+    <Compile Include="FakeResearch.cs" />
+    <Compile Include="FakeVisit.cs" />
     <Compile Include="IPayContract.cs" />
     <Compile Include="IPayIdent.cs" />
     <Compile Include="IPayDoctor.cs" />
     <Compile Include="IPayResearch.cs" />
     <Compile Include="IPay.cs" />
-    <Compile Include="FakePayDoctor.cs" />
+    <Compile Include="FakeDoctor.cs" />
+    <Compile Include="IPayVisit.cs" />
     <Compile Include="PayHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

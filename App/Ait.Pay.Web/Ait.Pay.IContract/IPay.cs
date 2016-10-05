@@ -108,33 +108,5 @@ namespace Ait.Pay.IContract
         public int? ErrorCode { get; set; }
     }
 
-
-    public class PayVisitInfo : PayIdValue
-    {
-        public PayIdValue Lpu { get; set; }
-
-        public PayIdValue Patient { get; set; }
-
-        public PayServiceItem Service { get; set; }
-
-        public string VisitDate { get; set; }
-
-        public string VisitTime { get; set; }
-
-
-        public string PatientCard { get; set; }
-
-        public string PatientBirthdate { get; set; }
-
-        public string Room { get; set; }
-
-        public string LpuAddress { get; set; }
-
-        public string Note { get; set; }
-
-        public string CreatedAt { get; set; }
-
-    }
-
 }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ait.Pay.IContract
 {
-    class FakePayDoctor : IPayDoctor
+    class FakeDoctor : IPayDoctor
     {
         #region Data
         class Data
@@ -694,11 +694,11 @@ About =
         }
 
 
-        public Task<List<PayDoctorVisitInfo>> GetDoctorVisits(PayGetDoctorVisits criteria)
+        public Task<List<PayVisit>> GetDoctorVisits(PayGetVisits criteria)
         {
-            return Task.FromResult(new List<PayDoctorVisitInfo>
+            return Task.FromResult(new List<PayVisit>
             {
-                new PayDoctorVisitInfo
+                new PayVisit
                 {
                     Id = "23",
                     Doctor = new PayIdValue { Id = "1", Value = "Бугаева Антон Васильевич" },

@@ -2,10 +2,10 @@
 
 ; (function (angular, window, document, undefined) {
 
-    var Comp = function ($routeParams, service, emitter) {
+    var Comp = function ($routeParams, $location, $localStorage, service, emitter) {
 
         var state = this.state = {
-            tab: null, //       time-visit|ident-visit|waiting-visit|result-visit
+            tab: null, // time-visit|ident-visit|waiting-visit|result-visit
             doctor: null,
             isLoading: true,
 
@@ -13,24 +13,26 @@
             doctorId: $routeParams.doctorId || null,
             specialityId: $routeParams.specialityId || null,
             slotId: $routeParams.slotId || null,
+            visitId: $routeParams.visitId || null,
             error: null,
             patient: null
         };
 
-        function Load() {
+        function LoadDoctor(doctorId, specialityId) {
             state.isLoading = true;
 
             return service
                 .GetDoctor({
-                    DoctorId: state.doctorId,
-                    SpecialityId: state.specialityId
+                    DoctorId: doctorId,
+                    SpecialityId: specialityId
                 })
                 .success(function (d) {
                     state.doctor = d;
-                    state.tab = 'time-visit';
+                    state.specialityId = specialityId;
+                    state.doctorId = doctorId;
                 })
                 .error(function (e) {
-                    emitter.emit('toastError', e);                    
+                    emitter.emit('toastError', e);
                 })
                 .finally(function () {
                     state.isLoading = false;
@@ -39,16 +41,18 @@
 
 
         this.$onInit = function () {
-            Load().then(function () {
 
-                if (state.canTab('ident-visit')) {
-                    state.tab = 'ident-visit';
-                }
-                else {
-                    state.tab = 'time-visit';
-                }
+            if (state.visitId) {
+                state.setTab('result-visit');
+            }
+            else {
+                LoadDoctor(state.doctorId, state.specialityId).then(function () {
+                    if (!state.setTab('ident-visit')) {
+                        state.setTab('time-visit');
+                    }
+                });
+            }
 
-            });
         };
 
 
@@ -60,12 +64,28 @@
             state.patient = p;
             state.tab = 'waiting-visit';
 
+            $('html, body').animate({ scrollTop: 0 }, 500);
+
             return service
                 .CreateVisit({
                     DoctorId: state.doctorId,
                     SpecialityId: state.specialityId,
                     SlotId: state.slotId,
                     PatientId: p.Id
+                })
+                .success(function (visit) {
+
+                    if (visit.Id) {
+                        var visits = $localStorage.visits || {};
+                        visits[visit.Id] = p.Id;
+                        $localStorage.visits = visits;
+
+                        $location.path("/visit/" + visit.Id);
+                        //state.visitId = visit.Id;
+                        //state.tab = 'result-visit';
+                        //$('html, body').animate({ scrollTop: 0 }, 500);
+                    }
+
                 })
                 .error(function (e) {
                     emitter.emit('toastError', e);
@@ -83,6 +103,15 @@
         });
 
 
+        var off_rv = emitter.on('visitLoaded', function (t, v, d) {
+            if (v.Doctor && v.Speciality) {
+                if (state.doctorId != v.Doctor.Id || state.specialityId != v.Speciality.Id) {
+                    LoadDoctor(v.Doctor.Id, v.Speciality.Id);
+                }
+            }
+        });
+
+
         this.state.canTab = function (t) {
 
             if (state.tab == 'waiting-visit')
@@ -94,7 +123,7 @@
                 case 'ident-visit':
                     return state.slotId;
                 case 'result-visit':
-                    return false;
+                    return state.visitId;
             }
             return false;
         };
@@ -103,23 +132,25 @@
         this.state.setTab = function (t) {
             if (state.canTab(t)) {
                 state.tab = t;
+                return true;
             }
+            return false;
         };
 
 
         this.$onDestroy = function () {
             off_pi.off();
+            off_rv.off();
         };
-
 
     };
 
 
-    Comp.$inject = ['$routeParams', 'doctorService', 'aitEmitter'];
+    Comp.$inject = ['$routeParams', '$location', '$localStorage', 'doctorService', 'aitEmitter'];
 
 
     angular
-      .module('doctor', ['ngRoute', 'ngSanitize', 'doctorService', 'aitEmitter', 'timeVisit', 'identVisit', 'resultVisit'])
+      .module('doctor', ['ngRoute', 'ngSanitize', 'ngStorage', 'doctorService', 'aitEmitter', 'timeVisit', 'identVisit', 'resultVisit'])
 
       .config(['$routeProvider', function ($routeProvider) {
           $routeProvider
@@ -129,11 +160,10 @@
             .when('/doctor/:doctorId/:specialityId/slot/:slotId', {
                 template: '<doctor/>'
             })
-          //.when('/doctor/:doctorId/:specialityId/slot/:slotId/patient/:patientId', {
-          //    template: '<doctor/>'
-          //})
+            .when('/visit/:visitId', {
+                template: '<doctor/>'
+            })
           ;
-
       }])
 
       .component('doctor', {

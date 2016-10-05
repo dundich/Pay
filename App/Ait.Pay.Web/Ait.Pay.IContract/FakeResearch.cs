@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Ait.Pay.IContract
 {
-    class FakePayResearch : IPayResearch
+    class FakeResearch : IPayResearch
     {
         #region Data
         class Data

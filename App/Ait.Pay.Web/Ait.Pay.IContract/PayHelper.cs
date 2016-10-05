@@ -30,24 +30,5 @@ namespace Ait.Pay.IContract
             return new PayIdValue { Id = key, Value = value };
         }
 
-
-
-
-        public static IPayDoctor GetFakePayDoctorService()
-        {
-            return new FakePayDoctor();
-        }
-
-
-        public static IPayResearch GetFakePayResearchService()
-        {
-            return new FakePayResearch();
-        }
-
-        public static IPayIdent GetFakePayIdentService()
-        {
-            return new FakeIdent();
-        }
-
     }
 }

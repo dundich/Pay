@@ -98,7 +98,9 @@ namespace Ait.Pay.IContract
         public string SlotId { get; set; }
     }
 
-
+    /// <summary>
+    /// Получить рабочие дни
+    /// </summary>
     public class PayGetDoctorVisitDays : PayGetDoctor
     {
         /// <summary>
@@ -121,26 +123,6 @@ namespace Ait.Pay.IContract
         public string Date { get; set; }
     }
 
-
-    /// <summary>
-    /// Получить визиты
-    /// </summary>
-    public class PayGetDoctorVisits : PayGetDoctorVisitDays
-    {
-        public string PatientId { get; set; }
-
-        public string VisitId { get; set; }
-    }
-
-
-    /// <summary>
-    /// Визит
-    /// </summary>
-    public class PayDoctorVisitInfo : PayVisitInfo
-    {
-        public PayIdValue Doctor { get; set; }
-        public PayIdValue Speciality { get; set; }
-    }
 
 
     public interface IPayDoctor : IPay
@@ -177,10 +159,5 @@ namespace Ait.Pay.IContract
         /// </summary>
         Task<PayVisitResult> CreateDoctorVisit(PayCreateDoctorVisit criteria);
 
-
-        Task<PayIdValue> DeleteDoctorVisit(PayCriteria criteria);
-
-
-        Task<List<PayDoctorVisitInfo>> GetDoctorVisits(PayGetDoctorVisits criteria);
     }
 }

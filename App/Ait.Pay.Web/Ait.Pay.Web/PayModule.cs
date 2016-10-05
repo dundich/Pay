@@ -18,14 +18,21 @@ namespace Ait.Pay.Web
 
         private static void LoadDemo(ContainerBuilder builder)
         {
-            builder.Register(b => PayHelper.GetFakePayDoctorService()).SingleInstance();
-            builder.Register(b => PayHelper.GetFakePayResearchService()).SingleInstance();
-            builder.Register(b => PayHelper.GetFakePayIdentService()).SingleInstance();
+            builder.Register(b => Fake.Doctor).SingleInstance();
+            builder.Register(b => Fake.Ident).SingleInstance();
+            builder.Register(b => Fake.Research).SingleInstance();
+            builder.Register(b => Fake.Visit).SingleInstance();
         }
 
         private static void LoadService(ContainerBuilder builder)
         {
-            builder.RegisterType<PayService>().As<IPayResearch, IPayDoctor, IPayIdent>().SingleInstance();
+            builder
+                .RegisterType<PayService>()
+                .As<IPayResearch>()
+                .As<IPayDoctor>()
+                .As<IPayIdent>()
+                .As<IPayVisit>()
+                .SingleInstance();
         }
 
     }

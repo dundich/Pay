@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ait.Pay.Web.Providers
 {
-    public class PayService : IPayDoctor, IPayIdent, IPayResearch
+    public class PayService : IPayContract
     {
 
         readonly IPayConfig cfg;
@@ -51,15 +51,6 @@ namespace Ait.Pay.Web.Providers
             return await cfg.GetPayDoctor<List<PaySlot>, PayGetDoctorVisitSlots>("GetDoctorVisitSlots", criteria);
         }
 
-        public async Task<List<PayDoctorVisitInfo>> GetDoctorVisits(PayGetDoctorVisits criteria)
-        {
-            return await cfg.GetPayDoctor<List<PayDoctorVisitInfo>, PayGetDoctorVisits>("GetDoctorVisits", criteria);
-        }
-
-        public async Task<List<PayIdValue>> GetPatientDoctorVisits(PayCriteria criteria)
-        {
-            return await cfg.GetPayDoctor<List<PayIdValue>, PayCriteria>("GetPatientDoctorVisits", criteria);
-        }
 
         public async Task<List<PayIdValue>> GetSpecialityList(PayCriteria criteria)
         {
@@ -77,6 +68,7 @@ namespace Ait.Pay.Web.Providers
 
         //****************
         //  IDENT
+        //***********
         public async Task<List<IContract.PayServiceItem>> GetResearchList(PayCriteria criteria)
         {
             return await cfg.GetPayResearch<List<IContract.PayServiceItem>, PayCriteria>("GetResearchList", criteria);
@@ -97,6 +89,19 @@ namespace Ait.Pay.Web.Providers
             return await cfg.GetPayResearch<List<PayIdValue>, PayCriteria>("GetResearchVisitTimes", criteria);
         }
 
+
+        //****************
+        //  IVISIT
+        //***********
+        public async Task<PayIdValue> DeleteVisit(PayCriteria criteria)
+        {
+            return await cfg.GetPayVisit<PayIdValue, PayCriteria>("DeleteVisit", criteria);
+        }
+
+        public async Task<List<PayVisit>> GetVisits(PayGetVisits criteria)
+        {
+            return await cfg.GetPayVisit<List<PayVisit>, PayCriteria>("GetPayVisit", criteria);
+        }
     }
 
 
@@ -115,6 +120,11 @@ namespace Ait.Pay.Web.Providers
 
 
         internal static async Task<R> GetPayResearch<R, T>(this IPayConfig cfg, string url, T criteria)
+        {
+            return await GetPay<R, T>(cfg, url, criteria);
+        }
+
+        internal static async Task<R> GetPayVisit<R, T>(this IPayConfig cfg, string url, T criteria)
         {
             return await GetPay<R, T>(cfg, url, criteria);
         }
