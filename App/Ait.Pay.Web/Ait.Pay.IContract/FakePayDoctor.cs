@@ -683,9 +683,9 @@ About =
             return l.First();
         }
 
-        public Task<PayOrderResult> CreateDoctorVisit(PayCreateDoctorVisit criteria)
+        public Task<PayVisitResult> CreateDoctorVisit(PayCreateDoctorVisit criteria)
         {
-            return Task.FromResult(new PayOrderResult { Id = "23", Value = "ОК!" });
+            return Task.FromResult(new PayVisitResult { Id = "23", Value = "ОК!" });
         }
 
         public Task<PayIdValue> DeleteDoctorVisit(PayCriteria criteria)
@@ -694,7 +694,7 @@ About =
         }
 
 
-        public Task<List<PayOrderInfo>> GetDoctorVisits(PayGetDoctorVisits criteria)
+        public Task<List<PayVisitInfo>> GetDoctorVisits(PayGetDoctorVisits criteria)
         {
             throw new NotImplementedException();
         }

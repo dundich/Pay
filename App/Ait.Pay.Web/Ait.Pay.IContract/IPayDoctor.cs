@@ -125,6 +125,8 @@ namespace Ait.Pay.IContract
     public class PayGetDoctorVisits : PayGetDoctor
     {
         public string PatientId { get; set; }
+
+        public string VisitId { get; set; }
     }
 
 
@@ -160,12 +162,12 @@ namespace Ait.Pay.IContract
         /// <summary>
         /// Создать визит
         /// </summary>
-        Task<PayOrderResult> CreateDoctorVisit(PayCreateDoctorVisit criteria);
+        Task<PayVisitResult> CreateDoctorVisit(PayCreateDoctorVisit criteria);
 
 
         Task<PayIdValue> DeleteDoctorVisit(PayCriteria criteria);
 
 
-        Task<List<PayOrderInfo>> GetDoctorVisits(PayGetDoctorVisits criteria);
+        Task<List<PayVisitInfo>> GetDoctorVisits(PayGetDoctorVisits criteria);
     }
 }

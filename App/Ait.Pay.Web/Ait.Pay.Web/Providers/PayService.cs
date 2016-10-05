@@ -21,9 +21,9 @@ namespace Ait.Pay.Web.Providers
         /// <summary>
         /// IDOCTOR
         /// </summary>
-        public async Task<PayOrderResult> CreateDoctorVisit(PayCreateDoctorVisit criteria)
+        public async Task<PayVisitResult> CreateDoctorVisit(PayCreateDoctorVisit criteria)
         {
-            return await cfg.GetPayDoctor<PayOrderResult, PayCriteria>("CreateDoctorVisit", criteria);
+            return await cfg.GetPayDoctor<PayVisitResult, PayCriteria>("CreateDoctorVisit", criteria);
         }
 
         public async Task<PayIdValue> DeleteDoctorVisit(PayCriteria criteria)
@@ -51,9 +51,9 @@ namespace Ait.Pay.Web.Providers
             return await cfg.GetPayDoctor<List<PaySlot>, PayGetDoctorVisitSlots>("GetDoctorVisitSlots", criteria);
         }
 
-        public async Task<List<PayOrderInfo>> GetDoctorVisits(PayGetDoctorVisits criteria)
+        public async Task<List<PayVisitInfo>> GetDoctorVisits(PayGetDoctorVisits criteria)
         {
-            return await cfg.GetPayDoctor<List<PayOrderInfo>, PayGetDoctorVisits>("GetDoctorVisits", criteria);
+            return await cfg.GetPayDoctor<List<PayVisitInfo>, PayGetDoctorVisits>("GetDoctorVisits", criteria);
         }
 
         public async Task<List<PayIdValue>> GetPatientDoctorVisits(PayCriteria criteria)

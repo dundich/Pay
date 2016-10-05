@@ -96,7 +96,7 @@ namespace Ait.Pay.IContract
     }
 
 
-    public class PayOrderResult : PayIdValue
+    public class PayVisitResult : PayIdValue
     {
         /// <summary>
         /// -2 (место занято)
@@ -109,7 +109,7 @@ namespace Ait.Pay.IContract
     }
 
 
-    public class PayOrderInfo : PayIdValue
+    public class PayVisitInfo : PayIdValue
     {
 
         public string VisitDate { get; set; }

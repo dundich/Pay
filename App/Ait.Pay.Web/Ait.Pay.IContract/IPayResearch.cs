@@ -31,9 +31,7 @@ namespace Ait.Pay.IContract
         /// личина
         /// </summary>
         public string Avatar { get; set; }
-
     }
-
 
 
     public interface IPayResearch : IPay
