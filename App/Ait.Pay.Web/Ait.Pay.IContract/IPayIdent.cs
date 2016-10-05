@@ -11,7 +11,7 @@ namespace Ait.Pay.IContract
         /// <summary>
         /// yyy-MM-dd
         /// </summary>
-        public string Birthday { get; set; }
+        public string Birthdate { get; set; }
 
         public string Sex { get; set; }
 

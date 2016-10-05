@@ -17,7 +17,7 @@ namespace Ait.Pay.Web.Controllers
             public string LastName { get; set; }
             public string MiddleName { get; set; }
 
-            public string Birthday { get; set; }
+            public string Birthdate { get; set; }
 
             public string Phone { get; set; }
 
@@ -55,7 +55,7 @@ namespace Ait.Pay.Web.Controllers
                 p.FirstName = toName(p.FirstName);
                 p.MiddleName = toName(p.MiddleName);
 
-                p.Birthday = toYMD(Birthday);
+                p.Birthdate = toYMD(Birthdate);
                 p.DocDate = toYMD(DocDate);
 
                 p.Sex = Sex.NoNull(c => c.Id);

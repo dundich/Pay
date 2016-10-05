@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using System;
 
 namespace Ait.Pay.Web.Providers
 {
@@ -52,6 +51,11 @@ namespace Ait.Pay.Web.Providers
             return await cfg.GetPayDoctor<List<PaySlot>, PayGetDoctorVisitSlots>("GetDoctorVisitSlots", criteria);
         }
 
+        public async Task<List<PayOrderInfo>> GetDoctorVisits(PayGetDoctorVisits criteria)
+        {
+            return await cfg.GetPayDoctor<List<PayOrderInfo>, PayGetDoctorVisits>("GetDoctorVisits", criteria);
+        }
+
         public async Task<List<PayIdValue>> GetPatientDoctorVisits(PayCriteria criteria)
         {
             return await cfg.GetPayDoctor<List<PayIdValue>, PayCriteria>("GetPatientDoctorVisits", criteria);
@@ -92,6 +96,7 @@ namespace Ait.Pay.Web.Providers
         {
             return await cfg.GetPayResearch<List<PayIdValue>, PayCriteria>("GetResearchVisitTimes", criteria);
         }
+
     }
 
 

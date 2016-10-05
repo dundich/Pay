@@ -20,7 +20,7 @@
                     FirstName: null,
                     LastName: null,
                     MiddleName: null,
-                    Birthday: null,
+                    Birthdate: null,
                     Sex: null,
                     Phone: null,
                     Email: null,

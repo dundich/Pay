@@ -693,7 +693,8 @@ About =
             throw new NotImplementedException();
         }
 
-        public Task<List<PayIdValue>> GetPatientDoctorVisits(PayCriteria criteria)
+
+        public Task<List<PayOrderInfo>> GetDoctorVisits(PayGetDoctorVisits criteria)
         {
             throw new NotImplementedException();
         }

@@ -106,7 +106,7 @@ namespace Ait.Pay.IContract
         /// </summary>
         public string DateBeg { get; set; }
         /// <summary>
-        /// yyyy-MM-dd
+        /// yyyy-MM-dd (включительно)
         /// </summary>
         public string DateEnd { get; set; }
     }
@@ -119,6 +119,12 @@ namespace Ait.Pay.IContract
         /// yyyy-MM-dd
         /// </summary>
         public string Date { get; set; }
+    }
+
+
+    public class PayGetDoctorVisits : PayGetDoctor
+    {
+        public string PatientId { get; set; }
     }
 
 
@@ -160,9 +166,6 @@ namespace Ait.Pay.IContract
         Task<PayIdValue> DeleteDoctorVisit(PayCriteria criteria);
 
 
-        Task<List<PayIdValue>> GetPatientDoctorVisits(PayCriteria criteria);
-
+        Task<List<PayOrderInfo>> GetDoctorVisits(PayGetDoctorVisits criteria);
     }
-
-
 }
