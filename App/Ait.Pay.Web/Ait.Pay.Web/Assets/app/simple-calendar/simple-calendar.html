@@ -1,0 +1,39 @@
+﻿<div class="current-month">
+    <div class="move-month prev-month" ng-click="prevMonth()">
+        <span ng-show="allowedPrevMonth()">&#x2039;</span>
+    </div>
+    <span>{{ selectedMonth }}</span>
+    &nbsp;
+    <span>{{ selectedYear }}</span>
+    <div class="move-month next-month" ng-click="nextMonth()">
+        <span ng-show="allowedNextMonth()">&#x203a;</span>
+    </div>
+</div>
+
+
+
+<div class="weekdays" style="width: 100%"><div class="weekday">Пн</div><div class="weekday">Вт</div><div class="weekday">Ср</div><div class="weekday">Чт</div><div class="weekday">Пт</div><div class="weekday">Сб</div><div class="weekday">Вс</div></div>
+
+<div>
+    <div ng-repeat="week in weeks track by $index" class="week">
+
+        <div class="day"
+             ng-class="{default: isDefaultDate(date), event: date.event.length > 0, disabled: date.disabled || !date}"
+             ng-repeat="date in week track by $index"
+             ng-click="onClick(date)">
+            <div class="day-number">{{ date.day || "&nbsp;" }}</div>
+
+            <div class="event-title" ng-repeat="events in date.event" ng-if="events.Text">
+                {{ events.Text }}
+            </div>
+
+            <!--
+            <div class="event-title" ng-repeat="events in date.event | limitTo : options.maxEventsPerDay" ng-if="options.multiEventDates">
+                {{ events.Text }}
+                <div ng-if="date.event.length > options.maxEventsPerDay">...</div>
+            </div>
+            <div class="event-title" ng-if="!options.multiEventDates">{{ date.event[0].title || "&nbsp;" }}</div>-->
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,99 @@
+﻿<div class="block-line">
+
+    <div class="container">
+        <div class="row">
+            <div class="col l12">
+
+                <!--<nav>
+                    <div class="nav-wrapper">
+                        <div class="col s12">
+                            <a href="#!" class="breadcrumb">Специалисты</a>
+                            <a href="#!" class="breadcrumb">Кардиолог</a>
+                        </div>
+                    </div>
+                </nav>-->
+
+
+                <h2 class="header">Выберите врача</h2>
+
+                <!--<h2>Стоматологи</h2>-->
+
+
+
+                <span ng-if="$ctrl.state.isLoading"><ait-loading></ait-loading></span>
+
+                <div class="screen screen1">
+                    <div class="row card" ng-repeat="doctor in $ctrl.state.list">
+
+
+                        <div class="col m2 s3">
+
+                            <div class="avatar">
+                                <img ng-if="::doctor.Avatar" class="dp" ng-src="{{::doctor.Avatar}}" />
+
+                                <i ng-if="::(!doctor.Avatar)" class="fa fa-user-md" aria-hidden="true"></i>
+
+                            </div>
+
+
+                            <div class="additional-info  hidden-sm hidden-xs">
+                                <div class="job-age" ng-if="::doctor.JobAge">Стаж {{::doctor.JobAge}}&nbsp;лет</div>
+                                <div class="range" ng-repeat="range in doctor.Ranges">
+                                    {{::range}}
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col m4 s9">
+                            <a href="" ng-class="clickedIndex === doctor.Id ? 'name hero' : 'name'" hero-id="name">{{::doctor.Value}}</a>
+
+                            <p class="doctor-spec">
+
+                                <a href="" class="doctor-spec-item current" ng-repeat="spec in ::doctor.Specialities">{{::spec.Value}}</a>
+                            </p>
+
+
+                            <div class="" ng-bind-html="::doctor.About">
+                            </div>
+
+
+                        </div>
+
+                        <div class="col m6 s12 main">
+                            <div class="lpu" ng-repeat="lpu in ::doctor.LpuList">
+
+                                <lpu-address data="lpu"></lpu-address>
+
+                                <div ng-repeat="room in ::lpu.Rooms">
+                                    <strong><i class="fa fa-clock-o" aria-hidden="true"></i> <room>{{::room.Value}}</room></strong>
+                                    <ul class="prices">
+                                        <li ng-repeat="time in ::room.Times">{{::time.Id}}    <span class="price-value">{{::time.Value}}</span></li>
+                                    </ul>
+                                </div>
+
+                                <div>
+                                    <strong><i class="fa fa-stethoscope" aria-hidden="true"></i> Услуги</strong>
+                                    <ul class="prices">
+                                        <li ng-repeat="service in ::lpu.Services"><a href="#">{{::service.Value}}</a>    <span class="price-value">{{::service.Price}} <i class="fa fa-rub" aria-hidden="true"></i></span></li>
+                                    </ul>
+                                    <!--<p class="prices-added">
+                                        <a href="">+ ещё 12 услуг...</a>
+                                    </p>-->
+                                </div>
+
+                                <p class="accept">
+                                    <a ng-href="#/doctor/{{::doctor.Id}}/{{::$ctrl.state.specialityId}}" class="waves-effect waves-light btn orange">Выбрать</a>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>

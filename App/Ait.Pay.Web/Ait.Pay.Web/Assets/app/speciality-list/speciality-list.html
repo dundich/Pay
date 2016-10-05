@@ -1,0 +1,23 @@
+﻿<div class="block-line">
+
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="section">
+                    <h2 class="header">Выберите специалиста</h2>
+
+                    <span ng-if="$ctrl.state.isLoading"><ait-loading></ait-loading></span>
+
+                    <div class="column" ng-if="$ctrl.state.list">
+                        <ul class="flow-text">
+                            <li ng-repeat="item in ::$ctrl.state.list">
+                                <a ng-href="#/doctor-list/{{::item.Id}}">{{::item.Value}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

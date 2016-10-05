@@ -1,0 +1,108 @@
+﻿
+<div class="col s12 offset-l2 l8">
+
+    <div class="row">
+
+        <form name="form" novalidate ng-submit="submit()" class="col s12">
+
+            <div class="row">
+                <ait-field class="col s12" form="form" caption="Фамилия" ng-model="$ctrl.FirstName" required="true" ait-field-type="fio" ait-focus-on="true">
+                </ait-field>
+
+
+
+                <ait-field class="col s12" form="form" caption="Имя" ng-model="$ctrl.LastName" required="true" ait-field-type="fio">
+                </ait-field>
+
+
+
+                <ait-field class="col s12" form="form" caption="Отчество" ng-model="$ctrl.MiddleName" ait-field-type="fio">
+                </ait-field>
+
+
+
+
+                <ait-field class="col s12 l6" form="form" caption="Дата рождения" ng-model="$ctrl.Birthday" ait-field-type="birthdate" required="true">
+                </ait-field>
+
+                <ait-field class="col s12 l5 offset-l1 sex" form="form" caption="Пол" ng-model="$ctrl.Sex" items-source="$ctrl.state.sexs" ait-field-type="sex" required="true">
+                </ait-field>
+            </div>
+
+            <div class="row">
+                <div class="col s12 for-tab">
+                    Контактые данные
+                </div>
+
+                <ait-field class="col s12 l6" form="form" caption="Телефон" ng-model="$ctrl.Phone" ait-field-type="phone" required="true">
+                </ait-field>
+
+                <ait-field class="col s12 l6" form="form" caption="Email" ng-model="$ctrl.Email" ait-field-type="email" required="true">
+                </ait-field>
+            </div>
+
+
+            <div class="row">
+
+                <div class="col s12 for-tab">
+                    Адрес регистрации
+                </div>
+
+                <ait-field class="col s12" form="form" caption="Выберите регион" ng-model="$ctrl.RegionId" ait-field-type="region" required="true">
+                </ait-field>
+
+                <div ng-show="$ctrl.RegionId">
+                    <ait-field class="col s12" form="form" caption="Адрес" name="address" ng-model="$ctrl.Address" ait-field-type="street" parent-bind="$ctrl.RegionId" required="true">
+                    </ait-field>
+                    <ait-field class="col s4 l4" form="form" caption="Дом" ng-model="$ctrl.House">
+                    </ait-field>
+                    <ait-field class="col s4 l4" form="form" caption="Корп./стр." ng-model="$ctrl.Build">
+                    </ait-field>
+                    <ait-field class="col s4 l4" form="form" caption="Кв." ng-model="$ctrl.Room">
+                    </ait-field>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col s12 for-tab">Паспортные данные</div>
+
+
+                <ait-field class="col l4 s12" form="form" caption="Серия" ait-field-mask="99-99" placeholder="XX-XX" ng-model="$ctrl.DocSer" ait-field-valid="\d\d\-\d\d" required="true">
+                </ait-field>
+
+                <ait-field class="col l4 s12" form="form" caption="Номер" ait-field-mask="999999" placeholder="XXXXXX" ait-field-valid="\d{6}" ng-model="$ctrl.DocNum" required="true">
+                </ait-field>
+
+                <ait-field class="col s12 l4" form="form" caption="Дата выдачи" ng-model="$ctrl.DocDate" ait-field-type="birthdate" required="true">
+                </ait-field>
+
+                <ait-field class="col s12 l8" form="form" caption="Кем выдан" ng-model="$ctrl.DocIssuer">
+                </ait-field>
+            </div>
+
+
+            <p style="margin-top: 34px;">
+                <div class="row">
+                    <div class="col s12 l6">
+                        <ait-loading ng-if="$ctrl.state.isLoading">идет загрузка...</ait-loading>
+                        <ait-error-panel error="$ctrl.state.error">Ошибка:</ait-error-panel>
+                        &nbsp;
+                    </div>
+                    <div class="col s12 l6 right-align">
+                        <button type="submit"
+                                class="btn-large waves-effect waves-light orange"
+                                value="Записаться на приём"
+                                ng-click="$ctrl.state.onSubmit()"
+                                ng-disabled="form.$invalid || $ctrl.state.isLoading">
+                            <span>Записаться на приём</span>
+                        </button>
+                    </div>
+                </div>
+            </p>
+
+        </form>
+    </div>
+
+
+</div>

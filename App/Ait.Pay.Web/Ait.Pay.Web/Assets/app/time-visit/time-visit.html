@@ -1,0 +1,29 @@
+﻿
+<div class="row">
+
+    <ait-loading ng-if="$ctrl.state.isLoading || $ctrl.state.isTimesLoading"></ait-loading>
+
+    <div class="col s12 main" ng-class="{l6:$ctrl.state.times}">
+        <simple-calendar events="$ctrl.state.events" options="$ctrl.calendarOptions"></simple-calendar>
+        <br />
+    </div>
+
+    <div class="col s12 l6" ng-if="$ctrl.state.times || $ctrl.state.isTimesLoading">
+        <div class="times">
+            <div class="times-caption">
+                Записаться на дату: <span class="strong" ng-bind="$ctrl.state.selectEvent.date | date:'dd.MM.yyyy'"></span>
+            </div>
+            <div class="times-items">
+                <div class="times-item" ng-if="$ctrl.state.times" ng-repeat="t in $ctrl.state.times">
+                    <a href="#/doctor/{{::$ctrl.state.doctorId}}/{{::$ctrl.state.specialityId}}/slot/{{::t.Id}}"
+                       ng-class="{orange:$ctrl.state.slotId==t.Id}"
+                       class="waves-effect waves-light btn">
+                        {{::t.Value}}
+                    </a>
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+
+</div>

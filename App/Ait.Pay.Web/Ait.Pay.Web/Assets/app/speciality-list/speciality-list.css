@@ -1,0 +1,12 @@
+speciality-list .column ul {
+    /*-webkit-column-width: 184px;
+    -moz-column-width: 184px;
+    column-width: 184px;*/
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    -webkit-column-gap: 2em;
+    -moz-column-gap: 2em;
+    column-gap: 2em;
+    list-style: none;
+}

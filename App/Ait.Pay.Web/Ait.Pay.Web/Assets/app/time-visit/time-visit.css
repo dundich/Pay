@@ -1,0 +1,30 @@
+﻿time-visit .times-caption {
+    text-align: center;
+    padding: 6px 8px;
+    border-bottom: 1px solid #dddddd;
+}
+
+time-visit ait-loading {
+    display: block;
+    position: absolute;
+    width: 98%;
+    margin-top: 70px;
+}
+
+time-visit .times-items {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+
+time-visit .times-item {
+    border: 7px solid #fff;
+    border-bottom: none;
+    border-left: none;
+    overflow: hidden;
+}
+
+    time-visit .times-item:hover > a {
+        text-decoration: underline !important;
+    }

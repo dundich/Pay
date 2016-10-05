@@ -1,0 +1,27 @@
+﻿<div class="container">
+
+
+    <h3>Войти</h3>
+
+    <p>
+    </p>
+
+    <form ng-submit="signIn()" class="row">
+
+        <div class="col m3 s12">
+            <div class="row">
+                <div class="alert alert-success" ng-show="message == 'ended'"><h4>Due to inactivity, you were logged out automatically.</h4></div>
+            </div>
+            <div class="row"><input class="form-control margin-top-5" type="text" ng-model="username" placeholder="Email" /></div>
+            <div class="row"><input class="form-control margin-top-5" type="password" ng-model="password" placeholder="Пароль" /></div>
+            <div class="row"><p><input class="btn btn-primary margin-top-5" type="submit" value="Войти" /></p></div>
+        </div>
+
+    </form>
+
+    <div class="row">
+        <div class="col m3  s12">
+            <div class="row alert alert-danger margin-top-5" ng-show="showMessage">{{message}}</div>
+        </div>
+    </div>
+</div>

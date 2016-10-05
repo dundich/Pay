@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <meta charset="utf-8" />
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#EE6E73">
+
+    <title>@ViewBag.Title</title>
+
+
+    @Styles.Render("~/Content/font-awesome.css")
+    @Styles.Render("~/Content/css/select2.css")
+
+    @Styles.Render("~/styles")
+
+    @Styles.Render("~/Content/materialize-v0.97.5/css/materialize.css")
+
+    @Scripts.Render("~/jquery")
+
+    @Scripts.Render("~/Content/materialize-v0.97.5/js/materialize.js")
+
+</head>
+
+<body>
+
+    @RenderBody()
+
+
+    @Scripts.Render("~/ng")
+    @Scripts.Render("~/app")
+
+
+    @Scripts.Render("~/misc")
+</body>
+
+
+</html>

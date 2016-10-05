@@ -1,0 +1,1 @@
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Ait.Pay.Web.WebApiApplication" Language="C#" %>

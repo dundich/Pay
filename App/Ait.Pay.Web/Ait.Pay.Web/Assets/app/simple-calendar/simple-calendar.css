@@ -1,0 +1,119 @@
+﻿simple-calendar * {
+    user-select: none;
+}
+
+simple-calendar .calendar {
+    padding: 0;
+    border: 1px solid #dddddd;
+    user-select: none;
+    background-color: #fff;
+}
+
+simple-calendar .move-month {
+    cursor: pointer;
+}
+
+simple-calendar .prev-month {
+    float: left;
+}
+
+simple-calendar .next-month {
+    float: right;
+}
+
+simple-calendar .current-month {
+    text-align: center;
+    padding: 6px 8px;
+    border-bottom: 1px solid #dddddd;
+}
+
+simple-calendar .prev-month, simple-calendar .next-month {
+    width: 3em;
+    background: #f5f5f5;
+}
+
+/* *********************** */
+/* START Week CSS Settings */
+/* *********************** */
+
+/* ********************* */
+/* END Week CSS Settings */
+/* ********************* */
+
+/* ************************** */
+/* START Weekday CSS Settings */
+/* ************************** */
+
+simple-calendar .weekday {
+    text-align: center;
+    padding-right: 10px;
+}
+
+
+/* ************************ */
+/* END Weekday CSS Settings */
+/* ************************ */
+
+simple-calendar .week, simple-calendar .weekdays {
+    display: flex;
+    flex-direction: row;
+    padding-top: 0px;
+}
+
+
+simple-calendar .weekday, .day {
+    width: calc(100% / 7);
+}
+
+simple-calendar .day {
+    height: inherit;
+    padding: 3px 4px;
+    border: 7px solid #fff;
+    border-bottom: none;
+    border-left: none;
+    overflow: hidden;
+    background-color: #fcf8e3;
+    color: #808080;
+    font-size: 120%;
+    min-height: 45px;
+}
+
+
+simple-calendar .day.default .day-number {
+        font-weight: bold;
+}
+
+simple-calendar .day {
+    cursor: default;
+}
+
+
+
+    simple-calendar .day.event {
+        background-color: #009688;
+        color: #fff;
+        cursor: pointer;
+    }
+
+
+        simple-calendar .day.event:hover > .day-number {
+            text-decoration: underline;
+        }
+
+        simple-calendar .day.event:hover {
+            background-color: #007f73;
+        }
+
+
+    simple-calendar .day.disabled {
+        cursor: default;
+        color: #9E9E9E;
+        background-color: white;
+    }
+
+
+simple-calendar .event-title {
+    text-align: center;
+    font-size: 55%;
+    margin: -2px 0;
+}

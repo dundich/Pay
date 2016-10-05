@@ -1,0 +1,24 @@
+﻿research-list ul {
+    list-style: none;
+}
+
+research-list a {
+    /* color: #009688; */
+}
+
+research-list .service:before {
+    content: '→';
+    margin-left: -1em;
+    margin-right: 0.5em;
+}
+
+research-list .service {
+    display: inline-flex;
+    margin: 0.2em 0;
+    margin-left: 1em;
+}
+
+
+research-list .card {
+    padding: 0 20px 20px !important;
+}

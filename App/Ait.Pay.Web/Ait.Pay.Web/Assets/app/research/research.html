@@ -1,0 +1,47 @@
+﻿<div class="container">
+    <div class="row">
+        <div class="col s12">
+            <div class="section">
+                <!--<h2 class="header">Исследование</h2>-->
+
+                <span ng-if="$ctrl.isLoading"><ait-loading></ait-loading></span>
+
+
+                <!-- ngIf: $ctrl.state.isLoading -->
+
+                <h2 class="name" ng-bind="$ctrl.data.Service.Value"></h2>
+
+                <div class="hidden-sm hidden-xs ng-binding" ng-if="$ctrl.data">
+                    <p class="hidden-sm hidden-xs" ng-bind="$ctrl.data.About">
+
+                    </p>
+                </div>
+                <lpu-address data="$ctrl.data"></lpu-address>
+                
+                <div class="card row" >
+
+                    <div class="col m12 visit-guide" ng-switch="$ctrl.mode">
+
+                        <ul class="tabs">
+                            <li class="tab col s4" ng-class="{active:$ctrl.mode=='time-visit'}"><a href="" ng-click="$ctrl.mode='time-visit'">Дата и время</a></li>
+                            <li class="tab col s4" ng-class="{active:$ctrl.mode=='ident-visit'}"><a href="" ng-click="$ctrl.mode='ident-visit'">Идентификация</a></li>
+                            <li class="tab col s4"><a href="" ng-click="$ctrl.mode=''">Результат</a></li>
+                        </ul>
+
+                        <div ng-switch-when="time-visit">
+                            <h3 class="header col s12">Выберите дату и время</h3>
+                            <time-visit></time-visit>
+                        </div>
+
+                        <div ng-switch-when="ident-visit">
+                            <h3 class="header col s12">Пройдите идентификацию{{$ctrl.regionId}}</h3>
+                            <ident-visit region-id="$ctrl.regionId"></ident-visit>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

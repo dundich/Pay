@@ -1,0 +1,29 @@
+﻿<div class="container">
+    <h3>Регистрация</h3>
+
+    <p>        
+    </p>
+
+    <form ng-submit="$ctrl.register()" class="row">
+        <div class="col-md-3">
+            <div class="row"><input class="form-control margin-top-5" type="text" ng-model="$ctrl.username" placeholder="Username" /></div>
+            <div class="row"><input class="form-control margin-top-5" type="password" ng-model="$ctrl.password1" placeholder="Password" /></div>
+            <div class="row"><input class="form-control margin-top-5" type="password" ng-model="$ctrl.password2" placeholder="Confirm Password" /></div>
+            <div class="row">
+                <p>
+                    <input class="btn btn-primary margin-top-5" type="submit" value="Регистрация" />
+                </p>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="list-group margin-top-5" ng-show="$ctrl.showErrorMessage">
+                <li class="list-group-item list-group-item-danger" ng-repeat="$ctrl.message in errorMessages">
+                    {{$ctrl.message}}
+                </li>
+            </ul>
+            <div class="row alert alert-success margin-top-5" ng-show="$ctrl.showSuccessMessage">{{$ctrl.successMessage}}</div>
+        </div>
+    </div>
+</div>

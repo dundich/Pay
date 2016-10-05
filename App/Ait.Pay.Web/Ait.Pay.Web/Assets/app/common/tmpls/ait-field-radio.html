@@ -1,0 +1,18 @@
+﻿<div ng-if="::$ctrl.type" class="ait-field-radio">
+
+    <label for="{{::$ctrl.name}}" ng-bind="::$ctrl.caption"></label>
+
+    <div ng-if="$ctrl.itemsSource" class="ait-field-items">
+        <p ng-repeat="item in ::$ctrl.itemsSource">
+            <input name="{{::$ctrl.name}}" type="radio" id="{{::$ctrl.name + '_' + $index}}" ng-model="$ctrl.bindModel" ng-value="::item" />
+            <label for="{{::$ctrl.name + '_' + $index}}">
+                <ait-field-item item="item" template="{{::$ctrl.aitFieldItemTemplate}}">
+                </ait-field-item>
+            </label>
+        </p>
+    </div>
+
+    <ait-field-error ng-if="$ctrl.required && $ctrl.bindModel==null">
+        <span>Поле обязательно для заполнения</span>
+    </ait-field-error>
+</div>

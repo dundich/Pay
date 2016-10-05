@@ -1,0 +1,118 @@
+﻿
+
+<div class="container">
+    <!--<h2 class="header">Тут доктор</h2>-->
+    <!--<h2>Стоматологи</h2>-->
+
+    <br />
+
+    <div class="card row" ng-if="$ctrl.state.doctor">
+
+        <div class="col s12">
+            <div class="top row">
+
+
+                <div class="col m2 s3">
+
+                    <div class="avatar">
+                        <img ng-if="::$ctrl.state.doctor.Avatar" class="dp" ng-src="{{::$ctrl.state.doctor.Avatar}}" />
+
+                        <i ng-if="(!$ctrl.state.doctor.Avatar)" class="fa fa-user-md" aria-hidden="true"></i>
+
+                    </div>
+
+
+                    <div class="additional-info  hidden-sm hidden-xs">
+                        <div class="job-age" ng-if="::$ctrl.state.doctor.JobAge">Стаж {{::$ctrl.state.doctor.JobAge}}&nbsp;лет</div>
+                        <div class="range" ng-repeat="range in $ctrl.state.doctor.Ranges">
+                            {{::range}}
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="col m10 s12">
+                    <div style="margin-top:30px;" ng-if="$ctrl.state.isLoading"><ait-loading></ait-loading></div>
+
+                    <h2 href="" class="name" hero-id="name">{{::$ctrl.state.doctor.Value}}</h2>
+
+                    <p class="doctor-spec">
+                        <a href="" class="doctor-spec-item current" ng-repeat="spec in ::$ctrl.state.doctor.Specialities">{{::spec.Value}}</a>
+                    </p>
+
+
+                    <div class="hidden-sm hidden-xs" ng-bind-html="::$ctrl.state.doctor.About">
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="col m12 visit-guide">
+                    <br />
+
+                    <ul class="tabs">
+                        <li class="tab col s3" ng-class="{active:$ctrl.state.tab=='time-visit', disabled:!$ctrl.state.canTab('time-visit')}">
+                            <a href="" ng-click="$ctrl.state.setTab('time-visit')">
+                                <num>1</num><act-subj><act>Выберите</act><subj>дату и время</subj></act-subj>
+                            </a>
+                        </li>
+                        <li class="tab col s3" ng-class="{active:$ctrl.state.tab=='ident-visit', disabled:!$ctrl.state.canTab('ident-visit')}">
+                            <a href="" ng-click="$ctrl.state.setTab('ident-visit')">
+                                <num>2</num><act-subj><act>Пройдите</act><subj>идентификацию</subj></act-subj>
+                            </a>
+                        </li>
+                        <li class="tab col s3" ng-class="{active:$ctrl.state.tab=='result-visit', disabled:!$ctrl.state.canTab('result-visit')}">
+                            <a href="" ng-click="$ctrl.state.setTab('result-visit')">
+                                <num>3</num><act-subj><act>Результат</act><subj>записи</subj></act-subj>
+                            </a>
+                        </li>
+                    </ul>
+                    <div ng-switch="$ctrl.state.tab" class="row">
+                        <div class="col s12" ng-switch-when="time-visit">
+                            <h3 class="header">Выберите дату и время</h3>
+                            <time-visit></time-visit>
+                        </div>
+
+                        <div class="col s12" ng-switch-when="ident-visit">
+                            <h3 class="header">Пройдите идентификацию</h3>
+                            <ident-visit is-local-storage="true"></ident-visit>
+                        </div>
+
+                        <div class="col s12" ng-switch-when="waiting-visit">
+                            <h3 class="header">Ждите, идет обработка...</h3>
+                            <div class="row">
+                                <div class="col s12 m6 offset-m3">
+                                    <br />
+                                    <div class="progress">
+                                        <div class="indeterminate"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col s12" ng-switch-when="error-visit">
+                            <h3 class="header">Ошибка записи!</h3>
+                            <div class="row">
+                                <div class="col s12 m6 offset-m3">
+                                    <br />
+                                    <ait-error-panel error="$ctrl.state.error"></ait-error-panel>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col s12" ng-switch-when="result-visit">
+                            <h3 class="header">Результат</h3>
+                            <result-visit></result-visit>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>

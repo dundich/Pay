@@ -1,0 +1,100 @@
+﻿<div class="body" ng-cloak>
+    <header>
+        <nav class="teal">
+
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo" style="padding-left:20px;"> <i class="fa fa-heartbeat" aria-hidden="true"></i> ГКБ 15</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="#/speciality">Врачи</a></li>
+                    <li><a href="#/research-list">Консультации</a></li>
+                    <li ng-show="loggedIn">
+                        <a href="" ng-click="logout()">{{username}} | Выйти</a>
+                    </li>
+                    <li ng-hide="loggedIn">
+                        <a href="#/signin">Войти</a>
+                    </li>
+                    <li ng-hide="loggedIn">
+                        <a href="#/register">Регистрация</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- EXTENDED HEADER with in-app navigation -->
+        <div class="extendednav" id="header-container">
+
+            <!--<div class="clear-both clearfix"></div>-->
+        </div>
+    </header>
+
+    <main>
+        <div ng-view>
+        </div>
+    </main>
+
+
+    <footer class="page-footer teal">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">ГКБ №15 имени О. М. Филатова</h5>
+                    <p class="grey-text text-lighten-4">Адрес: 111539, Москва, ул. Вешняковская, 23</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Контакты</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="#!">+7 (499) 333-33-33</a></li>
+                        <li><a class="grey-text text-lighten-3" href="#!">email: gkb15@mail.ru</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2016 ООО "АИТ"
+                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+        </div>
+    </footer>
+</div>
+
+
+<script type="text/javascript">
+
+    (function ($, window, undefined) {
+        'use strict';
+        $.cfg = $.cfg || { cfg: {} };
+        $.cfg.kladr = '@ViewBag.Settings["Ait.Web.Kladr"]';
+    })(jQuery, window);
+
+</script>
+
+
+@*<div class="container">
+        <div class="row s-head">
+            <div class="col-lg-5 col-md-5 col-sm-6 s-logo">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".masthead">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-icon" href="."><img alt="Brand" src="~/Assets/imgs/logotype.png"></a>
+                <div class="s-trademark h3">
+                    <a href="~/">
+                        <strong>
+                            ГОРОДСКАЯ
+                        </strong> <br />
+                        КЛИНИЧЕСКАЯ <br />
+                        <strong>
+                            БОЛЬНИЦА №15
+                        </strong><br />
+                        <small>имени О.М. Филатова</small>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-7  col-md-7 col-sm-6">
+
+            </div>
+        </div>
+    </div>*@

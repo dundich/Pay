@@ -1,0 +1,20 @@
+﻿<div class="input-field ait-field-street" ng-if="::$ctrl.type">
+
+    <input id="{{::$ctrl.name}}" name="{{::$ctrl.name}}"
+    type="text"
+    ait-kladr-street-region="$ctrl.parentBind"
+    ait-kladr-street="$ctrl.Kladr"
+    ng-init="$ctrl.init()"
+    ng-model="$ctrl.bindModel"
+    ng-class="{invalid: !$ctrl.form[$ctrl.name].$valid, valid: $ctrl.form[$ctrl.name].$valid}"
+    ait-valid="{{$ctrl.valid}}"
+    ait-field-tag ="{{::$ctrl.aitFieldTag}}"
+    autocomplete="{{::($ctrlautocomplete||'off')}}"
+    ng-required="$ctrl.required" />
+
+    <ait-field-error ng-show="!$ctrl.form[$ctrl.name].$valid">
+        <span ng-if="$ctrl.form[$ctrl.name].$error.required">Поле обязательно для заполнения</span>
+        <span ng-if="!$ctrl.form[$ctrl.name].$error.required">значение некорректно</span>
+    </ait-field-error>    
+    <label for="{{::$ctrl.name}}" ng-bind="::$ctrl.caption" class="caption"></label>
+</div>

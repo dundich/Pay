@@ -1,0 +1,13 @@
+﻿<div>
+    <div class="col m6 s12 main">
+        <div ng-repeat="package in ::$ctrl.packages">
+            <div>
+                <h5>Стоимость услуг по специальности → <spec>{{::package.Specification.Value}}</spec></h5>
+                <ul class="prices">
+                    <li ng-repeat="service in ::package.Services"><a href="">{{::service.Value}}</a>    <span class="price-value">{{::service.Price}} <i class="fa fa-rub" aria-hidden="true"></i></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
