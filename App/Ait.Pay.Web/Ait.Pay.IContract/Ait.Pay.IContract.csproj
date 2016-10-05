@@ -48,7 +48,6 @@
     <Compile Include="IPayIdent.cs" />
     <Compile Include="IPayDoctor.cs" />
     <Compile Include="IPayResearch.cs" />
-    <Compile Include="IPay.cs" />
     <Compile Include="FakeDoctor.cs" />
     <Compile Include="IPayVisit.cs" />
     <Compile Include="PayHelper.cs" />
