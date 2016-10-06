@@ -5,9 +5,18 @@ using System.Threading.Tasks;
 
 namespace Ait.Pay.Web
 {
+    /// <summary>
+    /// Pay config
+    /// </summary>
     public interface IPayConfig
     {
+        /// <summary>
+        /// load configuration
+        /// </summary>        
         Task<IDictionary<string, string>> GetSettings();
+        /// <summary>
+        /// reset cache for reload
+        /// </summary>
         void Reset();
     }
 

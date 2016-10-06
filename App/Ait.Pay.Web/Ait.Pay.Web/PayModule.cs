@@ -1,5 +1,5 @@
 ﻿using Ait.Pay.IContract;
-using Ait.Pay.Web.Providers;
+using Ait.Pay.Web.Models;
 using Autofac;
 using Maybe2.Configuration;
 
@@ -12,27 +12,24 @@ namespace Ait.Pay.Web
             builder.Register<IShellSettings>(b => ShellFileSettings.CreateWebShellSettings()).SingleInstance();
             builder.RegisterType<PayConfig>().As<IPayConfig>().SingleInstance();
 
-            LoadDemo(builder);
-            //LoadService(builder);
-        }
-
-        private static void LoadDemo(ContainerBuilder builder)
-        {
+#if (DEBUG && DEMO)
             builder.Register(b => Fake.Doctor).SingleInstance();
             builder.Register(b => Fake.Ident).SingleInstance();
             builder.Register(b => Fake.Research).SingleInstance();
             builder.Register(b => Fake.Visit).SingleInstance();
-        }
 
-        private static void LoadService(ContainerBuilder builder)
-        {
+            builder.RegisterType<PayService>().As<IPayReport>().SingleInstance();
+
+#else
             builder
                 .RegisterType<PayService>()
                 .As<IPayResearch>()
                 .As<IPayDoctor>()
                 .As<IPayIdent>()
                 .As<IPayVisit>()
+                .As<IPayReport>()
                 .SingleInstance();
+#endif
         }
 
     }

@@ -1,13 +1,9 @@
-﻿using System;
-
-namespace Ait.Pay.IContract
+﻿namespace Ait.Pay.IContract
 {
-
-
-
     public static class PayHelper
     {
-        public static PayIdValue SetPropValue(this PayIdValue p, string key, string value)
+        public static T SetPropValue<T>(this T p, string key, string value)
+            where T : PayIdValue
         {
             if (p == null) return null;
 

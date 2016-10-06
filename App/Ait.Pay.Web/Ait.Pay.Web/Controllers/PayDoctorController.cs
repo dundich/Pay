@@ -17,13 +17,6 @@ namespace Ait.Pay.Web.Controllers
 
 
         [HttpPost]
-        public async Task<object> CreateVisit(PayCreateDoctorVisit criteria)
-        {
-            return (await payService.CreateDoctorVisit(criteria));
-        }
-
-
-        [HttpPost]
         public async Task<object> GetSpecialityList()
         {
             return (await payService.GetSpecialityList(new PayCriteria { }))

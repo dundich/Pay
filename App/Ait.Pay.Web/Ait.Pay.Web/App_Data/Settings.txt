@@ -1,2 +1,3 @@
 ﻿Ait.Pay.IContract: http://localhost:6110/pay
 Ait.Web.Kladr: http://localhost/Ait.Web.Kladr/api/
+Ait.Rep.Web: http://localhost/Ait.Rep.Web/api/

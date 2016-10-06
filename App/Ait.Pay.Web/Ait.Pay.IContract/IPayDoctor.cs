@@ -91,12 +91,7 @@ namespace Ait.Pay.IContract
 
 
 
-    public class PayCreateDoctorVisit : PayGetDoctor
-    {
-        public string PatientId { get; set; }
 
-        public string SlotId { get; set; }
-    }
 
     /// <summary>
     /// Получить рабочие дни
@@ -154,10 +149,6 @@ namespace Ait.Pay.IContract
         Task<List<PaySlot>> GetDoctorVisitSlots(PayGetDoctorVisitSlots criteria);
 
 
-        /// <summary>
-        /// Создать визит
-        /// </summary>
-        Task<PayVisitResult> CreateDoctorVisit(PayCreateDoctorVisit criteria);
 
     }
 }

@@ -30,6 +30,8 @@ namespace Ait.Pay.IContract
 
         public string LpuAddress { get; set; }
 
+        public string Contacts { get; set; }
+
         public string Note { get; set; }
 
         public string CreatedAt { get; set; }
@@ -66,11 +68,43 @@ namespace Ait.Pay.IContract
         public int? Kind { get; set; }
     }
 
+
+
+    public class PayVisitResult : PayIdValue
+    {
+        /// <summary>
+        /// -2 (место занято)
+        /// -13 (доступ закрыт)
+        /// -10101 (Мин. срок между назначениями по одной специальности - {0} дн!)
+        /// -10102 (Мин. срок между двумя назначениями пациента - {0} мин.!)
+        /// -666 CRASH
+        /// </summary>
+        public int? ErrorCode { get; set; }
+    }
+
+
+    public class PayCreateDoctorVisit : PayIdValue
+    {
+        public string PatientId { get; set; }
+
+        public string SlotId { get; set; }
+
+        public string DoctorId { get; set; }
+
+        public string SpecialityId { get; set; }
+    }
+
+
     /// <summary>
     /// Работа с визитами
     /// </summary>
     public interface IPayVisit
     {
+
+        /// <summary>
+        /// Создать визит
+        /// </summary>
+        Task<PayVisitResult> CreateDoctorVisit(PayCreateDoctorVisit criteria);
 
         /// <summary>
         /// Удалить

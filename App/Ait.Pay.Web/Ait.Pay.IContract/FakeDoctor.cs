@@ -383,7 +383,7 @@ namespace Ait.Pay.IContract
                 new PayDoctor
                 {
                     Id = "1",
-                    Value = "Андрющенко Ирина Сергеевна",
+                    Value = "Андрющенко Анна Ивановна",
                     Avatar = @"Assets/imgs/doc1.jpg",
                     About =
 @"<p class='hidden-sm hidden-xs'>
@@ -430,7 +430,7 @@ namespace Ait.Pay.IContract
                 },
                 new PayDoctor
                 {
-                    Id = "2", Value = "Бугаева Наталья Васильевна",
+                    Id = "2", Value = "Бугаева Екатерина Ивановна",
                     Avatar = @"Assets/imgs/doc2.jpeg",
                     About =
 @"<p class='hidden-sm hidden-xs'>
@@ -467,7 +467,7 @@ namespace Ait.Pay.IContract
                 },
                 new PayDoctor
                 {
-                    Id = "3", Value = "Вериго Андрей Валерьевич",
+                    Id = "3", Value = "Веригов Антон Валерьевич",
                     About =
 @"<div><p>Заведующий офтальмологическим отделением лазерной микрохирургии стационара дневного пребывания.</p><p>Доцент кафедры офтальмологии им. академика А.П. Нестерова лечебного факультета РНИМУ им. Н.И. Пирогова.</p><p>Исполнительный директор Российского глаукомного общества.</p><p>На базе отделения работает Московский глаукомный центр.</p></div>",
                     JobAge = 12,
@@ -540,7 +540,7 @@ namespace Ait.Pay.IContract
                 },
                 new PayDoctor
                 {
-                    Id = "4", Value = "Гончаренко Оксана Ивановна",
+                    Id = "4", Value = "Гончаренко Зарема Васильевна",
                     About = null,
                     //JobAge = 29,
                     Specialities = new List<PayIdValue> { "1".PayValue("Уролог")  },
@@ -563,7 +563,7 @@ namespace Ait.Pay.IContract
                 },
                 new PayDoctor
                 {
-                    Id = "5", Value = "Дзгоева Зарема Урузмаговна",
+                    Id = "5", Value = "Дзгоева Оксана Урузмаговна",
 About =
 @"<p class='hidden-sm hidden-xs'>
 <h5>О приёме</h5>
@@ -681,38 +681,6 @@ About =
         {
             var l = await GetDoctorList(new PayGetDoctorList { });
             return l.First();
-        }
-
-        public Task<PayVisitResult> CreateDoctorVisit(PayCreateDoctorVisit criteria)
-        {
-            return Task.FromResult(new PayVisitResult { Id = "23", Value = "ОК!" });
-        }
-
-        public Task<PayIdValue> DeleteDoctorVisit(PayCriteria criteria)
-        {
-            throw new NotImplementedException();
-        }
-
-
-        public Task<List<PayVisit>> GetDoctorVisits(PayGetVisits criteria)
-        {
-            return Task.FromResult(new List<PayVisit>
-            {
-                new PayVisit
-                {
-                    Id = "23",
-                    Doctor = new PayIdValue { Id = "1", Value = "Бугаева Антон Васильевич" },
-                    Speciality = new PayIdValue{Id = "1", Value = "Акушер" },
-                    Room = "каб 200",
-                    Lpu = "1".PayValue("ЛПУ"),
-                    Service = new PayServiceItem { Id = "1", Value = "приём в кабинете", Price = "300ye" },
-                    VisitDate = DateTime.Today.ToString("yyyy-MM-dd"),
-                    VisitTime = "12:00",
-                    CreatedAt = "2016-04-02",
-                    PatientCard = "123345",
-                    Patient = "1".PayValue("Иванов Иван Иванович")
-                }
-            });
         }
     }
 }

@@ -5,7 +5,9 @@ namespace Ait.Pay.IContract
 
     public interface IPay { }
 
-
+    /// <summary>
+    /// [HttpPost]
+    /// </summary>
     public interface IPayContract : IPayDoctor, IPayIdent, IPayResearch, IPayVisit, IPay
     {
 
@@ -102,16 +104,4 @@ namespace Ait.Pay.IContract
         public int? TicketCount { get; set; }
     }
 
-
-    public class PayVisitResult : PayIdValue
-    {
-        /// <summary>
-        /// -2 (место занято)
-        /// -13 (доступ закрыт)
-        /// -10101 (Мин. срок между назначениями по одной специальности - {0} дн!)
-        /// -10102 (Мин. срок между двумя назначениями пациента - {0} мин.!)
-        /// -666 CRASH
-        /// </summary>
-        public int? ErrorCode { get; set; }
-    }
 }

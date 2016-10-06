@@ -6,6 +6,5 @@
         public static IPayResearch Research => new FakeResearch();
         public static IPayDoctor Doctor => new FakeDoctor();
         public static IPayIdent Ident => new FakeIdent();
-
     }
 }
