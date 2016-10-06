@@ -33,8 +33,10 @@ namespace Ait.Pay.IContract
                     Service = new PayServiceItem { Id = "1", Value = "приём в кабинете", Price = "300ye" },
                     VisitDate = DateTime.Today.ToString("yyyy-MM-dd"),
                     VisitTime = "12:00",
+                    PatientBirthdate = "2001-03-01",
                     CreatedAt = "2016-04-02 13:33",
                     PatientCard = "123345",
+                    Note = "помятка",
                     Patient = "1".PayValue("Иванов Иван Иванович")
                 }
             };

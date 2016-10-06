@@ -1,7 +1,9 @@
 ﻿using Ait.Pay.IContract;
 using Ait.Pay.Web.Models;
+using Maybe2;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -37,7 +39,7 @@ namespace Ait.Pay.Web.Controllers
         }
 
 
-        public class getReport : PayCriteria
+        public class getReport
         {
             public string VisitId { get; set; }
         }
@@ -51,7 +53,6 @@ namespace Ait.Pay.Web.Controllers
             var visit = (
                 await GetVisits(new PayGetVisits
                 {
-                    LpuId = criteria.LpuId,
                     VisitId = criteria.VisitId
                 }))
                 .FirstOrDefault();
@@ -60,12 +61,41 @@ namespace Ait.Pay.Web.Controllers
             if (visit == null)
                 throw new Exception("Визит не найден!");
 
+            //HARD CODE!
             var rep = await report.report2(new ReportRequest
             {
-                data = ""
+                repId = "ПриглНаКонс",
+                data = new
+                {
+                    пацФИО = visit.Patient.Value,
+                    исслНазвание = visit.Service.NoNull(c => c.Value),
+                    врачФИО = visit.Doctor.NoNull(c => c.Value),
+                    врачСпециальность = visit.Speciality.NoNull(c => c.Value),
+                    врачФИОСпециальность = visit.Doctor.NoNull(c => c.Value) + " " + visit.Speciality.NoNull(c => c.Value),
+                    визитДеньНеделиДата = visit.VisitDate.NoNull(c => c.StrToDate().ToString("ddd, dd.MM.yyyy", new CultureInfo("ru-RU", false))),
+                    местоПриема = visit.Room,
+                    визитВремя = visit.VisitTime,
+                    медкартаНомер = visit.PatientCard,
+                    пацДатаРождения = visit.PatientBirthdate.NoNull(c => c.StrToDate().ToString("dd.MM.yyyy")),
+                    визитСоздан = visit.CreatedAt.NoNull(c => c.StrToDate().ToString("dd.MM.yyyy HH:mm")),
+                    лпуАдрес = visit.LpuAddress,
+                    лпуНаименование = visit.NoNull(c => c.Value),
+                    лпуКонтакты = visit.Contacts,
+                    _распечатанДатаВремя = DateTime.Now.ToString("dd.MM.yyyy"),
+                    визитПамятка = visit.Note
+                }
+                .AsJson(),
+                //lpuId = "GKB15",
+                viewFmt = "pdf"
             });
 
-            return rep;
+            rep.view = rep.baseUrl.ReplaceLoopbackToProxyHost(Request.RequestUri.Host).EnsureTrailingSlash() + rep.view;
+
+            return new
+            {
+                visit = visit,
+                report = rep
+            };
         }
     }
 }

@@ -111,7 +111,8 @@ namespace Ait.Pay.Web.Models
         public async Task<ReportResponse> report2(ReportRequest criteria)
         {
             var setts = await cfg.GetSettings();
-            var url = setts.GetOrDefault(consts.KEY_URL_REP);
+            string key = consts.KEY_URL_REP.Trim();
+            var url = setts.GetOrDefault(key).EnsureTrailingSlash() + "report2";
             return await url.PostAsJson<ReportResponse, ReportRequest>(criteria);
         }
 

@@ -301,6 +301,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\app\result-visit\result-visit.js" />
+    <Content Include="Assets\app\services\visit.service.js" />
     <Content Include="Assets\app\services\ident.service.js" />
     <Content Include="Assets\app\services\research.service.js" />
     <Content Include="Assets\jquery\kladr\jquery.kladr.css" />
