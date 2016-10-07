@@ -82,21 +82,18 @@ namespace Ait.Pay.IContract
     public class PayGetDoctorList : PayCriteria
     {
         public string SpecialityId { get; set; }
-    }
 
-    public class PayGetDoctor : PayGetDoctorList
-    {
+        /// <summary>
+        /// NULL- все
+        /// </summary>
         public string DoctorId { get; set; }
     }
-
-
-
 
 
     /// <summary>
     /// Получить рабочие дни
     /// </summary>
-    public class PayGetDoctorVisitDays : PayGetDoctor
+    public class PayGetDoctorVisitDays : PayGetDoctorList
     {
         /// <summary>
         /// yyyy-MM-dd
@@ -110,12 +107,17 @@ namespace Ait.Pay.IContract
 
 
 
-    public class PayGetDoctorVisitSlots : PayGetDoctor
+    public class PayGetDoctorVisitSlots : PayGetDoctorList
     {
         /// <summary>
         /// yyyy-MM-dd
         /// </summary>
         public string Date { get; set; }
+
+        /// <summary>
+        /// NULL -> all
+        /// </summary>
+        public string SlotId { get; set; }
     }
 
 
@@ -128,14 +130,9 @@ namespace Ait.Pay.IContract
         Task<List<PayIdValue>> GetSpecialityList(PayCriteria criteria);
 
         /// <summary>
-        /// список докторишек
+        /// список докторишек (Выбрать доктора)
         /// </summary>
         Task<List<PayDoctor>> GetDoctorList(PayGetDoctorList criteria);
-
-        /// <summary>
-        /// Выбрать доктора
-        /// </summary>
-        Task<PayDoctor> GetDoctor(PayGetDoctor criteria);
 
         /// <summary>
         /// Список дней с визитами
@@ -147,8 +144,6 @@ namespace Ait.Pay.IContract
         /// Список доступных времен
         /// </summary>
         Task<List<PaySlot>> GetDoctorVisitSlots(PayGetDoctorVisitSlots criteria);
-
-
 
     }
 }

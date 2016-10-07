@@ -14,7 +14,6 @@ namespace Ait.Pay.IContract
     }
 
 
-
     /// <summary>
     /// На всяк случай...
     /// </summary>
@@ -98,10 +97,26 @@ namespace Ait.Pay.IContract
         public string LpuId { get; set; }
     }
 
-
+    /// <summary>
+    /// Место в расписании
+    /// Value="12:30"
+    /// </summary>
     public class PaySlot : PayIdValue
     {
-        public int? TicketCount { get; set; }
-    }
+        /// <summary>
+        /// где приём
+        /// </summary>
+        public string Room { get; set; }
 
+        /// <summary>
+        /// Дата визита (yyyy-MM-dd)
+        /// </summary>
+        public string DateTime { get; set; }
+
+
+        /// <summary>
+        /// кол-во свободных мест
+        /// </summary>
+        public int? TicketCount { get; set; }        
+    }
 }

@@ -33,9 +33,9 @@ namespace Ait.Pay.Web.Controllers
 
 
         [HttpPost]
-        public async Task<object> GetDoctor(PayGetDoctor criteria)
+        public async Task<object> GetDoctor(PayGetDoctorList criteria)
         {
-            return await payService.GetDoctor(criteria);
+            return (await payService.GetDoctorList(criteria)).FirstOrDefault();
         }
 
 

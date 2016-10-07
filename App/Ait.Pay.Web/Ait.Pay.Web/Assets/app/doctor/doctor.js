@@ -4,10 +4,13 @@
 
     var Comp = function ($routeParams, $location, $localStorage, service, emitter) {
 
+        this.service = service;
+
         var state = this.state = {
             tab: null, // time-visit|ident-visit|waiting-visit|result-visit
             doctor: null,
             isLoading: true,
+
 
             //in
             doctorId: $routeParams.doctorId || null,

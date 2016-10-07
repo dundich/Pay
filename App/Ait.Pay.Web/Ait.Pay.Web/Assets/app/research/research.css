@@ -1,3 +1,32 @@
 ﻿research  .visit-guide .header {
 	text-align: center;
 }
+
+
+research .tabs .tab a {
+    display: flex !important;
+    align-items: center !important;
+    line-height: 1em !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+research a num {
+    font-size: 225%;
+    padding: 0 0.15em;
+}
+
+research a act-subj {
+    display: flex;
+    flex-flow: column;
+    text-align: left;
+}
+
+research a act {
+    font-size: 70%;
+    text-transform: lowercase;
+}
+
+research a subj {
+    line-height: 1.1em;
+}

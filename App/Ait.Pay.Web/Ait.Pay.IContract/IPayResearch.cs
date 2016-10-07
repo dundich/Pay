@@ -5,7 +5,7 @@ namespace Ait.Pay.IContract
 {
 
 
-    public class PayResearchLocation: PayIdValue
+    public class PayResearchLocation : PayIdValue
     {
 
         public PayIdValue Lpu { get; set; }
@@ -33,30 +33,64 @@ namespace Ait.Pay.IContract
         public string Avatar { get; set; }
     }
 
+    /// <summary>
+    /// список услуг
+    /// </summary>
+    public class PayGetResearchList : PayCriteria
+    {
+        /// <summary>
+        /// код исследования
+        /// </summary>
+        public string ResearchId { get; set; }
+    }
+
+
+    /// <summary>
+    /// место оказания услуги (исследования)
+    /// </summary>
+    public class PayGetResearchLocation : PayGetResearchList
+    {
+    }
+
+
+    /// <summary>
+    /// получить доступные дни
+    /// </summary>
+    public class PayGetResearchVisitDays : PayGetResearchLocation
+    {
+        /// <summary>
+        /// yyyy-MM-dd
+        /// </summary>
+        public string DateBeg { get; set; }
+        /// <summary>
+        /// yyyy-MM-dd (включительно)
+        /// </summary>
+        public string DateEnd { get; set; }
+    }
+
+
 
     public interface IPayResearch : IPay
     {
         /// <summary>
         /// список исследований
         /// </summary>        
-        Task<List<PayServiceItem>> GetResearchList(PayCriteria criteria);
+        Task<List<PayServiceItem>> GetResearchList(PayGetResearchList criteria);
 
         /// <summary>
         /// Выбрать исследование
         /// </summary>
-        Task<PayResearchLocation> GetResearchLocation(PayCriteria criteria);
+        Task<PayResearchLocation> GetResearchLocation(PayGetResearchLocation criteria);
 
         /// <summary>
         /// Список дней с визитами
         /// </summary>
-        Task<List<PayIdValue>> GetResearchVisitDays(PayCriteria criteria);
-
+        Task<List<PayVisitDay>> GetResearchVisitDays(PayGetResearchVisitDays criteria);
 
         /// <summary>
         /// Список доступных времен
         /// </summary>
-        Task<List<PayIdValue>> GetResearchVisitTimes(PayCriteria criteria);
-
+        Task<List<PaySlot>> GetResearchVisitSlots(PayCriteria criteria);
     }
 
 

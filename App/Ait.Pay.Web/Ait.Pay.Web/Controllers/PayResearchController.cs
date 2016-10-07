@@ -18,10 +18,9 @@ namespace Ait.Pay.Web.Controllers
 
 
         [HttpPost]
-        [HttpGet]
-        public async Task<object> GetResearchList()
+        public async Task<object> GetResearchList(PayGetResearchList criteria)
         {
-            var list = await payService.GetResearchList(new PayCriteria { });
+            var list = await payService.GetResearchList(criteria);
 
 
             var nodes = list.Select(c => new ForestLink<PayServiceItem> { Id = c.Id, Data = c, ParentId = c.ParentId ?? "" });
@@ -48,10 +47,23 @@ namespace Ait.Pay.Web.Controllers
 
 
         [HttpPost]
-        [HttpGet]
-        public async Task<object> GetResearchLocation()
+        public async Task<object> GetResearchLocation(PayGetResearchLocation criteria)
         {
-            return await payService.GetResearchLocation(new PayCriteria { });
+            return await payService.GetResearchLocation(criteria);
+        }
+
+
+        [HttpPost]
+        public async Task<object> GetVisitDays(PayGetResearchVisitDays criteria)
+        {
+            return await payService.GetResearchVisitDays(criteria);
+        }
+
+
+        [HttpPost]
+        public async Task<object> GetVisitSlots(PayGetDoctorVisitSlots criteria)
+        {
+            return (await payService.GetResearchVisitSlots(criteria)).OrderBy(c => c.Value);
         }
 
     }

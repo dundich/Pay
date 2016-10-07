@@ -4,7 +4,7 @@
 
     <br />
 
-    <div class="card row">
+    <div class="card_ row">
 
         <div class="col s12">
             <div class="top row" ng-if="$ctrl.state.doctor">
@@ -65,7 +65,7 @@
                 <div ng-switch="$ctrl.state.tab">
                     <div ng-switch-when="time-visit">
                         <h3 class="header">Выберите дату и время</h3>
-                        <time-visit></time-visit>
+                        <time-visit service="$ctrl.service"></time-visit>
                     </div>
 
                     <div ng-switch-when="ident-visit">

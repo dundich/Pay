@@ -1,30 +1,26 @@
 ﻿<div class="block-line">
     <div class="container">
-        <div>
-            <div>
-                <div>
-                    <h2 class="header">Выберите исследование</h2>
+        <h2 class="header">Выберите исследование</h2>
 
-                    <span ng-if="$ctrl.state.isLoading"><ait-loading></ait-loading></span>
+        <span ng-if="$ctrl.state.isLoading"><ait-loading></ait-loading></span>
 
-                    <div class="card1 row" ng-repeat="col in $ctrl.state.list">
+        <div class="card1 row" ng-repeat="col in $ctrl.state.list">
 
-                        <div style="padding: 1.4em;"> 
-                            <h4 class="col s12"><a ng-href="#/research">{{::col.Data.Value}}</a></h4>
-                            <div class="col s3" ng-repeat="folder in ::col.Children">
+            <div style="padding: 1.4em;">
+                <h4 class="col s12">{{::col.Data.Value}}</h4>
+                <div class="col s12 m6 l4" ng-repeat="folder in ::col.Children">
 
-                                <h5 ng-if="::folder.Data.IsFolder">{{::folder.Data.Value}}</h5>
-                                <span ng-if="!folder.Data.IsFolder" class="service"><a ng-href="#/research">{{::folder.Data.Value}}</a></span>
+                    <h5 ng-if="::folder.Data.IsFolder"><i class="fa fa-folder-open" aria-hidden="true"></i> {{::folder.Data.Value}}</h5>
+                    <span ng-if="!folder.Data.IsFolder" class="service">
+                        <a ng-href="#/research/{{::folder.Data.Id}}">{{::folder.Data.Value}}</a>
+                    </span>
 
-                                <div ng-repeat="item in ::folder.Children">
-                                    <span class="service"><a ng-href="#/research">{{::item.Data.Value}}</a></span>
-                                </div>
-                            </div>
-                        </div>
-
+                    <div ng-repeat="item in ::folder.Children">
+                        <span class="service"><a ng-href="#/research/{{::item.Data.Id}}">{{::item.Data.Value}}</a></span>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

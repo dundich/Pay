@@ -19,10 +19,9 @@ namespace Ait.Pay.Web.Models
         /// <summary>
         /// IDOCTOR
         /// </summary>
-
-        public async Task<PayDoctor> GetDoctor(PayGetDoctor criteria)
+        public async Task<List<PayIdValue>> GetSpecialityList(PayCriteria criteria)
         {
-            return await GetPay<PayDoctor, PayCriteria>("GetDoctor", criteria);
+            return await GetPay<List<PayIdValue>, PayCriteria>("GetSpecialityList", criteria);
         }
 
         public async Task<List<PayDoctor>> GetDoctorList(PayGetDoctorList criteria)
@@ -32,7 +31,7 @@ namespace Ait.Pay.Web.Models
 
         public async Task<List<PayVisitDay>> GetDoctorVisitDays(PayGetDoctorVisitDays criteria)
         {
-            return await GetPay<List<PayVisitDay>, PayGetDoctor>("GetDoctorVisitDays", criteria);
+            return await GetPay<List<PayVisitDay>, PayGetDoctorList>("GetDoctorVisitDays", criteria);
         }
 
         public async Task<List<PaySlot>> GetDoctorVisitSlots(PayGetDoctorVisitSlots criteria)
@@ -40,11 +39,6 @@ namespace Ait.Pay.Web.Models
             return await GetPay<List<PaySlot>, PayGetDoctorVisitSlots>("GetDoctorVisitSlots", criteria);
         }
 
-
-        public async Task<List<PayIdValue>> GetSpecialityList(PayCriteria criteria)
-        {
-            return await GetPay<List<PayIdValue>, PayCriteria>("GetSpecialityList", criteria);
-        }
 
         //************
         //  IDENT
@@ -58,24 +52,24 @@ namespace Ait.Pay.Web.Models
         //****************
         //  IDENT
         //***********
-        public async Task<List<IContract.PayServiceItem>> GetResearchList(PayCriteria criteria)
+        public async Task<List<PayServiceItem>> GetResearchList(PayGetResearchList criteria)
         {
-            return await GetPay<List<IContract.PayServiceItem>, PayCriteria>("GetResearchList", criteria);
+            return await GetPay<List<PayServiceItem>, PayCriteria>("GetResearchList", criteria);
         }
 
-        public async Task<PayResearchLocation> GetResearchLocation(PayCriteria criteria)
+        public async Task<PayResearchLocation> GetResearchLocation(PayGetResearchLocation criteria)
         {
-            return await GetPay<PayResearchLocation, PayCriteria>("GetResearchLocation", criteria);
+            return await GetPay<PayResearchLocation, PayGetResearchLocation>("GetResearchLocation", criteria);
         }
 
-        public async Task<List<PayIdValue>> GetResearchVisitDays(PayCriteria criteria)
+        public async Task<List<PayVisitDay>> GetResearchVisitDays(PayGetResearchVisitDays criteria)
         {
-            return await GetPay<List<PayIdValue>, PayCriteria>("GetResearchVisitDays", criteria);
+            return await GetPay<List<PayVisitDay>, PayGetResearchVisitDays>("GetResearchVisitDays", criteria);
         }
 
-        public async Task<List<PayIdValue>> GetResearchVisitTimes(PayCriteria criteria)
+        public async Task<List<PaySlot>> GetResearchVisitSlots(PayCriteria criteria)
         {
-            return await GetPay<List<PayIdValue>, PayCriteria>("GetResearchVisitTimes", criteria);
+            return await GetPay<List<PaySlot>, PayCriteria>("GetResearchVisitTimes", criteria);
         }
 
 
@@ -86,11 +80,6 @@ namespace Ait.Pay.Web.Models
         public async Task<PayVisitResult> CreateDoctorVisit(PayCreateDoctorVisit criteria)
         {
             return await GetPay<PayVisitResult, PayCreateDoctorVisit>("CreateDoctorVisit", criteria);
-        }
-
-        public async Task<PayIdValue> DeleteDoctorVisit(PayCriteria criteria)
-        {
-            return await GetPay<PayIdValue, PayCriteria>("DeleteDoctorVisit", criteria);
         }
 
         public async Task<PayIdValue> DeleteVisit(PayCriteria criteria)
@@ -125,8 +114,5 @@ namespace Ait.Pay.Web.Models
             url = setts.GetOrDefault(consts.KEY_URL_PAY).EnsureTrailingSlash() + url;
             return await url.PostAsJson<R, T>(criteria);
         }
-
-
     }
-
 }

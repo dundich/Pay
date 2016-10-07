@@ -22,3 +22,9 @@ research-list .service {
 research-list .card {
     padding: 0 20px 20px !important;
 }
+
+
+research-list .fa-folder-open {
+	font-size: 60%;
+	color: #009688;
+}

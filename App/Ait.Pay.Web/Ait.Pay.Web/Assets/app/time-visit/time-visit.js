@@ -6,11 +6,12 @@
     }
 
 
-    var Comp = function ($scope, $routeParams, service, aitEmitter, aitUtils) {
+    var Comp = function ($scope, $routeParams, $location, aitEmitter, aitUtils) {
 
         var now = new Date();
         var dateToYYYYMMDD = aitUtils.dateToYYYYMMDD;
 
+        var service = this.service;
 
         var state = this.state = {
             events: [],
@@ -18,8 +19,13 @@
             isLoading: true,
             isTimesLoading: false,
 
-            doctorId: $routeParams.doctorId,
-            specialityId: $routeParams.specialityId,
+            path: $location.path(),
+
+            //doctorId: $routeParams.doctorId,
+            //specialityId: $routeParams.specialityId,
+
+
+
             slotId: $routeParams.slotId,
 
             selectEvent: null   //selectEvent.date
@@ -107,15 +113,16 @@
     };
 
 
-    Comp.$inject = ['$scope', '$routeParams', 'doctorService', 'aitEmitter', 'aitUtils'];
+    Comp.$inject = ['$scope', '$routeParams', '$location', 'aitEmitter', 'aitUtils'];
 
 
     angular
-      .module('timeVisit', ['ngRoute', 'ngSanitize', 'doctorService', 'simple-calendar', 'aitEmitter', 'aitUtils'])
+      .module('timeVisit', ['ngRoute', 'ngSanitize', 'simple-calendar', 'aitEmitter', 'aitUtils'])
 
       .component('timeVisit', {
           controller: Comp,
           bindings: {
+              service: '='
           },
           templateUrl: 'Assets/app/time-visit/time-visit.html'
       });

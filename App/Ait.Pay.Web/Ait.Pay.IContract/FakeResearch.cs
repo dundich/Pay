@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Ait.Pay.IContract
@@ -321,7 +324,7 @@ namespace Ait.Pay.IContract
         #endregion
 
 
-        public async Task<List<PayServiceItem>> GetResearchList(PayCriteria criteria)
+        public async Task<List<PayServiceItem>> GetResearchList(PayGetResearchList criteria)
         {
             return await Task.Run(async () =>
             {
@@ -331,18 +334,31 @@ namespace Ait.Pay.IContract
         }
 
 
-        public async Task<List<PayIdValue>> GetResearchVisitDays(PayCriteria criteria)
+        public async Task<List<PayVisitDay>> GetResearchVisitDays(PayGetResearchVisitDays criteria)
         {
             return await Task.Run(async () =>
             {
-                await Task.Delay(2000);
+                await Task.Delay(1000);
 
-                return new List<PayIdValue>
+                DateTime d;
+
+                if (criteria != null && DateTime.TryParseExact(criteria.DateBeg, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out d))
                 {
-                    "1".PayValue("2016-10-01").SetPropValue("Text", "09:00-18:00"),
-                    "2".PayValue("2016-10-1" ).SetPropValue("Text", "10:00-18:00"),
-                    "3".PayValue("2016-10-10").SetPropValue("Text", "10:00-18:00"),
-                    "4".PayValue("2016-10-12").SetPropValue("Text", "10:00-18:00")
+                    DateTime.TryParseExact(criteria.DateBeg, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out d);
+                }
+                else
+                {
+                    d = DateTime.Today;
+                }
+
+                var r = new Random(5);
+
+                return new List<PayVisitDay>
+                {
+                    new PayVisitDay { Id = "1", Value = d.ToString("yyyy-MM-dd"), Text = "09:00-18:00", TicketCount = 1 },
+                    new PayVisitDay { Id = "2", Value = d.AddDays(r.Next(0, 15)).ToString("yyyy-MM-dd"), Text = "09:00-18:00", TicketCount = 1},
+                    new PayVisitDay { Id = "3", Value = d.AddDays(r.Next(0, 15)).ToString("yyyy-MM-dd"), Text = "12:00-13:00", TicketCount = 1},
+                    new PayVisitDay { Id = "4", Value = d.AddDays(r.Next(0, 15)).ToString("yyyy-MM-dd"), Text = "10:00-19:00", TicketCount = 1}
                 };
 
             });
@@ -350,37 +366,39 @@ namespace Ait.Pay.IContract
 
 
 
-        public async Task<List<PayIdValue>> GetResearchVisitTimes(PayCriteria criteria)
+        public async Task<List<PaySlot>> GetResearchVisitSlots(PayCriteria criteria)
         {
             return await Task.Run(async () =>
             {
-                await Task.Delay(2000);
+                await Task.Delay(500);
 
-                return new List<PayIdValue>
+                return new List<PaySlot>
                 {
-                    "1".PayValue("10:10"),
-                    "2".PayValue("10:20"),
-                    "3".PayValue("10:30"),
-                    "4".PayValue("10:40"),
-                    "5".PayValue("11:30"),
-                    "6".PayValue("12:43"),
-                    "7".PayValue("17:20")
+                    new PaySlot { Id="1", Value="10:10", DateTime = "2016-10-02 10:10", Room="каб. 202", TicketCount = 1},
+                    new PaySlot { Id="2", Value="10:20", DateTime = "2016-10-02 10:20", Room="каб. 202", TicketCount = 1},
+                    new PaySlot { Id="3", Value="10:30", DateTime = "2016-10-02 10:30", Room="каб. 202", TicketCount = 1},
+                    new PaySlot { Id="4", Value="10:40", DateTime = "2016-10-02 10:40", Room="каб. 202", TicketCount = 1},
+                    new PaySlot { Id="5", Value="11:30", DateTime = "2016-10-02 11:30", Room="каб. 202", TicketCount = 1},
+                    new PaySlot { Id="6", Value="12:43", DateTime = "2016-10-02 12:43", Room="каб. 202", TicketCount = 1},
+                    new PaySlot { Id="7", Value="17:20", DateTime = "2016-10-02 17:20", Room="каб. 202", TicketCount = 1}
                 };
             });
         }
 
-        public Task<PayResearchLocation> GetResearchLocation(PayCriteria criteria)
+        public Task<PayResearchLocation> GetResearchLocation(PayGetResearchLocation criteria)
         {
             return Task.Run(() =>
-          {
-              return new PayResearchLocation
-              {
+            {
+                var Service = Data.ResearchList.FirstOrDefault(c => c.Id == criteria.ResearchId);
 
-                  Address = new PayIdValue { Value = "111539, Москва, ул. Вешняковская, 23" },
-                  Lpu = new PayIdValue { Id = "GKB15", Value = "Городская клиническая больница №15 имени О. М. Филатова " },
+                return new PayResearchLocation
+                {
+
+                    Address = new PayIdValue { Value = "111539, Москва, ул. Вешняковская, 23" },
+                    Lpu = new PayIdValue { Id = "GKB15", Value = "Городская клиническая больница №15 имени О. М. Филатова " },
 
 
-                  About = @"Колоноскопия – это медицинская процедура, проводимая для оценки состояния поверхности кишки.
+                    About = @"Колоноскопия – это медицинская процедура, проводимая для оценки состояния поверхности кишки.
  Слизь, жидкость, различные наложения на стенках кишки могут скрыть очаг заболевания, изменив
 визуальную картинку - источник информации в диагностике заболеваний кишки.
  Подготовка - важный этап в обследовании, и ее качество - зона Вашей ответственности.
@@ -389,30 +407,30 @@ namespace Ait.Pay.IContract
 соблюдение «жидкостной» диеты за 24 ЧАСА до исследования и лекарственный препарат для комфортной
 очистки кишечника ФОРТРАНС или ФЛИТ ФОСФО-СОДА.",
 
-                  Service = new PayServiceItem { Id = "1", Value = "Колоноскопия", Price = "1000-2000рур" },
+                    Service = Service,
 
-                  Rooms = new List<PayRoom>
-                  {
-                     new PayRoom
-                     {
-                         Value = "каб.505 эт.2",
-                         Times = new List<PayIdValue>
-                         {
-                             "Пн, Ср".PayValue("08:00-12:48"),
-                             "Сб".PayValue("08:00-09:00")
-                         }
-                     },
-                     new PayRoom
-                     {
-                         Value = "каб.102",
-                         Times = new List<PayIdValue>
-                         {
-                             "Вт, Чт".PayValue("14:00-18:00")
-                         }
-                     }
-                }
-              };
-          });
+                    Rooms = new List<PayRoom>
+                    {
+                        new PayRoom
+                        {
+                            Value = "каб.505 эт.2",
+                            Times = new List<PayIdValue>
+                            {
+                                "Пн, Ср".PayValue("08:00-12:48"),
+                                "Сб".PayValue("08:00-09:00")
+                            }
+                        },
+                        new PayRoom
+                        {
+                            Value = "каб.102",
+                            Times = new List<PayIdValue>
+                            {
+                                "Вт, Чт".PayValue("14:00-18:00")
+                            }
+                        }
+                    }
+                };
+            });
         }
     }
 }

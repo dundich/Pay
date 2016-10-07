@@ -3,7 +3,9 @@
     var Service = function (serviceFactory) {
         return serviceFactory({
             GetResearchList: 'api/PayResearch/GetResearchList',
-            GetResearch: 'api/PayResearch/GetResearchLocation'
+            GetResearch: 'api/PayResearch/GetResearchLocation',
+            GetVisitDays: 'api/PayResearch/GetVisitDays',
+            GetVisitSlots: 'api/PayResearch/GetVisitSlots'
         });
     };
 
