@@ -18,6 +18,7 @@ namespace Ait.Pay.Web.Models
             }
         }
 
+
         public static string AsJson<T>(this T obj)
         {
             return JsonConvert.SerializeObject(obj);

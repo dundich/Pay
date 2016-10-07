@@ -1,20 +1,19 @@
 ﻿<div class="block-line">
     <div class="container">
-        <div class="row">
-            <div class="col s12">
-                <div class="section">
+        <div>
+            <div>
+                <div>
                     <h2 class="header">Выберите исследование</h2>
 
                     <span ng-if="$ctrl.state.isLoading"><ait-loading></ait-loading></span>
 
-                    <div class="card1" ng-repeat="col in $ctrl.state.list">
+                    <div class="card1 row" ng-repeat="col in $ctrl.state.list">
 
-
-                        <div class="row flow-text">
-                            <h3 class="col s12"><a ng-href="#/research">{{::col.Data.Value}}</a></h3>
+                        <div style="padding: 1.4em;"> 
+                            <h4 class="col s12"><a ng-href="#/research">{{::col.Data.Value}}</a></h4>
                             <div class="col s3" ng-repeat="folder in ::col.Children">
 
-                                <h4 ng-if="::folder.Data.IsFolder">{{::folder.Data.Value}}</h4>
+                                <h5 ng-if="::folder.Data.IsFolder">{{::folder.Data.Value}}</h5>
                                 <span ng-if="!folder.Data.IsFolder" class="service"><a ng-href="#/research">{{::folder.Data.Value}}</a></span>
 
                                 <div ng-repeat="item in ::folder.Children">
