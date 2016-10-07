@@ -1,11 +1,18 @@
-﻿<div class="row">
-    <div class="col s12 main">
+﻿<div class="row1">
+    <div class="col1 s121 main">
         <div class="progress">
             <div class="indeterminate"></div>
         </div>
-
         <div id="content-report">
 
+        </div>
+        <div ng-if="$ctrl.state.error">
+            <h3 class="header">Упс! Ошибка...</h3>
+            <ait-error-panel error="$ctrl.state.error">Ошибка:</ait-error-panel>
+            <p style="text-align:center;">
+                <br />
+                <a class="waves-effect waves-light btn-large orange" ng-href="#"> <i class="fa fa-home" aria-hidden="true"></i> На главную</a>
+            </p>
         </div>
     </div>
 </div>

@@ -14,7 +14,10 @@
 
 
         function Load(visitId) {
+
             state.isLoading = true;
+            state.error = null;
+
             return service
                 .GetReport({
                     VisitId: visitId
@@ -37,13 +40,12 @@
                         scrolling: 'no'
                     }).appendTo(rhost);
 
-                    setTimeout(function () {
-                        $(".progress").hide();
-                    }, 2000);
+                    setTimeout(hideProgress, 2000);
 
                     emitter.emit('resultVisitLoaded', data);
                 })
                 .error(function (e) {
+                    state.error = e;
                     state.isLoading = false;
                     hideProgress();
                 });
@@ -59,7 +61,7 @@
     Comp.$inject = ['$routeParams', '$location', 'visitService', 'aitEmitter'];
 
     angular
-      .module('resultVisit', ['visitService'])
+      .module('resultVisit', ['aitUI', 'visitService'])
 
       .component('resultVisit', {
           controller: Comp,
