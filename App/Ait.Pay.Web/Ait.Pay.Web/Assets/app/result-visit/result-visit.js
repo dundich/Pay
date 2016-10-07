@@ -1,15 +1,16 @@
 ﻿; (function (angular, window, document, undefined) {
 
-    var Comp = function ($routeParams, $location, service, emitter) {
+    var Comp = function ($routeParams, $timeout, $location, service, emitter) {
 
         var state = this.state = {
             isLoading: true,
             visitId: $routeParams.visitId || null,
-            error: null
+            error: null,
+            data: null
         };
 
-        function hideProgress() {
-            $(".progress").hide();
+        function hideProgress() {            
+            state.isLoading = false;
         }
 
 
@@ -24,6 +25,8 @@
                 })
                 .success(function (data) {
 
+                    state.data = data;
+
                     var repUri = data.report.view;
                     var rhost = $('#content-report');
 
@@ -35,12 +38,12 @@
                         src: repUri,
                         id: 'reportFrame',
                         width: '100%',
-                        height: '1200px',
+                        height: '600px',
                         frameborder: 0,
                         scrolling: 'no'
                     }).appendTo(rhost);
 
-                    setTimeout(hideProgress, 2000);
+                    $timeout(hideProgress, 2000);                    
 
                     emitter.emit('resultVisitLoaded', data);
                 })
@@ -50,6 +53,7 @@
                     hideProgress();
                 });
         };
+        
 
         this.$onInit = function () {
             Load(state.visitId);
@@ -58,7 +62,7 @@
     };
 
 
-    Comp.$inject = ['$routeParams', '$location', 'visitService', 'aitEmitter'];
+    Comp.$inject = ['$routeParams', '$timeout', '$location', 'visitService', 'aitEmitter'];
 
     angular
       .module('resultVisit', ['aitUI', 'visitService'])

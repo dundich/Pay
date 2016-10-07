@@ -42,6 +42,7 @@ doctor-list .doctor-spec {
 
 doctor-list .address {
     text-align: center;
+    color: gray;
 }
 
 doctor-list .additional-info {

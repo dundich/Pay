@@ -297,6 +297,7 @@
     <Content Include="Assets\app\lpu-address\lpu-address.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\app\result-visit\result-visit.css" />
     <Content Include="Assets\app\result-visit\result-visit.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
