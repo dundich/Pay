@@ -19,13 +19,6 @@
             isLoading: true,
             isTimesLoading: false,
 
-            path: $location.path(),
-
-            //doctorId: $routeParams.doctorId,
-            //specialityId: $routeParams.specialityId,
-
-
-
             slotId: $routeParams.slotId,
 
             selectEvent: null   //selectEvent.date
