@@ -69,6 +69,21 @@ namespace Ait.Pay.IContract
     }
 
 
+    public class PayGetResearchVisitSlots : PayGetResearchLocation
+    {
+        /// <summary>
+        /// yyyy-MM-dd
+        /// </summary>
+        public string Date { get; set; }
+
+        /// <summary>
+        /// NULL -> all
+        /// </summary>
+        public string SlotId { get; set; }
+    }
+
+
+
 
     public interface IPayResearch : IPay
     {
@@ -90,7 +105,7 @@ namespace Ait.Pay.IContract
         /// <summary>
         /// Список доступных времен
         /// </summary>
-        Task<List<PaySlot>> GetResearchVisitSlots(PayCriteria criteria);
+        Task<List<PaySlot>> GetResearchVisitSlots(PayGetResearchVisitSlots criteria);
     }
 
 

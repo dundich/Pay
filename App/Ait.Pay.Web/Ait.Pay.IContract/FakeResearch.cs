@@ -366,7 +366,7 @@ namespace Ait.Pay.IContract
 
 
 
-        public async Task<List<PaySlot>> GetResearchVisitSlots(PayCriteria criteria)
+        public async Task<List<PaySlot>> GetResearchVisitSlots(PayGetResearchVisitSlots criteria)
         {
             return await Task.Run(async () =>
             {

@@ -84,9 +84,6 @@
                         $localStorage.visits = visits;
 
                         $location.path("/visit/" + visit.Id);
-                        //state.visitId = visit.Id;
-                        //state.tab = 'result-visit';
-                        //$('html, body').animate({ scrollTop: 0 }, 500);
                     }
 
                 })

@@ -61,7 +61,7 @@ namespace Ait.Pay.Web.Controllers
 
 
         [HttpPost]
-        public async Task<object> GetVisitSlots(PayGetDoctorVisitSlots criteria)
+        public async Task<object> GetVisitSlots(PayGetResearchVisitSlots criteria)
         {
             return (await payService.GetResearchVisitSlots(criteria)).OrderBy(c => c.Value);
         }

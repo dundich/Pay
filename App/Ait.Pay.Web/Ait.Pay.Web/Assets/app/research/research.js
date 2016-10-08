@@ -3,7 +3,7 @@
 ; (function (angular, window, document, undefined) {
 
     'use strict';
-    var Comp = function ($routeParams, service) {
+    var Comp = function ($routeParams, $location, $localStorage, service, emitter) {
 
         this.service = service;
 
@@ -42,6 +42,7 @@
 
 
             Load().then(function () {
+
                 if (!state.setTab('ident-visit')) {
                     state.setTab('time-visit');
                 }
@@ -75,19 +76,68 @@
             return false;
         };
 
+        function CreateVisit(p) {
 
+            if (!p || !p.Id) return;
+
+            state.patient = p;
+            state.tab = 'waiting-visit';
+
+            $('html, body').animate({ scrollTop: 0 }, 500);
+
+            return service
+                .CreateVisit({
+                    ResearchId: state.researchId,
+                    SlotId: state.slotId,
+                    PatientId: p.Id
+                })
+                .success(function (visit) {
+
+                    if (visit.Id) {
+                        var visits = $localStorage.visits || {};
+                        visits[visit.Id] = p.Id;
+                        $localStorage.visits = visits;
+
+                        $location.path("/visit/" + visit.Id);
+                    }
+
+                })
+                .error(function (e) {
+                    emitter.emit('toastError', e);
+                    state.tab = 'error-visit';
+                    state.error = e;
+                })
+                .finally(function () {
+                    //state.tab =
+                });
+        }
+
+
+
+        var off_pi = emitter.on('patentIdentified', function (t, p, d) {
+            CreateVisit(p);
+        });
+
+        this.$onDestroy = function () {
+            off_pi.off();
+        };
     };
 
 
-    Comp.$inject = ['$routeParams', 'researchService'];
+    Comp.$inject = ['$routeParams', '$location', '$localStorage', 'researchService', 'aitEmitter'];
 
 
     var app = angular
-        .module('research', ['ngRoute', 'researchService', 'lpuAddress', 'aitEmitter', 'timeVisit', 'identVisit', 'resultVisit'])
+        .module('research', ['ngRoute', 'ngStorage', 'researchService', 'lpuAddress', 'aitEmitter', 'timeVisit', 'identVisit', 'resultVisit'])
         .config(['$routeProvider', function ($routeProvider) {
-            $routeProvider.when('/research/:researchId', {
-                template: '<research/>'
-            });
+            $routeProvider
+                .when('/research/:researchId', {
+                    template: '<research/>'
+                })
+                .when('/research/:researchId/slot/:slotId', {
+                    template: '<research/>'
+                })
+            ;
         }]);
 
 

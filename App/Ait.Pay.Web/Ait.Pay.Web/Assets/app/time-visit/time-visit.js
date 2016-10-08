@@ -6,7 +6,7 @@
     }
 
 
-    var Comp = function ($scope, $routeParams, $location, aitEmitter, aitUtils) {
+    var Comp = function ($scope, $routeParams, $location, $route, aitEmitter, aitUtils) {
 
         var now = new Date();
         var dateToYYYYMMDD = aitUtils.dateToYYYYMMDD;
@@ -110,10 +110,15 @@
                 });
         };
 
+
+        this.clickOnSlot = function (slotId) {
+            $route.updateParams({ slotId: slotId });
+        };
+
     };
 
 
-    Comp.$inject = ['$scope', '$routeParams', '$location', 'aitEmitter', 'aitUtils'];
+    Comp.$inject = ['$scope', '$routeParams', '$location', '$route', 'aitEmitter', 'aitUtils'];
 
 
     angular

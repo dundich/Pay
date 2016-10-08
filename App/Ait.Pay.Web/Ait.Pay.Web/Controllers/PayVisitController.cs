@@ -27,6 +27,13 @@ namespace Ait.Pay.Web.Controllers
         {
             return (await payVisit.CreateDoctorVisit(criteria));
         }
+
+        [HttpPost]
+        public async Task<object> CreateResearchVisit(PayCreateResearchVisit criteria)
+        {
+            return await payVisit.CreateResearchVisit(criteria);
+        }
+
         [HttpPost]
         public Task<PayIdValue> DeleteVisit(PayCriteria criteria)
         {

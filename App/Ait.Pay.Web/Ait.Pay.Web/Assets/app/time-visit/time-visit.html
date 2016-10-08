@@ -15,7 +15,7 @@
             </div>
             <div class="times-items">
                 <div class="times-item" ng-if="$ctrl.state.times" ng-repeat="t in $ctrl.state.times">
-                    <a href="#{{::$ctrl.state.path}}/slot/{{::t.Id}}"
+                    <a href="" ng-click="$ctrl.clickOnSlot(t.Id)"
                        ng-class="{orange:$ctrl.state.slotId==t.Id}"
                        class="waves-effect waves-light btn">
                         {{::t.Value}}

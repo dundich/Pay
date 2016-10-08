@@ -11,6 +11,10 @@ namespace Ait.Pay.IContract
             return Task.FromResult(new PayVisitResult { Id = "23", Value = "ОК!" });
         }
 
+        public Task<PayVisitResult> CreateResearchVisit(PayCreateResearchVisit criteria)
+        {
+            return Task.FromResult(new PayVisitResult { Id = "24", Value = "ОК!!!" });
+        }
 
         public Task<PayIdValue> DeleteVisit(PayCriteria criteria)
         {
@@ -38,6 +42,21 @@ namespace Ait.Pay.IContract
                     PatientCard = "123345",
                     Note = "помятка",
                     Patient = "1".PayValue("Иванов Иван Иванович")
+                },
+                new PayVisit
+                {
+                    Id = "24",
+                    Room = "каб.200 эт.2",
+                    Lpu = "1".PayValue("ЛПУ"),
+                    Contacts = "+7(444) 123-45-67",
+                    Service = new PayServiceItem { Id = "1", Value = "УЗИ костей таза", Price = "300ye" },
+                    VisitDate = DateTime.Today.ToString("yyyy-MM-dd"),
+                    VisitTime = "12:00",
+                    PatientBirthdate = "2001-03-01",
+                    CreatedAt = "2016-04-02 13:33",
+                    PatientCard = "123345-к",
+                    Note = "помятка",
+                    Patient = "1".PayValue("Иванов Илья Иванович")
                 }
             };
 

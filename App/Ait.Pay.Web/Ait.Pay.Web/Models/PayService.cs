@@ -67,9 +67,9 @@ namespace Ait.Pay.Web.Models
             return await GetPay<List<PayVisitDay>, PayGetResearchVisitDays>("GetResearchVisitDays", criteria);
         }
 
-        public async Task<List<PaySlot>> GetResearchVisitSlots(PayCriteria criteria)
+        public async Task<List<PaySlot>> GetResearchVisitSlots(PayGetResearchVisitSlots criteria)
         {
-            return await GetPay<List<PaySlot>, PayCriteria>("GetResearchVisitTimes", criteria);
+            return await GetPay<List<PaySlot>, PayGetResearchVisitSlots>("GetResearchVisitSlots", criteria);
         }
 
 
@@ -80,6 +80,11 @@ namespace Ait.Pay.Web.Models
         public async Task<PayVisitResult> CreateDoctorVisit(PayCreateDoctorVisit criteria)
         {
             return await GetPay<PayVisitResult, PayCreateDoctorVisit>("CreateDoctorVisit", criteria);
+        }
+
+        public async Task<PayVisitResult> CreateResearchVisit(PayCreateResearchVisit criteria)
+        {
+            return await GetPay<PayVisitResult, PayCreateResearchVisit>("CreateResearchVisit", criteria);
         }
 
         public async Task<PayIdValue> DeleteVisit(PayCriteria criteria)
@@ -114,5 +119,7 @@ namespace Ait.Pay.Web.Models
             url = setts.GetOrDefault(consts.KEY_URL_PAY).EnsureTrailingSlash() + url;
             return await url.PostAsJson<R, T>(criteria);
         }
+
+
     }
 }

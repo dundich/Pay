@@ -5,7 +5,8 @@
             GetResearchList: 'api/PayResearch/GetResearchList',
             GetResearch: 'api/PayResearch/GetResearchLocation',
             GetVisitDays: 'api/PayResearch/GetVisitDays',
-            GetVisitSlots: 'api/PayResearch/GetVisitSlots'
+            GetVisitSlots: 'api/PayResearch/GetVisitSlots',
+            CreateVisit: 'api/PayVisit/CreateResearchVisit'
         });
     };
 
