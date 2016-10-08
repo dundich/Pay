@@ -3,12 +3,12 @@
 
     <ait-loading ng-if="$ctrl.state.isLoading || $ctrl.state.isTimesLoading"></ait-loading>
 
-    <div class="col s12 main" ng-class="{l6:$ctrl.state.times}">
+    <div class="col s12 main" ng-class="{l7:$ctrl.state.times}">
         <simple-calendar events="$ctrl.state.events" options="$ctrl.calendarOptions"></simple-calendar>
         <br />
     </div>
 
-    <div class="col s12 l6" ng-if="$ctrl.state.times || $ctrl.state.isTimesLoading">
+    <div class="col s12 l5" ng-if="$ctrl.state.times || $ctrl.state.isTimesLoading">
         <div class="times">
             <div class="times-caption">
                 Записаться на дату: <span class="strong" ng-bind="$ctrl.state.selectEvent.date | date:'dd.MM.yyyy'"></span>

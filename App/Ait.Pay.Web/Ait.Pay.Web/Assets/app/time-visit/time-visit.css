@@ -28,3 +28,10 @@ time-visit .times-item {
     time-visit .times-item:hover > a {
         text-decoration: underline !important;
     }
+
+
+
+
+.times-item .btn {
+    padding: 0 1.5rem;
+}

@@ -79,9 +79,9 @@ simple-calendar .day {
 }
 
 
-simple-calendar .day.default .day-number {
+    simple-calendar .day.default .day-number {
         font-weight: bold;
-}
+    }
 
 simple-calendar .day {
     cursor: default;
@@ -115,5 +115,5 @@ simple-calendar .day {
 simple-calendar .event-title {
     text-align: center;
     font-size: 55%;
-    margin: -2px 0;
+    margin: -2px -1px;
 }
