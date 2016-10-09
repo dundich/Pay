@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Ait.Pay.IContract
 {
@@ -56,12 +57,13 @@ namespace Ait.Pay.IContract
                     CreatedAt = "2016-04-02 13:33",
                     PatientCard = "123345-к",
                     Note = "помятка",
-                    Patient = "1".PayValue("Иванов Илья Иванович")
+                    Patient = "1".PayValue("Иванов Илья Иванович"),
+                    Kind = 1
                 }
             };
 
 
-            return Task.FromResult(new List<PayVisit>(items));
+            return Task.FromResult(new List<PayVisit>(items.Where(c => criteria.VisitId != null && c.Id == criteria.VisitId)));
         }
     }
 }
