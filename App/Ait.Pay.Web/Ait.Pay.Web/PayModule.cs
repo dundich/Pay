@@ -17,9 +17,6 @@ namespace Ait.Pay.Web
             builder.Register(b => Fake.Ident).SingleInstance();
             builder.Register(b => Fake.Research).SingleInstance();
             builder.Register(b => Fake.Visit).SingleInstance();
-
-            builder.RegisterType<PayService>().As<IPayReport>().SingleInstance();
-
 #else
             builder
                 .RegisterType<PayService>()
@@ -27,9 +24,14 @@ namespace Ait.Pay.Web
                 .As<IPayDoctor>()
                 .As<IPayIdent>()
                 .As<IPayVisit>()
-                .As<IPayReport>()
                 .SingleInstance();
 #endif
+
+
+            builder
+                .RegisterType<PayReport>()
+                .As<IPayReport, IPayVisitReport>()
+                .SingleInstance();
         }
 
     }

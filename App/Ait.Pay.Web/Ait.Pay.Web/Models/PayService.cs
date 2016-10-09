@@ -5,7 +5,10 @@ using System.Threading.Tasks;
 
 namespace Ait.Pay.Web.Models
 {
-    public class PayService : IPayContract, IPayReport
+    /// <summary>
+    /// Proxy to remote service
+    /// </summary>
+    public class PayService : IPayContract
     {
 
         readonly IPayConfig cfg;
@@ -98,19 +101,6 @@ namespace Ait.Pay.Web.Models
         }
 
 
-        //****************
-        //  IREPORT
-        //***********
-
-        public async Task<ReportResponse> report2(ReportRequest criteria)
-        {
-            var setts = await cfg.GetSettings();
-            string key = consts.KEY_URL_REP.Trim();
-            var url = setts.GetOrDefault(key).EnsureTrailingSlash() + "report2";
-            return await url.PostAsJson<ReportResponse, ReportRequest>(criteria);
-        }
-
-
 
         //---------------
         private async Task<R> GetPay<R, T>(string url, T criteria)
@@ -119,7 +109,5 @@ namespace Ait.Pay.Web.Models
             url = setts.GetOrDefault(consts.KEY_URL_PAY).EnsureTrailingSlash() + url;
             return await url.PostAsJson<R, T>(criteria);
         }
-
-
     }
 }

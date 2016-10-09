@@ -18,7 +18,7 @@ namespace Ait.Pay.Web
 
             //Moved bootstrap css to own style tag in the _layout page.  This is to remove it from the optimizations which was breaking the fonts and icons.
 
-            bundles.Add(new StyleBundle("~/styles").IncludeDirectory("~/Assets", "*.css", true));
+            bundles.Add(new StyleBundle("~/styles").IncludeDirectory("~/Assets/app", "*.css", true));
 
 
             bundles.Add(new ScriptBundle("~/ng")

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Ait.Pay.IContract;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Ait.Pay.Web.Models
@@ -10,6 +11,17 @@ namespace Ait.Pay.Web.Models
     {
         Task<ReportResponse> report2(ReportRequest value);
     }
+
+
+
+    /// <summary>
+    /// get Invite Report
+    /// </summary>
+    public interface IPayVisitReport
+    {
+        Task<ReportResponse> GetInviteVisitReport(PayVisit value);
+    }
+
 
 
     /// <summary>
