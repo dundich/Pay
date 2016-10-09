@@ -398,7 +398,7 @@
     <Content Include="Assets\misc\modernizr.min.js" />
     <Content Include="Assets\misc\respond.min.js" />
     <Content Include="Assets\styles\select2-bootstrap.css" />
-    <Content Include="Assets\styles\styles.css" />
+    <Content Include="Assets\app\styles.css" />
     <Content Include="Assets\Content\css\select2.css" />
     <Content Include="Assets\Content\css\select2.min.css" />
     <Content Include="Content\font-awesome.css" />
