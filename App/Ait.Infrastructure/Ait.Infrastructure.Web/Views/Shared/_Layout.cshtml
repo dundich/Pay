@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#EE6E73">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/materialize/css/materialize.css")
+    @Styles.Render("~/styles")
+</head>
+
+<body>
+    @RenderBody()
+
+
+    @Scripts.Render("~/Scripts/jquery-2.1.1.min.js")
+
+    @Scripts.Render("~/Scripts/materialize/materialize.min.js")
+
+    @Scripts.Render("~/ng")
+    @Scripts.Render("~/app")
+
+
+    @Scripts.Render("~/misc")
+</body>
+</html>

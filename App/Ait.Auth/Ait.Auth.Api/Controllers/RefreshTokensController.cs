@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace Ait.Auth.Api.Controllers
+namespace Ait.Infrastructure.Api.Controllers
 {
     [RoutePrefix("api/RefreshTokens")]
     public class RefreshTokensController : ApiController

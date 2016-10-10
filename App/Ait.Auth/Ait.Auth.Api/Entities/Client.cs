@@ -1,7 +1,7 @@
-﻿using Ait.Auth.Api.Models;
+﻿using Ait.Infrastructure.Api.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace Ait.Auth.Api.Entities
+namespace Ait.Infrastructure.Api.Entities
 {
     public class Client
     {

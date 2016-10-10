@@ -1,0 +1,18 @@
+﻿<div class="input-field ait-field-email" ng-if="::$ctrl.type">
+    <input id="{{::$ctrl.name}}" name="{{::$ctrl.name}}"
+           type="email"
+           ng-model="$ctrl.bindModel"
+           ng-class="{invalid: !$ctrl.form[$ctrl.name].$valid, valid: $ctrl.form[$ctrl.name].$valid}"
+           ait-valid="email"
+           ng-init="$ctrl.init()"
+           autocomplete="{{::($ctrlautocomplete||'off')}}"
+           ng-required="$ctrl.required" />
+    <ait-field-error ng-show="!$ctrl.form[$ctrl.name].$valid">
+        <span ng-if="$ctrl.form[$ctrl.name].$error.required">Поле обязательно для заполнения</span>
+        <span ng-if="!$ctrl.form[$ctrl.name].$error.required">значение некорректно</span>
+    </ait-field-error>
+    <label for="{{::$ctrl.name}}" ng-bind="::$ctrl.caption"  class="caption"></label>
+    <!--<div>
+        DD:{{$ctrl.form[$ctrl.name]}}
+    </div>-->
+</div>

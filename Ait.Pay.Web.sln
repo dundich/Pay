@@ -21,6 +21,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ait.Auth.Api", "App\Ait.Aut
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "consoleAuthTest", "App\Ait.Auth\consoleAuthTest\consoleAuthTest.csproj", "{C0BF92BC-F082-4160-8780-D8481CD97BEC}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "App", "App", "{4335C6E1-33DD-4B0F-98C2-5F15772FB607}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ait.Infrastructure.Web", "App\Ait.Infrastructure\Ait.Infrastructure.Web\Ait.Infrastructure.Web.csproj", "{2FC1FFDE-29FC-4F3E-94F0-CD24D3C4C09E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +51,10 @@ Global
 		{C0BF92BC-F082-4160-8780-D8481CD97BEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0BF92BC-F082-4160-8780-D8481CD97BEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0BF92BC-F082-4160-8780-D8481CD97BEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FC1FFDE-29FC-4F3E-94F0-CD24D3C4C09E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FC1FFDE-29FC-4F3E-94F0-CD24D3C4C09E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FC1FFDE-29FC-4F3E-94F0-CD24D3C4C09E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FC1FFDE-29FC-4F3E-94F0-CD24D3C4C09E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,5 +62,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{23DFCFD5-B158-4C0D-9C31-5E9CB64C64CF} = {4AB84BB8-CBB3-412A-9A27-12189A168C7E}
 		{C0BF92BC-F082-4160-8780-D8481CD97BEC} = {4AB84BB8-CBB3-412A-9A27-12189A168C7E}
+		{2FC1FFDE-29FC-4F3E-94F0-CD24D3C4C09E} = {4335C6E1-33DD-4B0F-98C2-5F15772FB607}
 	EndGlobalSection
 EndGlobal

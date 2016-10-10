@@ -1,8 +1,8 @@
-﻿using Ait.Auth.Api.Entities;
+﻿using Ait.Infrastructure.Api.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System.Data.Entity;
 
-namespace Ait.Auth.Api
+namespace Ait.Infrastructure.Api
 {
     public class AuthContext : IdentityDbContext<IdentityUser>
     {

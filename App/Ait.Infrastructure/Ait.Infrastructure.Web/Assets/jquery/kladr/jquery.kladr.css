@@ -1,0 +1,48 @@
+﻿.kladr_autocomplete ul {
+    position: absolute;
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    border-radius: 0px;
+    background-color: white;
+    z-index: 9999;
+}
+
+.kladr_autocomplete li {
+    display: list-item;
+    list-style-type: none;
+    margin: 0;
+    padding: 6px 12px; /*3px 5px;*/
+    overflow: hidden;
+    border: 1px solid white;
+    cursor: pointer;
+}
+
+    .kladr_autocomplete li.active {
+        color: white;
+        background-color: #337ab7; /*#fcf8e3;*/
+        border-radius: 0px;
+        border: 1px solid #337ab7; /*1px solid #ffd9bf;*/
+    }
+
+        .kladr_autocomplete li.active a {
+            color: white !important;
+            text-decoration: none;
+        }
+
+.kladr_autocomplete a {
+    display: block;
+    cursor: default;
+    width: 10000px;
+}
+
+.kladr_autocomplete .spinner {
+    position: absolute;
+    display: block;
+    margin: -3px 0 0 -15px;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    z-index: 9999;
+}

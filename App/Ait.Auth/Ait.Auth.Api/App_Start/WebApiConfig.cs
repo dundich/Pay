@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 
-namespace Ait.Auth.Api
+namespace Ait.Infrastructure.Api
 {
     public static class WebApiConfig
     {

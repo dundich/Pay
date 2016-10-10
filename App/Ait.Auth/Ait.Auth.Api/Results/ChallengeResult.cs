@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
-namespace Ait.Auth.Api.Results
+namespace Ait.Infrastructure.Api.Results
 {
     public class ChallengeResult : IHttpActionResult
     {        

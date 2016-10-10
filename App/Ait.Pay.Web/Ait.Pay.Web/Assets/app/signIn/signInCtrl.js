@@ -9,7 +9,7 @@
 
                 service.signIn($scope)
                 .success(function (data) {
-                    window.location = '#/todomanager';
+                    window.location = '#/';
                 })
                 .error(function (data, status, headers, config) {
                     $scope.message = data.error_description.replace(/["']{1}/gi, "");

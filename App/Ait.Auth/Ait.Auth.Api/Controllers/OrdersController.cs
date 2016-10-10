@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Web.Http;
 
-namespace Ait.Auth.Api.Controllers
+namespace Ait.Infrastructure.Api.Controllers
 {
     [RoutePrefix("api/Orders")]
     public class OrdersController : ApiController

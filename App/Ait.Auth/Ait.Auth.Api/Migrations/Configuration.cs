@@ -1,18 +1,18 @@
-namespace Ait.Auth.Api.Migrations
+namespace Ait.Infrastructure.Api.Migrations
 {
-    using Ait.Auth.Api.Entities;
+    using Ait.Infrastructure.Api.Entities;
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Ait.Auth.Api.AuthContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Ait.Infrastructure.Api.AuthContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;// false;
         }
 
-        protected override void Seed(Ait.Auth.Api.AuthContext context)
+        protected override void Seed(Ait.Infrastructure.Api.AuthContext context)
         {
             if (context.Clients.Count() > 0)
             {

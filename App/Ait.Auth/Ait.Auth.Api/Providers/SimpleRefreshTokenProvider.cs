@@ -1,4 +1,4 @@
-﻿using Ait.Auth.Api.Entities;
+﻿using Ait.Infrastructure.Api.Entities;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Infrastructure;
 using System;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Ait.Auth.Api.Providers
+namespace Ait.Infrastructure.Api.Providers
 {
     public class SimpleRefreshTokenProvider : IAuthenticationTokenProvider
     {
@@ -75,12 +75,12 @@ namespace Ait.Auth.Api.Providers
 
         public void Create(AuthenticationTokenCreateContext context)
         {
-            throw new NotImplementedException();
+            CreateAsync(context);
         }
 
         public void Receive(AuthenticationTokenReceiveContext context)
         {
-            throw new NotImplementedException();
+            ReceiveAsync(context);
         }
     }
 }

@@ -19,9 +19,7 @@
         'research',
 
         'doctorList',
-        'doctor',
-
-        'todoManager'
+        'doctor'
     ]);
 
     app.config(['$provide', '$routeProvider', '$httpProvider', function ($provide, $routeProvider, $httpProvider) {
@@ -57,11 +55,6 @@
         $routeProvider.when('/signin/:message?', {
             templateUrl: 'App/SignIn',
             controller: 'signInCtrl'
-        });
-
-        $routeProvider.when('/todomanager', {
-            templateUrl: 'App/TodoManager',
-            controller: 'todoManagerCtrl'
         });
 
         $routeProvider.otherwise({
@@ -111,8 +104,6 @@
             //e = 'Ошибка!\r\n' + e;
             Materialize.toast(e, 4000, 'red error');
         });
-
-
     }]);
 
 })(angular, window);

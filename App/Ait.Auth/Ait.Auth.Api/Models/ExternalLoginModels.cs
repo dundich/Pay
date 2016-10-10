@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Ait.Auth.Api.Models
+namespace Ait.Infrastructure.Api.Models
 {
     public class ExternalLoginViewModel
     {

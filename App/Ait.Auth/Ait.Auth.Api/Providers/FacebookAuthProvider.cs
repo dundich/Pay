@@ -6,7 +6,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 
-namespace Ait.Auth.Api.Providers
+namespace Ait.Infrastructure.Api.Providers
 {
     public class FacebookAuthProvider : FacebookAuthenticationProvider
     {

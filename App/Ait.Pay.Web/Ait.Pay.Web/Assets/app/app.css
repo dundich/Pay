@@ -1,0 +1,93 @@
+﻿.header {
+    color: #009688;
+    font-weight: 300;
+}
+
+
+.body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+
+/*  WIZARD  */
+
+.how-order .ellipse {
+    width: 109px;
+    height: 109px;
+    border: 3px solid #727DC9;
+    text-align: center;
+    border-radius: 60px;
+    padding-top: 23px;
+    margin: 10px;
+}
+
+.how-order strong {
+    color: #727DC9;
+}
+
+.how-order td:nth-child(2) {
+    padding: 10px 20px;
+    /* font-size: 120%; */
+}
+
+.how-order h2 {
+    margin-top: 45px;
+    margin-bottom: 33px;
+}
+
+.how-order {
+    margin-bottom: 60px;
+}
+
+
+
+    .how-order .img1 {
+        width: 54px;
+        height: 54px;
+    }
+
+    .how-order .img2 {
+        width: 42px;
+        height: 42px;
+    }
+
+    .how-order .img3 {
+        width: 48px;
+        height: 48px;
+    }
+
+    .how-order .img4 {
+        width: 54px;
+        height: 54px;
+    }
+
+    .how-order .img5 {
+        width: 50px;
+        height: 50px;
+    }
+
+    .how-order .img6 {
+        width: 55px;
+        height: 55px;
+    }
+
+    .how-order h2 {
+        margin-top: 45px;
+        margin-bottom: 33px;
+        text-align: center;
+    }
+
+.how-order {
+    border-bottom: 1px #E8E8E8 solid;
+    padding: 0px 0px 60px;
+}
+
+nowrap {
+    white-space: nowrap;
+}

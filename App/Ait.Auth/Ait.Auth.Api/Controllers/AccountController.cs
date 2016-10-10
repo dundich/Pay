@@ -1,5 +1,5 @@
-﻿using Ait.Auth.Api.Models;
-using Ait.Auth.Api.Results;
+﻿using Ait.Infrastructure.Api.Models;
+using Ait.Infrastructure.Api.Results;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
-namespace Ait.Auth.Api.Controllers
+namespace Ait.Infrastructure.Api.Controllers
 {
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController

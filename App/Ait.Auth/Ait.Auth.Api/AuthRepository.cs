@@ -1,5 +1,5 @@
-﻿using Ait.Auth.Api.Entities;
-using Ait.Auth.Api.Models;
+﻿using Ait.Infrastructure.Api.Entities;
+using Ait.Infrastructure.Api.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Ait.Auth.Api
+namespace Ait.Infrastructure.Api
 {
 
     public class AuthRepository : IDisposable
