@@ -41,18 +41,27 @@
     angular
         .module('aitRegionList', ['ngRoute', 'aitKladrModel'])
 
-        //.config(['$routeProvider', function ($routeProvider) {
-        //    $routeProvider.when('/region-list', {
-        //        template: '<region-list/>'
-        //    });
-        //}])
-
         .component('aitRegionList', {
             bindings: {
                 onSelected: '&'
             },
             controller: Comp,
-            templateUrl: 'Assets/app/common/kladr/ait-region-list.html'
+            template:'\
+<div class="row">\
+    <div class="col s12">\
+        <div class="section">\
+            <span ng-if="$ctrl.state.model.isLoading"><ait-loading></ait-loading></span>\
+            <div class="row reg-container" ng-if="$ctrl.state.list">\
+                <div ng-repeat="item in ::$ctrl.state.list">\
+                    <div ng-if="item.group" class="group-reg">{{item.group}}</div>\
+                    <a href="" ng-click="$ctrl.onSelected({item:item})">{{::item.name}}</a>\
+                </div>\
+            </div>\
+        </div>\
+    </div>\
+</div>'
+
+                //'Assets/app/common/kladr/ait-region-list.html'
         });
 
 
