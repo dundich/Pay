@@ -6,17 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#EE6E73">
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/materialize/css/materialize.css")
-    @Styles.Render("~/styles")
+
+    @Styles.Render("~/content/fontawesome/css/fa")
+    @Styles.Render("~/Content/materialize/css/ma")
+    @Styles.Render("~/styles")    
 </head>
 
 <body>
     @RenderBody()
 
+    @Scripts.Render("~/jquery")
 
-    @Scripts.Render("~/Scripts/jquery-2.1.1.min.js")
+    <script type="text/javascript">
 
-    @Scripts.Render("~/Scripts/materialize/materialize.min.js")
+        (function ($, window, undefined) {
+            'use strict';
+            $.cfg = $.cfg || { cfg: {} };
+            $.cfg.kladr = '';
+        })(jQuery, window);
+
+    </script>
+   
+    @Scripts.Render("~/ma")
 
     @Scripts.Render("~/ng")
     @Scripts.Render("~/app")

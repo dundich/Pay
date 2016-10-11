@@ -11,6 +11,13 @@ namespace Ait.Infrastructure.Web
 
             bundles.Add(new StyleBundle("~/styles").IncludeDirectory("~/Assets/app", "*.css", true));
 
+            bundles.Add(new StyleBundle("~/content/fontawesome/css/fa")
+                .Include("~/content/fontawesome/css/font-awesome.css"));
+
+            bundles.Add(new StyleBundle("~/content/materialize/css/ma")
+                .Include("~/content/materialize/css/materialize.css"));
+
+
 
             bundles.Add(new ScriptBundle("~/ng")
                 .Include("~/Scripts/angular.min.js"
@@ -22,17 +29,18 @@ namespace Ait.Infrastructure.Web
                         ));
 
 
-            bundles.Add(new ScriptBundle("~/app").IncludeDirectory("~/Assets/app", "*.js", true));
+            bundles.Add(new ScriptBundle("~/ma")
+                .Include("~/Scripts/materialize/materialize.js"));
+
+            bundles.Add(new ScriptBundle("~/app")
+                .IncludeDirectory("~/Assets/app", "*.js", true));
 
 
             bundles.Add(new ScriptBundle("~/jquery")
                 .Include(
-                        "~/Scripts/jquery/jquery-2.1.1.min.js",
-                        "~/Scripts/jquery.inputmask/inputmask.js",
-                        "~/Scripts/jquery.inputmask/jquery.inputmask.js",
-                        "~/Scripts/jquery.inputmask/inputmask.extensions.js",
-                        "~/Scripts/jquery.inputmask/inputmask.date.extensions.js",
-                        "~/Scripts/jquery.inputmask/inputmask.numeric.extensions.js")
+                        "~/Scripts/jquery-2.1.1.js",
+                        "~/Scripts/jquery.inputmask/jquery.inputmask.bundle.js"
+                )
                 .IncludeDirectory("~/Assets/jquery", "*.js", true));
 
 

@@ -9,18 +9,19 @@
 
     <title>@ViewBag.Title</title>
 
+    @*@Styles.Render("~/Content/font-awesome.css")*@
 
-    @Styles.Render("~/Content/font-awesome.css")
-    @*@Styles.Render("~/Content/css/select2.css")*@
+    @Styles.Render("../Ait.Infrastructure.Web/content/fontawesome/css/fa")
+
+    @Styles.Render("../Ait.Infrastructure.Web/content/materialize/css/ma")
+
+    @*@Styles.Render("~/Content/materialize/css/materialize.css")*@
 
     @Styles.Render("~/styles")
 
-    @Styles.Render("~/Content/materialize/css/materialize.css")
+    @*@Scripts.Render("~/jquery")*@
 
-    @Scripts.Render("~/jquery")
-
-    @Scripts.Render("~/Scripts/materialize/materialize.min.js")
-
+    @Scripts.Render("../Ait.Infrastructure.Web/jquery")
 </head>
 
 <body>
@@ -28,16 +29,17 @@
     @RenderBody()
 
 
+    @*@Scripts.Render("~/Scripts/materialize/materialize.min.js")*@
+
+    @Scripts.Render("../Ait.Infrastructure.Web/ma")
+
     @*@Scripts.Render("~/ng")*@
 
-
-    @Scripts.Render("http://localhost/Ait.Auth.Web/ng");
-
+    @Scripts.Render("../Ait.Infrastructure.Web/ng")
 
     @Scripts.Render("~/app")
 
-
-    @Scripts.Render("~/misc")
+    @Scripts.Render("../Ait.Infrastructure.Web/misc")
 </body>
 
 
