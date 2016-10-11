@@ -19,7 +19,7 @@
         var startTimer = function () {
             var timer = $timeout(function () {
                 $timeout.cancel(timer);
-                $location.path('/login');
+                $location.path(authService.uriLogin);
             }, 2000);
         }
 
@@ -74,9 +74,9 @@
           template: '\
 <form class="form-login" role="form">\
     <h2 class="form-login-heading">Регистрация</h2>\
-    <input type="text" class="form-control" placeholder="Username" data-ng-model="$ctrl.state.userName" required autofocus>\
-    <input type="password" class="form-control" placeholder="Password" data-ng-model="$ctrl.state.password" required>\
-    <input type="password" class="form-control" placeholder="Confirm Password" data-ng-model="$ctrl.state.confirmPassword" required>\
+    <input type="text" class="form-control" placeholder="Пользователь" data-ng-model="$ctrl.state.userName" required autofocus>\
+    <input type="password" class="form-control" placeholder="Пароль" data-ng-model="$ctrl.state.password" required>\
+    <input type="password" class="form-control" placeholder="Повторите пароль" data-ng-model="$ctrl.state.confirmPassword" required>\
     <button class="btn btn-lg btn-info btn-block" type="submit" data-ng-click="$ctrl.signUp()">Зарегистрировать</button>\
     <div ng-if="$ctrl.message">\
       {{$ctrl.message}}\

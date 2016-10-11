@@ -4,7 +4,8 @@
 
     app.constant('authSettings', {
         apiServiceBaseUri: '../Ait.Auth.Api/',
-        clientId: 'ngAuthApp'
+        clientId: 'ngAuthApp',
+        uriLogin: '/login'
     });
 
 })(angular, window);
