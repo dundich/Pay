@@ -90,7 +90,9 @@
                         &nbsp;
                     </div>
                     <div class="col s12 l6 right-align">
+                        <div>{{form.$invalid || $ctrl.state.isLoading }}</div>
                         <button type="submit"
+                                ng-class="{disabled:(form.$invalid || $ctrl.state.isLoading)}"
                                 class="btn-large waves-effect waves-light orange"
                                 value="Записаться на приём"
                                 ng-click="$ctrl.state.onSubmit()"
