@@ -9,18 +9,11 @@
                 <ait-field class="col s12" form="form" caption="Фамилия" ng-model="$ctrl.FirstName" required="true" ait-field-type="fio" ait-focus-on="true">
                 </ait-field>
 
-
-
                 <ait-field class="col s12" form="form" caption="Имя" ng-model="$ctrl.LastName" required="true" ait-field-type="fio">
                 </ait-field>
 
-
-
                 <ait-field class="col s12" form="form" caption="Отчество" ng-model="$ctrl.MiddleName" ait-field-type="fio">
                 </ait-field>
-
-
-
 
                 <ait-field class="col s12 l6" form="form" caption="Дата рождения" ng-model="$ctrl.Birthdate" ait-field-type="birthdate" required="true">
                 </ait-field>
@@ -90,7 +83,6 @@
                         &nbsp;
                     </div>
                     <div class="col s12 l6 right-align">
-                        <div>{{form.$invalid || $ctrl.state.isLoading }}</div>
                         <button type="submit"
                                 ng-class="{disabled:(form.$invalid || $ctrl.state.isLoading)}"
                                 class="btn-large waves-effect waves-light orange"

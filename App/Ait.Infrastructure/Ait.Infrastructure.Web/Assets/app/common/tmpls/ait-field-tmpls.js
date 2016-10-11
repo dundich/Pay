@@ -1,8 +1,7 @@
 ﻿
 angular.module("aitFieldTmpls", []).run(["$templateCache", function ($templateCache) {
 
-    
-    
+        
     $templateCache.put("Assets/app/common/tmpls/ait-field-text.html", '\
 <div class="input-field ait-field-text" ng-if="::$ctrl.type">\
     <input id="{{::$ctrl.name}}" name="{{::$ctrl.name}}"\
@@ -84,39 +83,6 @@ angular.module("aitFieldTmpls", []).run(["$templateCache", function ($templateCa
 
     $templateCache.put("Assets/app/common/tmpls/ait-field-item.html",
         '<span class="ait-field-item" ng-bind="::item.Value||item.value||item.Text||item.text||item"></span>');
-
-
-    $templateCache.put("Assets/app/common/tmpls/ait-field-kladr.html", '\
-<div class="row">\
-    <div class="col s12 for-tab">\
-        Адрес регистрации\
-    </div>\
-    <div class="input-field col s12">\
-        <div style="color:#9e9e9e;">Выберите регион:</div>\
-        <region-choose region-id="$ctrl.regionId" on-selected="$ctrl.state.onRegionSelected(item)"></region-choose>\
-    </div>\
-    <div>&nbsp;</div>\
-    <div class="input-field col s12">\
-        <input type="text" id="street" name="street" autocomplete="off" kladr-street="$ctrl.kladr" kladr-street-region="$ctrl.regionId" ng-model="kladr" required />\
-        <label for="street">Адрес</label>\
-    </div>\
-    {{$ctrl.kladr}}\
-    </div>\
-    <div class="input-field ait-field-text" ng-if="::$ctrl.type">\
-        <input id="{{::$ctrl.name}}" name="{{::$ctrl.name}}"\
-               type="text"\
-               ng-init="$ctrl.init()"\
-               ng-model="$ctrl.bindModel"\
-               ng-class="{invalid: !$ctrl.form[$ctrl.name].$valid, valid: $ctrl.form[$ctrl.name].$valid}"\
-               ait-valid="{{$ctrl.valid}}"\
-               ng-required="$ctrl.required" />\
-        <ait-field-error ng-show="!$ctrl.form[$ctrl.name].$valid">\
-            <span ng-if="$ctrl.form[$ctrl.name].$error.required">Поле обязательно для заполнения</span>\
-            <span ng-if="!$ctrl.form[$ctrl.name].$error.required">значение некорректно</span>\
-        </ait-field-error>\
-        <label for="{{::$ctrl.name}}" ng-bind="::$ctrl.caption"  class="caption"></label>\
-</div>\
-');
 
 
     $templateCache.put("Assets/app/common/tmpls/ait-field-phone.html", '\
