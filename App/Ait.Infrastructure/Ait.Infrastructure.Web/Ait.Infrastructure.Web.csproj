@@ -245,6 +245,7 @@
     <Content Include="Assets\app\common\tmpls\ait-field-region.html" />
     <Content Include="Assets\app\common\tmpls\ait-field-street.html" />
     <Content Include="Assets\app\common\tmpls\ait-field-text.html" />
+    <Content Include="Assets\app\common\tmpls\ait-field-tmpls.js" />
     <Content Include="Assets\app\controllers\homeCtrl.js" />
     <Content Include="Assets\app\controllers\registerCtrl.js" />
     <Content Include="Assets\app\controllers\signInCtrl.js" />

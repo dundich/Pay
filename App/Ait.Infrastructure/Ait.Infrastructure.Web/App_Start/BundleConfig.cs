@@ -7,16 +7,14 @@ namespace Ait.Infrastructure.Web
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-
-
-            bundles.Add(new StyleBundle("~/styles").IncludeDirectory("~/Assets/app", "*.css", true));
+            bundles.Add(new StyleBundle("~/styles")
+                .IncludeDirectory("~/Assets/app", "*.css", true));
 
             bundles.Add(new StyleBundle("~/content/fontawesome/css/fa")
                 .Include("~/content/fontawesome/css/font-awesome.css"));
 
             bundles.Add(new StyleBundle("~/content/materialize/css/ma")
                 .Include("~/content/materialize/css/materialize.css"));
-
 
 
             bundles.Add(new ScriptBundle("~/ng")
@@ -44,7 +42,8 @@ namespace Ait.Infrastructure.Web
                 .IncludeDirectory("~/Assets/jquery", "*.js", true));
 
 
-            bundles.Add(new ScriptBundle("~/misc").IncludeDirectory("~/Assets/misc", "*.js", true));
+            bundles.Add(new ScriptBundle("~/misc")
+                .IncludeDirectory("~/Assets/misc", "*.js", true));
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862

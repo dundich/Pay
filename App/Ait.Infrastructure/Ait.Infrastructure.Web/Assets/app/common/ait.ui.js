@@ -92,8 +92,7 @@
     angular.module('aitUtils', [])
         .factory('aitUtils', function () { return aitUtils; });
 
-    var app = angular.module('aitUI', ['aitUtils']);
-
+    var app = angular.module('aitUI', ['aitUtils', 'aitFieldTmpls']);
 
     app.component('aitLoading', {
         bindings: {},

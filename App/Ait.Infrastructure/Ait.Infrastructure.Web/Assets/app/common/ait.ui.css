@@ -108,3 +108,13 @@ ait-error-panel > div {
         -moz-transition: opacity 2.25s ease-in-out;
         -webkit-transition: opacity 2.25s ease-in-out;
     }
+
+
+ait-field .input-field label {
+    left: 0 !important;
+}
+
+
+ait-field input {
+    display: block;
+}

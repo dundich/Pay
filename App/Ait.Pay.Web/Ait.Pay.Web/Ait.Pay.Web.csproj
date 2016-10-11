@@ -269,29 +269,6 @@
     <Content Include="App_Data\Settings.txt" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Assets\app\app.js" />
-    <Content Include="Assets\app\common\kladr\ait.kladr-street.js" />
-    <Content Include="Assets\app\common\kladr\ait-region-choose.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\app\common\kladr\ait-region-choose.js" />
-    <Content Include="Assets\app\common\kladr\ait.kladr-model.js" />
-    <Content Include="Assets\app\common\kladr\ait-region-list.css" />
-    <Content Include="Assets\app\common\kladr\ait-region-list.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\app\common\kladr\ait.kladr.js" />
-    <Content Include="Assets\app\common\kladr\ait.kladr-service.js" />
-    <Content Include="Assets\app\common\kladr\ait-region-list.js" />
-    <Content Include="Assets\app\common\tmpls\ait-field-kladr.html" />
-    <Content Include="Assets\app\common\tmpls\ait-field-email.html" />
-    <Content Include="Assets\app\common\tmpls\ait-field-item.html" />
-    <Content Include="Assets\app\common\tmpls\ait-field-radio.html" />
-    <Content Include="Assets\app\common\tmpls\ait-field-phone.html" />
-    <Content Include="Assets\app\common\tmpls\ait-field-region.html" />
-    <Content Include="Assets\app\common\tmpls\ait-field-street.html" />
-    <Content Include="Assets\app\common\tmpls\ait-field-fio.html" />
-    <Content Include="Assets\app\common\tmpls\ait-field-text.html" />
-    <Content Include="Assets\app\common\tmpls\ait-field-date.html" />
     <Content Include="Assets\app\home\home.css" />
     <Content Include="Assets\app\ident-visit\ident-visit.css" />
     <Content Include="Assets\app\lpu-address\lpu-address.js" />
@@ -326,8 +303,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\app\research\research.js" />
-    <Content Include="Assets\app\common\ait.emitter.js" />
-    <Content Include="Assets\app\common\ait.serviceFactory.js" />
     <Content Include="Areas\HelpPage\Views\_ViewStart.cshtml" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
     <Content Include="Areas\HelpPage\Views\Shared\_Layout.cshtml" />
@@ -351,8 +326,6 @@
     <None Include="Assets\app\speciality-list\speciality-list.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Content Include="Assets\app\common\ait.ui.css" />
-    <Content Include="Assets\app\common\ait.ui.js" />
     <Content Include="Assets\app\doctor\doctor.css" />
     <Content Include="Assets\app\doctor\doctor.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

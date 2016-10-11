@@ -1,4 +1,15 @@
-﻿//var app = angular.module('app', [
+﻿; (function (angular, window, undefined) {
+    var ait = angular.module('ait', [
+        'ngRoute',
+        'ngAnimate',
+
+        'aitEmitter',        
+        'aitUI'
+    ]);
+})(angular, window);
+
+
+//var app = angular.module('app', [
 //    'ngRoute',
 //    'ngCookies',
 //    'home',
