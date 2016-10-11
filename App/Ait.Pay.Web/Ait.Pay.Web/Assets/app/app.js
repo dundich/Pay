@@ -4,13 +4,9 @@
         'ngRoute',
         'ngAnimate',
 
-        //'aitEmitter',
-
         'ait',
 
         'authService',
-
-        //'aitUI',
 
         'home',
         'signIn',

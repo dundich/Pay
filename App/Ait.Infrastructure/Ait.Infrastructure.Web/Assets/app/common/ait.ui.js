@@ -1,9 +1,6 @@
-﻿/// <reference path="tmpls/ait-field-item.html" />
-/// <reference path="tmpls/ait-field-item.html" />
-'use strict';
+﻿; (function (angular, window, document, undefined) {
 
-; (function (angular, window, document, undefined) {
-
+    'use strict';
 
     if (!Array.prototype.find) {
         Array.prototype.find = function (predicate) {
@@ -240,8 +237,6 @@
 '
         };
     });
-
-
 
 
     app.directive('aitValid', function () {

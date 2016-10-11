@@ -1,6 +1,6 @@
-﻿'use strict';
-
+﻿
 ; (function (angular, window, document, undefined) {
+    'use strict';
 
     var Comp = function ($routeParams, $location, $localStorage, service, emitter) {
 

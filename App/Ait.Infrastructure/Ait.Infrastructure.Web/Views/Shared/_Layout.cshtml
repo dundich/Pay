@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html ng-app="app">
+<html ng-app="appAuth">
 
 <head>
     <meta charset="utf-8" />
@@ -18,21 +18,16 @@
     @Scripts.Render("~/jquery")
 
     <script type="text/javascript">
-
         (function ($, window, undefined) {
             'use strict';
             $.cfg = $.cfg || { cfg: {} };
             $.cfg.kladr = '';
         })(jQuery, window);
-
     </script>
    
     @Scripts.Render("~/ma")
-
     @Scripts.Render("~/ng")
     @Scripts.Render("~/app")
-
-
     @Scripts.Render("~/misc")
 </body>
 </html>
