@@ -1,4 +1,4 @@
-﻿namespace Ait.Infrastructure.Api.Models
+﻿namespace Ait.Auth.Api.Models
 {
     public enum ApplicationTypes
     {

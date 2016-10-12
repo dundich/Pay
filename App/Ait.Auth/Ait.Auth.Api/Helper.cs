@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace Ait.Infrastructure.Api
+namespace Ait.Auth.Api
 {
     public class Helper
     {

@@ -1,14 +1,9 @@
-﻿using Ait.Infrastructure.Api.Entities;
-using Microsoft.Owin.Security;
+﻿using Ait.Auth.Api.Entities;
 using Microsoft.Owin.Security.Infrastructure;
 using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 
-namespace Ait.Infrastructure.Api.Providers
+namespace Ait.Auth.Api.Providers
 {
     public class SimpleRefreshTokenProvider : IAuthenticationTokenProvider
     {

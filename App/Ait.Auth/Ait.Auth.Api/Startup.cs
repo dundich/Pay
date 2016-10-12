@@ -1,4 +1,4 @@
-﻿using Ait.Infrastructure.Api.Providers;
+﻿using Ait.Auth.Api.Providers;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.Google;
@@ -8,9 +8,9 @@ using System;
 using System.Data.Entity;
 using System.Web.Http;
 
-[assembly: OwinStartup(typeof(Ait.Infrastructure.Api.Startup))]
+[assembly: OwinStartup(typeof(Ait.Auth.Api.Startup))]
 
-namespace Ait.Infrastructure.Api
+namespace Ait.Auth.Api
 {
     public class Startup
     {
@@ -26,7 +26,7 @@ namespace Ait.Infrastructure.Api
 
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, Ait.Infrastructure.Api.Migrations.Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, Ait.Auth.Api.Migrations.Configuration>());
         }
 
         public void ConfigureOAuth(IAppBuilder app)

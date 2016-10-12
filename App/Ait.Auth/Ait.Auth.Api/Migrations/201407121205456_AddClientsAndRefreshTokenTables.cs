@@ -1,4 +1,4 @@
-namespace Ait.Infrastructure.Api.Migrations
+namespace Ait.Auth.Api.Migrations
 {
     using System.Data.Entity.Migrations;
 

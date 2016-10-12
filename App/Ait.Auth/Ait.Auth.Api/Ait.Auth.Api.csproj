@@ -169,6 +169,7 @@
     <Compile Include="Providers\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="Providers\SimpleRefreshTokenProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Shell.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

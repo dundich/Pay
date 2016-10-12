@@ -1,4 +1,4 @@
-﻿using Ait.Infrastructure.Api.Entities;
+﻿using Ait.Auth.Api.Entities;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
 
-namespace Ait.Infrastructure.Api.Providers
+namespace Ait.Auth.Api.Providers
 {
     public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
     {

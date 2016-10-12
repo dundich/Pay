@@ -129,8 +129,6 @@ namespace Maybe2.FileSystems
             });
         }
 
-
-
         class AppFileTextSaveCriteria : IAppFileSaveCriteria
         {
 

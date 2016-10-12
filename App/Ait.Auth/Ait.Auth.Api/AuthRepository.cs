@@ -1,5 +1,5 @@
-﻿using Ait.Infrastructure.Api.Entities;
-using Ait.Infrastructure.Api.Models;
+﻿using Ait.Auth.Api.Entities;
+using Ait.Auth.Api.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using System;
@@ -7,12 +7,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Ait.Infrastructure.Api
+namespace Ait.Auth.Api
 {
 
     public class AuthRepository : IDisposable
     {
-        private AuthContext _ctx;
+        private readonly AuthContext _ctx;
 
         private UserManager<IdentityUser> _userManager;
 

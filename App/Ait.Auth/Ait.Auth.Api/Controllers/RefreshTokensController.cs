@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace Ait.Infrastructure.Api.Controllers
+namespace Ait.Auth.Api.Controllers
 {
     [RoutePrefix("api/RefreshTokens")]
     public class RefreshTokensController : ApiController
@@ -32,7 +32,6 @@ namespace Ait.Infrastructure.Api.Controllers
                 return Ok();
             }
             return BadRequest("Token Id does not exist");
-
         }
 
         protected override void Dispose(bool disposing)

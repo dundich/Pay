@@ -1,6 +1,6 @@
-namespace Ait.Infrastructure.Api.Migrations
+namespace Ait.Auth.Api.Migrations
 {
-    using Ait.Infrastructure.Api.Entities;
+    using Ait.Auth.Api.Entities;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System.Collections.Generic;
