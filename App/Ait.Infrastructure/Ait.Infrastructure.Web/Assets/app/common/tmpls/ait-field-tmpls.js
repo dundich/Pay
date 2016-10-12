@@ -158,4 +158,24 @@ angular.module("aitFieldTmpls", []).run(["$templateCache", function ($templateCa
 </div>\
 ');
 
+
+    $templateCache.put("Assets/app/common/tmpls/ait-field-password.html", '\
+<div class="input-field ait-field-password" ng-if="::$ctrl.type">\
+    <input id="{{::$ctrl.name}}" name="{{::$ctrl.name}}"\
+           type="password"\
+           ng-model="$ctrl.bindModel"\
+    ng-init="$ctrl.init()"\
+    ng-class="{invalid: !$ctrl.form[$ctrl.name].$valid, valid: $ctrl.form[$ctrl.name].$valid}"\
+    ait-valid="{{$ctrl.valid}}"\
+    autocomplete="off"\
+    ait-mask-placeholder="{{::$ctrl.placeholder}}"\
+    ng-required="$ctrl.required" />\
+<ait-field-error ng-show="!$ctrl.form[$ctrl.name].$valid">\
+ <span ng-if="$ctrl.form[$ctrl.name].$error.required">Поле обязательно для заполнения</span>\
+ <span ng-if="!$ctrl.form[$ctrl.name].$error.required">значение некорректно</span>\
+</ait-field-error>\
+<label for="{{::$ctrl.name}}" ng-bind="::$ctrl.caption" class="caption"></label>\
+</div>\
+');  
+
 }]);

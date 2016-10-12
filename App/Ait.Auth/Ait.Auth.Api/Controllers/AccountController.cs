@@ -41,13 +41,20 @@ namespace Ait.Infrastructure.Api.Controllers
                 return BadRequest(ModelState);
             }
 
-            IdentityResult result = await _repo.RegisterUser(userModel);
-
-            IHttpActionResult errorResult = GetErrorResult(result);
-
-            if (errorResult != null)
+            try
             {
-                return errorResult;
+                IdentityResult result = await _repo.RegisterUser(userModel);
+
+                IHttpActionResult errorResult = GetErrorResult(result);
+
+                if (errorResult != null)
+                {
+                    return errorResult;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
 
             return Ok();

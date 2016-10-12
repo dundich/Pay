@@ -9,8 +9,8 @@ namespace Ait.Infrastructure.Api
         public AuthContext()
             : base("AuthContext")
         {
-            //Configuration.ProxyCreationEnabled = false;
-            //Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
+            Configuration.LazyLoadingEnabled = false;
         }
 
         public DbSet<Client> Clients { get; set; }

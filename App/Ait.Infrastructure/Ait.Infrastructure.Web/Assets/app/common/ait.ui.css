@@ -118,3 +118,8 @@ ait-field .input-field label {
 ait-field input {
     display: block;
 }
+
+
+.header {
+	font-weight: 300;
+}

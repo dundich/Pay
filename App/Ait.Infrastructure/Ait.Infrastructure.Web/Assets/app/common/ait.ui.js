@@ -413,6 +413,10 @@
                     this.type = 'street';
                     break;
 
+                case 'password':
+                    this.type = 'password';
+                    break;
+
                 default:
                     this.type = 'text';
                     break;
