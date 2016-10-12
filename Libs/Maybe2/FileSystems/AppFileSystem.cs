@@ -13,7 +13,7 @@ namespace Maybe2.FileSystems
         /// <summary>
         /// virtual path to context
         /// </summary>
-        public string RootPath = "App_Data";
+        public string RootPath => "App_Data";
     }
 
     public class AppWinFileSystem : IAppFileSystem

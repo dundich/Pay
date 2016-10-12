@@ -52,40 +52,40 @@
       .config(['$routeProvider', function ($routeProvider) {
           $routeProvider
             .when('/login', {
-                template: '<login/>'
-            })
-          ;
+                template: '\
+<div class="row">\
+    <div class="col s6 offset-s3">\
+        <h2 class="col s12 header">Войти</h2>\
+        <login></login>\
+    </div>\
+</div>'
+            });
       }])
 
       .component('login', {
           controller: Comp,
           template: '\
-<form role="form">\
-    <div class="row">\
-        <div class="col l2">\
-            &nbsp;\
-        </div>\
-        <div class="col l4">\
-            <h2 class="form-login-heading">Войти</h2>\
-            <input type="text" class="form-control" placeholder="Username" data-ng-model="$ctrl.state.userName" required autofocus>\
-            <input type="password" class="form-control" placeholder="Password" data-ng-model="$ctrl.state.password" required>\
-            <p>\
+<form name="form" role="form">\
+    <div class="col l6">\
+        <ait-field class="col s12" form="form" caption="Пользователь" ng-model="$ctrl.state.userName" required="true" ait-focus-on="true">\
+        </ait-field>\
+        <ait-field class="col s12" ait-field-type="password" form="form" caption="Пароль" ng-model="$ctrl.state.password" required="true">\
+        </ait-field>\
+        <div class="row">\
+            <p class="col s12">\
+                <br\>\
                 <button class="btn btn-md btn-info btn-block" type="submit" data-ng-click="$ctrl.login()">Войти</button>\
             </p>\
-            <div data-ng-hide="$ctrl.message == \'\'" class="alert alert-danger">\
-                <ait-error-panel error="$ctrl.message"></ait-error-panel>\
-            </div>\
         </div>\
-        <div class="col l4">\
-            <h2 class="form-login-heading">&nbsp;</h2>\
-            <p>Или вы можете войти в систему, используя один из социальных логинов ниже</p>\
-            <button class="btn btn-large btn-facebook btn-block blue" type="button" data-ng-click="authExternalProvider(\'Facebook\')"><i class="fa fa-facebook"></i> | Connect with Facebook</button>\
-            <br>\
-            <button class="btn btn-large btn-google-plus btn-block red" type="button" data-ng-click="authExternalProvider(\'Google\')"><i class="fa fa-google-plus"></i> | Connect with Google+</button>\
+        <div data-ng-hide="$ctrl.message == \'\'" class="alert alert-danger">\
+            <ait-error-panel error="$ctrl.message"></ait-error-panel>\
         </div>\
-        <div class="col l2">\
-            &nbsp;\
-        </div>\
+    </div>\
+    <div class="col l6">\
+        <p>Или вы можете войти в систему, используя один из социальных логинов ниже</p>\
+        <button class="btn btn-large btn-facebook btn-block blue" type="button" data-ng-click="authExternalProvider(\'Facebook\')"><i class="fa fa-facebook"></i> | Connect with Facebook</button>\
+        <br>\
+        <button class="btn btn-large btn-google-plus btn-block red" type="button" data-ng-click="authExternalProvider(\'Google\')"><i class="fa fa-google-plus"></i> | Connect with Google+</button>\
     </div>\
 </form>\
 '

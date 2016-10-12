@@ -9,7 +9,7 @@ namespace Ait.Auth.Api
 
         public static Shell Default => new Shell();
 
-        public Shell() : base(SettingsProvider.CreateWebSettings())
+        public Shell() : base(SettingsProvider.CreateProvider())
         {
         }
 

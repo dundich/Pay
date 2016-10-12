@@ -9,7 +9,7 @@ namespace Ait.Pay.Web
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.Register<IShellSettings>(b => new ShellSettings(SettingsProvider.CreateWebSettings())).SingleInstance();            
+            builder.Register<IShellSettings>(b => new ShellSettings(SettingsProvider.CreateProvider())).SingleInstance();            
 
 #if (DEBUG && DEMO)
             builder.Register(b => Fake.Doctor).SingleInstance();

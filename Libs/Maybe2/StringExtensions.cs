@@ -24,7 +24,7 @@ namespace Maybe2
         public static string PackWhiteSpaces(this string s, string packSpaces = " ")
         {
             if (s == null) return null;
-            return Regex.Replace(s.Trim(), @"\s+", packSpaces);
+            return Regex.Replace(s.Pack(), @"\s+", packSpaces);
         }
 
         public static string PackToNumber(this string input)

@@ -10,8 +10,6 @@ namespace Maybe2.Configuration
         void SaveSettings(IDictionary<string, string> settings);
     }
 
-
-
     public class SettingsProvider : ISettingsProvider
     {
         readonly IAppFileInfo[] fi;
@@ -58,23 +56,11 @@ namespace Maybe2.Configuration
             return !c.Key.IsNullOrWhiteSpace() && !c.Value.IsNullOrWhiteSpace();
         }
 
-        public static ISettingsProvider CreateWebSettings()
+        public static ISettingsProvider CreateProvider(bool isWebHost = true)
         {
-            return new SettingsProvider(new AppWebFileSystem().GetFileInfo("Settings.txt"));
+            return new SettingsProvider((isWebHost ? new AppWebFileSystem() : new AppWinFileSystem())
+                .GetFileInfo("Settings.txt"));
         }
     }
-
-
-    //public interface IShellConfig
-    //{
-    //    /// <summary>
-    //    /// load configuration
-    //    /// </summary>        
-    //    IDictionary<string, string> GetSettings();
-    //    /// <summary>
-    //    /// reset cache for reload
-    //    /// </summary>
-    //    void Reset();
-    //}
 
 }
