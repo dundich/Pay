@@ -1,5 +1,6 @@
 ﻿using Ait.Pay.IContract;
 using Maybe2;
+using Maybe2.Configuration;
 using System;
 using System.Globalization;
 using System.Threading.Tasks;
@@ -9,9 +10,9 @@ namespace Ait.Pay.Web.Models
     public class PayReport : IPayReport, IPayVisitReport
     {
 
-        readonly IPayConfig cfg;
+        readonly IShellSettings cfg;
 
-        public PayReport(IPayConfig cfg)
+        public PayReport(IShellSettings cfg)
         {
             this.cfg = cfg;
         }
@@ -57,7 +58,7 @@ namespace Ait.Pay.Web.Models
 
         public async Task<ReportResponse> report2(ReportRequest criteria)
         {
-            var setts = await cfg.GetSettings();
+            var setts = cfg.GetSettings();
             string key = consts.KEY_URL_REP.Trim();
             var url = setts.GetOrDefault(key).EnsureTrailingSlash() + "report2";
             var rep = await url.PostAsJson<ReportResponse, ReportRequest>(criteria);

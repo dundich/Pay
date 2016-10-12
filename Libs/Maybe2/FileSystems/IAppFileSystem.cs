@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Maybe2.FileSystems
 {
@@ -23,12 +22,12 @@ namespace Maybe2.FileSystems
         /// FileInfo /dfdf/dfdf/
         /// </summary>
         /// <param name="path">virtual path</param>        
-        Task<IAppFileInfo> GetFileInfo(string path);
+        IAppFileInfo GetFileInfo(string path);
 
         /// <summary>
         /// DirectoryInfo
         /// </summary>
-        Task<IAppDirectoryInfo> GetDirectoryInfo(string path = null);
+        IAppDirectoryInfo GetDirectoryInfo(string path = null);
 
         /// <summary>
         /// files by dir
@@ -36,13 +35,13 @@ namespace Maybe2.FileSystems
         /// <param name="path"></param>
         /// <param name="matcher"></param>
         /// <returns></returns>
-        Task<IEnumerable<IAppFileInfo>> ListFiles(string path, params string[] matcher);
+        IEnumerable<IAppFileInfo> ListFiles(string path, params string[] matcher);
 
         /// <summary>
         /// sub dirs
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        Task<IEnumerable<IAppDirectoryInfo>> ListDirectories(string path);
+        IEnumerable<IAppDirectoryInfo> ListDirectories(string path);
     }
 }

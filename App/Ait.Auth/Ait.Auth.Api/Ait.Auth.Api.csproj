@@ -139,6 +139,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Settings.txt" />
     <Content Include="rm.txt" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -182,13 +183,18 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201407121205456_AddClientsAndRefreshTokenTables.resx">
       <DependentUpon>201407121205456_AddClientsAndRefreshTokenTables.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Libs\Maybe2\Maybe2.csproj">
+      <Project>{16abf6cb-4ee5-411a-b9c6-2173de870456}</Project>
+      <Name>Maybe2</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

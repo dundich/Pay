@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Maybe2.FileSystems
 {
@@ -73,19 +71,19 @@ namespace Maybe2.FileSystems
         /// Meta Information(Author, Creator ....)
         /// </summary>
         /// <returns></returns>
-        Task<Dictionary<string, string>> GetAttributes();
+        //Task<Dictionary<string, string>> GetAttributes();
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="criteria"></param>
         /// <returns></returns>
-        Task Save(IAppFileSaveCriteria criteria);
+        void Save(IAppFileSaveCriteria criteria);
 
         /// <summary>
         /// File or Directory Delete
         /// </summary>        
-        Task Delete();
+        void Delete();
     }
 
 
@@ -94,7 +92,7 @@ namespace Maybe2.FileSystems
     /// </summary>
     public interface IAppFileInfo : IAppFileSystemInfo
     {
-        Task<byte[]> ReadBytes(IAppFileReadCriteria criteria = null);
+        byte[] ReadBytes(IAppFileReadCriteria criteria = null);
     }
 
 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Web.Hosting;
 
 namespace Maybe2.FileSystems
@@ -66,34 +65,28 @@ namespace Maybe2.FileSystems
             return new AppDirInfoImpl(new DirectoryInfo(physicalPath));
         }
 
-        public Task<IAppFileInfo> GetFileInfo(string path)
+        public IAppFileInfo GetFileInfo(string path)
         {
-            return Task.Run(() => CreateFileInfo(path));
+            return CreateFileInfo(path);
         }
 
-        public Task<IAppDirectoryInfo> GetDirectoryInfo(string path = null)
+        public IAppDirectoryInfo GetDirectoryInfo(string path = null)
         {
-            return Task.Run(() => CreateDirectoryInfo(path));
+            return CreateDirectoryInfo(path);
         }
 
-        public Task<IEnumerable<IAppFileInfo>> ListFiles(string path, params string[] matcher)
+        public IEnumerable<IAppFileInfo> ListFiles(string path, params string[] matcher)
         {
-            return Task.Run(() =>
-            {
-                var physicalPath = CombineToPhysicalPath(path);
-                var files = Directory.GetFiles(physicalPath, "*", SearchOption.TopDirectoryOnly);
-                return files.Select(f => CreateFileInfo(f));
-            });
+            var physicalPath = CombineToPhysicalPath(path);
+            var files = Directory.GetFiles(physicalPath, "*", SearchOption.TopDirectoryOnly);
+            return files.Select(f => CreateFileInfo(f));
         }
 
-        public Task<IEnumerable<IAppDirectoryInfo>> ListDirectories(string path)
+        public IEnumerable<IAppDirectoryInfo> ListDirectories(string path)
         {
-            return Task.Run(() =>
-            {
-                var physicalPath = CombineToPhysicalPath(path);
-                var dirs = Directory.GetDirectories(physicalPath, "*", SearchOption.TopDirectoryOnly);
-                return dirs.Select(f => CreateDirectoryInfo(f));
-            });
+            var physicalPath = CombineToPhysicalPath(path);
+            var dirs = Directory.GetDirectories(physicalPath, "*", SearchOption.TopDirectoryOnly);
+            return dirs.Select(f => CreateDirectoryInfo(f));
         }
     }
 

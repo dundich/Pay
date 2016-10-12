@@ -2,22 +2,21 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Maybe2.FileSystems
 {
     public static class AppFileSystemHelper
     {
 
-        public static async Task<bool> IsDirectoryExists(this IAppFileSystem fs, string path)
+        public static bool IsDirectoryExists(this IAppFileSystem fs, string path)
         {
-            return (await fs.GetDirectoryInfo(path)).IsExists;
+            return fs.GetDirectoryInfo(path).IsExists;
         }
 
 
-        public static async Task<bool> IsFileExists(this IAppFileSystem fs, string path)
+        public static bool IsFileExists(this IAppFileSystem fs, string path)
         {
-            return (await fs.GetFileInfo(path)).IsExists;
+            return fs.GetFileInfo(path).IsExists;
         }
 
         /// <summary>
@@ -25,38 +24,36 @@ namespace Maybe2.FileSystems
         /// </summary>
         /// <param name="path">The path and name of the file to read.</param>
         /// <returns>A string containing all lines of the file, or <code>null</code> if the file doesn't exist.</returns>
-        public static async Task<string> ReadText(this IAppFileSystem fs, string path, Encoding encoding = null)
+        public static string ReadText(this IAppFileSystem fs, string path, Encoding encoding = null)
         {
-            var fi = await fs.GetFileInfo(path);
-            return await fi.ReadText(encoding);
+            var fi = fs.GetFileInfo(path);
+            return fi.ReadText(encoding);
         }
 
-        public static async Task SaveText(this IAppFileSystem fs, string path, string content)
+        public static void SaveText(this IAppFileSystem fs, string path, string content)
         {
-            var fi = await fs.GetFileInfo(path);
-            await fi.SaveText(content);
+            fs.GetFileInfo(path).SaveText(content);
         }
 
-        public static async Task AppendText(this IAppFileSystem fs, string path, string content)
+        public static void AppendText(this IAppFileSystem fs, string path, string content)
         {
-            var fi = await fs.GetFileInfo(path);
-            await fi.AppendText(content);
+            fs.GetFileInfo(path).AppendText(content);
         }
 
-        public static async Task DeleteFile(this IAppFileSystem fs, string path)
+        public static void DeleteFile(this IAppFileSystem fs, string path)
         {
-            var fi = await fs.GetFileInfo(path);
+            var fi = fs.GetFileInfo(path);
 
             if (fi.IsExists)
-                await fi.Delete();
+                fi.Delete();
         }
 
-        public static async Task DeleteDirectory(this IAppFileSystem fs, string path)
+        public static void DeleteDirectory(this IAppFileSystem fs, string path)
         {
-            var fi = await fs.GetDirectoryInfo(path);
+            var fi = fs.GetDirectoryInfo(path);
 
             if (fi.IsExists)
-                await fi.Delete();
+                fi.Delete();
         }
 
 
@@ -98,35 +95,35 @@ namespace Maybe2.FileSystems
             return ps.Select((c, i) => GetVirtualPath(ps.Take(i + 1)));
         }
 
-        public static Task<IAppDirectoryInfo[]> GetRootToSelfDirs(this IAppFileSystem fs, string filePath)
+        public static IEnumerable<IAppDirectoryInfo> GetRootToSelfDirs(this IAppFileSystem fs, string filePath)
         {
             var paths = GetRootToSelfPaths(fs, filePath).ToArray();
             var ps = paths.Take(paths.Length - 1);
             var tall = ps.Select(s => fs.GetDirectoryInfo(s));
-            return Task.WhenAll(tall);
+            return tall;
         }
 
-        public static async Task<string> ReadText(this IAppFileInfo fi, Encoding encoding = null)
+        public static string ReadText(this IAppFileInfo fi, Encoding encoding = null)
         {
             if (!fi.IsDirectory && fi.IsExists)
             {
-                var bytes = await fi.ReadBytes();
+                var bytes = fi.ReadBytes();
                 return (encoding ?? Encoding.UTF8).GetString(bytes);
             }
             else
             {
-                return await Task.FromResult(string.Empty);
+                return string.Empty;
             }
         }
 
-        public static async Task SaveText(this IAppFileInfo fs, string content)
+        public static void SaveText(this IAppFileInfo fs, string content)
         {
-            await fs.Save(new AppFileTextSaveCriteria(content));
+            fs.Save(new AppFileTextSaveCriteria(content));
         }
 
-        public static async Task AppendText(this IAppFileInfo fs, string content)
+        public static void AppendText(this IAppFileInfo fs, string content)
         {
-            await fs.Save(new AppFileTextSaveCriteria(content)
+            fs.Save(new AppFileTextSaveCriteria(content)
             {
                 Action = SaveAction.Append
             });

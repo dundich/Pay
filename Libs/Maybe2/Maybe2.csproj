@@ -43,14 +43,13 @@
     <Compile Include="Classes\IHasId.cs" />
     <Compile Include="Classes\LazyCache.cs" />
     <Compile Include="Coder.cs" />
-    <Compile Include="Configuration\IShellFactory.cs" />
+    <Compile Include="Configuration\ISettingsProvider.cs" />
     <Compile Include="Configuration\IShellSettings.cs" />
     <Compile Include="Decliner.cs" />
     <Compile Include="DictionaryExtensions.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="FileSystems\AppFileSystem.cs" />
     <Compile Include="FileSystems\AppFileSystemHelper.cs" />
-    <Compile Include="FileSystems\AppIO.cs" />
     <Compile Include="FileSystems\IAppFileInfo.cs" />
     <Compile Include="FileSystems\IAppFileSystem.cs" />
     <Compile Include="FileSystems\AppFileInfo.cs" />

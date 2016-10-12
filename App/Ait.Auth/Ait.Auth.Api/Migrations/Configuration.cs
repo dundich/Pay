@@ -1,18 +1,20 @@
 namespace Ait.Infrastructure.Api.Migrations
 {
     using Ait.Infrastructure.Api.Entities;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Ait.Infrastructure.Api.AuthContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<AuthContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;// false;
         }
 
-        protected override void Seed(Ait.Infrastructure.Api.AuthContext context)
+        protected override void Seed(AuthContext context)
         {
             if (context.Clients.Count() > 0)
             {
@@ -20,7 +22,43 @@ namespace Ait.Infrastructure.Api.Migrations
             }
 
             context.Clients.AddRange(BuildClientsList());
+
+            fillUsers(context);
             context.SaveChanges();
+        }
+
+        private static void fillUsers(AuthContext context)
+        {
+            if (!context.Users.Any())
+            {
+                var roleStore = new RoleStore<IdentityRole>(context);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
+                var userStore = new UserStore<IdentityUser>(context);
+                var userManager = new UserManager<IdentityUser>(userStore);
+
+                // Add missing roles
+                var role = roleManager.FindByName("Admin");
+                if (role == null)
+                {
+                    role = new IdentityRole("Admin");
+                    roleManager.Create(role);
+                }
+
+                // Create test users
+                var user = userManager.FindByName("admin");
+                if (user == null)
+                {
+                    var newUser = new IdentityUser()
+                    {
+                        UserName = "admin",
+                        Email = "xxx@xxx.net",
+                        PhoneNumber = "",
+                    };
+                    userManager.Create(newUser, "admin");
+                    userManager.SetLockoutEnabled(newUser.Id, false);
+                    userManager.AddToRole(newUser.Id, "Admin");
+                }
+            }
         }
 
         private static List<Client> BuildClientsList()

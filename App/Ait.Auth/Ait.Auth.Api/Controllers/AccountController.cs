@@ -36,6 +36,15 @@ namespace Ait.Infrastructure.Api.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(UserModel userModel)
         {
+
+            var s = Shell.GetConnectionString();
+
+
+            if (userModel.UserName != null && userModel.UserName.Contains("admin"))
+            {
+                ModelState.AddModelError("", "Ник пользователя не должен содержать слово 'admin'");
+            }
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

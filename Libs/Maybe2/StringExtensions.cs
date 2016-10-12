@@ -18,7 +18,7 @@ namespace Maybe2
                 int l = s.Length - maxlen.Value;
                 s = s.Remove(maxlen.Value, l);
             }
-            return (s == null) ? null : s.Trim();
+            return (s == null) ? null : s.Trim().Trim('\uFEFF');
         }
 
         public static string PackWhiteSpaces(this string s, string packSpaces = " ")

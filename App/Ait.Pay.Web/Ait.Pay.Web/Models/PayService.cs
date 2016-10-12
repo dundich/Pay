@@ -1,5 +1,6 @@
 ﻿using Ait.Pay.IContract;
 using Maybe2;
+using Maybe2.Configuration;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -10,11 +11,9 @@ namespace Ait.Pay.Web.Models
     /// </summary>
     public class PayService : IPayContract
     {
+        readonly IShellSettings cfg;
 
-        readonly IPayConfig cfg;
-
-
-        public PayService(IPayConfig cfg)
+        public PayService(IShellSettings cfg)
         {
             this.cfg = cfg;
         }
@@ -105,7 +104,7 @@ namespace Ait.Pay.Web.Models
         //---------------
         private async Task<R> GetPay<R, T>(string url, T criteria)
         {
-            var setts = await cfg.GetSettings();
+            var setts = cfg.GetSettings();
             url = setts.GetOrDefault(consts.KEY_URL_PAY).EnsureTrailingSlash() + url;
             return await url.PostAsJson<R, T>(criteria);
         }

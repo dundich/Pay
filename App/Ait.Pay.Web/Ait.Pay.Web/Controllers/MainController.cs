@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Maybe2.Configuration;
+using System.Collections.Generic;
 using System.Web.Mvc;
 
 namespace Ait.Pay.Web.Controllers
@@ -7,16 +7,16 @@ namespace Ait.Pay.Web.Controllers
     public class MainController : Controller
     {
 
-        readonly IPayConfig cfg;
-        public MainController(IPayConfig cfg)
+        readonly IShellSettings cfg;
+        public MainController(IShellSettings cfg)
         {
             this.cfg = cfg;
         }
 
 
-        public async Task<IDictionary<string, string>> GetSettings()
+        public IDictionary<string, string> GetSettings()
         {            
-            return await cfg.GetSettings();
+            return cfg.GetSettings();
         }
 
 
@@ -24,9 +24,9 @@ namespace Ait.Pay.Web.Controllers
         /// This maps to the Main/Index.cshtml file.  This file is the main view for the application.
         /// </summary>
         /// <returns></returns>
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            ViewBag.Settings = await GetSettings();
+            ViewBag.Settings = GetSettings();
             return View();
         }
     }

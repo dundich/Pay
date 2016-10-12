@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace Maybe2.FileSystems
 {
@@ -14,10 +12,8 @@ namespace Maybe2.FileSystems
         public abstract long Length { get; }
         public abstract string Name { get; }
         public abstract string PhysicalPath { get; }
-
-        public abstract Task Delete();
-        public abstract Task<Dictionary<string, string>> GetAttributes();
-        public abstract Task Save(IAppFileSaveCriteria criteria);
+        public abstract void Delete();
+        public abstract void Save(IAppFileSaveCriteria criteria);
     }
 
 
@@ -43,52 +39,49 @@ namespace Maybe2.FileSystems
 
         public override bool IsDirectory => false;
 
-        public override Task<Dictionary<string, string>> GetAttributes()
+        //public override Task<Dictionary<string, string>> GetAttributes()
+        //{
+        //    return Task.Run<Dictionary<string, string>>(() => new Dictionary<string, string>
+        //    {
+        //    });
+        //}
+
+        public byte[] ReadBytes(IAppFileReadCriteria criteria = null)
         {
-            return Task.Run<Dictionary<string, string>>(() => new Dictionary<string, string>
-            {
-            });
+            return File.ReadAllBytes(PhysicalPath);
         }
 
-        public Task<byte[]> ReadBytes(IAppFileReadCriteria criteria = null)
+        public override void Save(IAppFileSaveCriteria criteria)
         {
-            return Task.Run(() => File.ReadAllBytes(PhysicalPath));
-        }
+            //Check Dir
+            MakeDirectory();
 
-        public override Task Save(IAppFileSaveCriteria criteria)
-        {
-            return Task.Run(() =>
+            var action = criteria.GetAction();
+            var bytes = criteria.GetData();
+            switch (action)
             {
-                //Check Dir
-                MakeDirectory();
+                case SaveAction.CreateNew:
+                    using (var fs = new FileStream(PhysicalPath, FileMode.CreateNew, FileAccess.Read, FileShare.ReadWrite))
+                    {
+                        fs.Write(bytes, 0, bytes.Length);
+                    }
+                    break;
 
-                var action = criteria.GetAction();
-                var bytes = criteria.GetData();
-                switch (action)
-                {
-                    case SaveAction.CreateNew:
-                        using (var fs = new FileStream(PhysicalPath, FileMode.CreateNew, FileAccess.Read, FileShare.ReadWrite))
-                        {
-                            fs.Write(bytes, 0, bytes.Length);
-                        }
-                        break;
+                case SaveAction.CreateOrUpdate:
+                    File.WriteAllBytes(PhysicalPath, bytes);
+                    break;
 
-                    case SaveAction.CreateOrUpdate:
-                        File.WriteAllBytes(PhysicalPath, bytes);
-                        break;
+                case SaveAction.Append:
+                    using (var stream = new FileStream(PhysicalPath, FileMode.Append))
+                    {
+                        stream.Write(bytes, 0, bytes.Length);
+                    }
+                    break;
 
-                    case SaveAction.Append:
-                        using (var stream = new FileStream(PhysicalPath, FileMode.Append))
-                        {
-                            stream.Write(bytes, 0, bytes.Length);
-                        }
-                        break;
-
-                    case SaveAction.Truncate:
-                        File.WriteAllText(PhysicalPath, string.Empty);
-                        break;
-                }
-            });
+                case SaveAction.Truncate:
+                    File.WriteAllText(PhysicalPath, string.Empty);
+                    break;
+            }
         }
 
         private void MakeDirectory()
@@ -96,9 +89,9 @@ namespace Maybe2.FileSystems
             _info.Directory.Create();
         }
 
-        public override Task Delete()
+        public override void Delete()
         {
-            return Task.Run(() => File.Delete(PhysicalPath));
+            File.Delete(PhysicalPath);
         }
     }
 
@@ -124,36 +117,29 @@ namespace Maybe2.FileSystems
 
         public override bool IsDirectory => true;
 
-        public override Task<Dictionary<string, string>> GetAttributes()
+        public override void Save(IAppFileSaveCriteria criteria)
         {
-            throw new NotImplementedException();
-        }
-
-        public override Task Save(IAppFileSaveCriteria criteria)
-        {
-            return Task.Run(() =>
+            var action = criteria.GetAction();
+            var bytes = criteria.GetData();
+            switch (action)
             {
-                var action = criteria.GetAction();
-                var bytes = criteria.GetData();
-                switch (action)
-                {
-                    case SaveAction.CreateNew:
-                    case SaveAction.CreateOrUpdate:
-                    case SaveAction.Append:
-                        Directory.CreateDirectory(PhysicalPath);
-                        break;
+                case SaveAction.CreateNew:
+                case SaveAction.CreateOrUpdate:
+                case SaveAction.Append:
+                    Directory.CreateDirectory(PhysicalPath);
+                    break;
 
-                    case SaveAction.Truncate:
-                        //File.Read
-                        //File.WriteAllText(PhysicalPath, string.Empty);
-                        break;
-                }
-            });
+                case SaveAction.Truncate:
+                    //File.Read
+                    //File.WriteAllText(PhysicalPath, string.Empty);
+                    break;
+            }
+
         }
 
-        public override Task Delete()
+        public override void Delete()
         {
-            return Task.Run(() => Directory.Delete(PhysicalPath));
+            Directory.Delete(PhysicalPath);
         }
     }
 }

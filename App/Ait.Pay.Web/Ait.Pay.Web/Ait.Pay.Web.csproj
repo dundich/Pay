@@ -250,7 +250,6 @@
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DataModels.cs" />
-    <Compile Include="Models\IPayConfig.cs" />
     <Compile Include="Models\IPayReport.cs" />
     <Compile Include="Models\PayHelper.cs" />
     <Compile Include="Models\PayReport.cs" />
