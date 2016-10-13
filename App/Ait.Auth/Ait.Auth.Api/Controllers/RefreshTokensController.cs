@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using Ait.Auth.Api.Modules;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 
 namespace Ait.Auth.Api.Controllers
@@ -7,11 +9,11 @@ namespace Ait.Auth.Api.Controllers
     public class RefreshTokensController : ApiController
     {
 
-        private AuthRepository _repo = null;
+        private IAuthRepository _repo => Request.GetOwinContext().Get<IAuthRepository>(OwinConsts.AuthRepository);
 
         public RefreshTokensController()
         {
-            _repo = new AuthRepository();
+            //_repo = new AuthRepository();
         }
 
         [Authorize(Users = "Admin")]
@@ -34,14 +36,14 @@ namespace Ait.Auth.Api.Controllers
             return BadRequest("Token Id does not exist");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _repo.Dispose();
-            }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        _repo.Dispose();
+        //    }
 
-            base.Dispose(disposing);
-        }
+        //    base.Dispose(disposing);
+        //}
     }
 }

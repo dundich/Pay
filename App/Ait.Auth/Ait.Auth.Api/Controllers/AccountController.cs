@@ -1,4 +1,5 @@
 ﻿using Ait.Auth.Api.Models;
+using Ait.Auth.Api.Modules;
 using Ait.Auth.Api.Results;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -20,7 +21,7 @@ namespace Ait.Auth.Api.Controllers
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
-        private AuthRepository _repo = null;
+        private IAuthRepository _repo => Request.GetOwinContext().Get<IAuthRepository>(OwinConsts.AuthRepository);
 
         private IAuthenticationManager Authentication
         {
@@ -29,7 +30,7 @@ namespace Ait.Auth.Api.Controllers
 
         public AccountController()
         {
-            _repo = new AuthRepository();
+
         }
 
         // POST api/Account/Register
@@ -206,7 +207,7 @@ namespace Ait.Auth.Api.Controllers
         }
 
 
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         [HttpGet]
         [Route("Claims")]
@@ -214,6 +215,8 @@ namespace Ait.Auth.Api.Controllers
         {
             //string token = "";
             //Microsoft.Owin.Security.AuthenticationTicket ticket = Startup.OAuthBearerOptions.AccessTokenFormat.Unprotect(token);
+            var cl = _repo.FindClient("admin");
+
             var identity = User.Identity as ClaimsIdentity;
 
             return identity.Claims.Select(c => new
@@ -225,15 +228,15 @@ namespace Ait.Auth.Api.Controllers
 
 
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                _repo.Dispose();
-            }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing)
+        //    {
+        //        _repo.Dispose();
+        //    }
 
-            base.Dispose(disposing);
-        }
+        //    base.Dispose(disposing);
+        //}
 
         #region Helpers
 

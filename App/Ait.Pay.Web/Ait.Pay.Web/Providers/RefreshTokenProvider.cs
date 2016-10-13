@@ -15,6 +15,11 @@ namespace Ait.Pay.Web.Providers
     {
         private static ConcurrentDictionary<string, AuthenticationTicket> _refreshTokens = new ConcurrentDictionary<string, AuthenticationTicket>();
 
+        public void Create(AuthenticationTokenCreateContext context)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task CreateAsync(AuthenticationTokenCreateContext context)
         {
             var guid = Guid.NewGuid().ToString();
@@ -35,6 +40,11 @@ namespace Ait.Pay.Web.Providers
             context.SetToken(guid);
         }
 
+        public void Receive(AuthenticationTokenReceiveContext context)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task ReceiveAsync(AuthenticationTokenReceiveContext context)
         {
             AuthenticationTicket ticket;
@@ -44,14 +54,14 @@ namespace Ait.Pay.Web.Providers
             }
         }
 
-        public void Create(AuthenticationTokenCreateContext context)
-        {
-            CreateAsync(context);
-        }
+        //public void Create(AuthenticationTokenCreateContext context)
+        //{
+        //    //CreateAsync(context);
+        //}
 
-        public void Receive(AuthenticationTokenReceiveContext context)
-        {
-            ReceiveAsync(context);
-        }
+        //public void Receive(AuthenticationTokenReceiveContext context)
+        //{
+        //    //ReceiveAsync(context);
+        //}
     }
 }
