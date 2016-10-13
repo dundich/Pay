@@ -1,7 +1,6 @@
 namespace Ait.Auth.Api.Migrations
 {
     using Ait.Auth.Api.Entities;
-    using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using System.Collections.Generic;
     using System.Data.Entity.Migrations;
@@ -31,32 +30,27 @@ namespace Ait.Auth.Api.Migrations
         {
             if (!context.Users.Any())
             {
-                var roleStore = new RoleStore<IdentityRole>(context);
-                var roleManager = new RoleManager<IdentityRole>(roleStore);
-                var userStore = new UserStore<IdentityUser>(context);
-                var userManager = new UserManager<IdentityUser>(userStore);
-
                 // Add missing roles
-                var role = roleManager.FindByName("Admin");
+                //var role = roleManager.FindByName("Admin");
+                var role = context.Roles.FirstOrDefault(c => c.Name == "Admin");
+
                 if (role == null)
                 {
                     role = new IdentityRole("Admin");
-                    roleManager.Create(role);
-                }
 
-                // Create test users
-                var user = userManager.FindByName("admin");
-                if (user == null)
-                {
-                    var newUser = new IdentityUser()
-                    {
-                        UserName = "admin",
-                        Email = "xxx@xxx.net",
-                        PhoneNumber = "",
-                    };
-                    userManager.Create(newUser, "admin");
-                    userManager.SetLockoutEnabled(newUser.Id, false);
-                    userManager.AddToRole(newUser.Id, "Admin");
+                    context.Roles.Add(role);
+                    //roleManager.Create(role);
+
+                    //var newUser = new IdentityUser()
+                    //{
+                    //    UserName = "admin",
+                    //    Email = "xxx@xxx.net",
+                    //    PasswordHash = "master"
+                    //};
+
+                    //newUser.Roles.Add(new IdentityUserRole { RoleId = role.Id, UserId = newUser.Id });
+
+                    //context.Users.Add(newUser);
                 }
             }
         }

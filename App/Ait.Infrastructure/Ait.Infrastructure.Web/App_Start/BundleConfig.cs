@@ -8,7 +8,9 @@ namespace Ait.Infrastructure.Web
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new StyleBundle("~/styles")
-                .IncludeDirectory("~/Assets/app", "*.css", true));
+                .IncludeDirectory("~/Assets/app", "*.css", true)
+                .Include("~/content/loading-bar.min.css")
+                );
 
             bundles.Add(new StyleBundle("~/content/fontawesome/css/fa")
                 .Include("~/content/fontawesome/css/font-awesome.css"));
@@ -23,6 +25,7 @@ namespace Ait.Infrastructure.Web
                         , "~/Scripts/angular-animate.min.js"
                         , "~/Scripts/angular-sanitize.min.js"
                         , "~/Scripts/angular-cookies.min.js"
+                        , "~/Scripts/loading-bar.min.js"
                         , "~/Scripts/ngStorage.min.js"
                         ));
 

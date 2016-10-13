@@ -7,6 +7,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Claims;
@@ -36,14 +37,10 @@ namespace Ait.Auth.Api.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(UserModel userModel)
         {
-
-            var s = Shell.GetConnectionString();
-
-
-            if (userModel.UserName != null && userModel.UserName.Contains("admin"))
-            {
-                ModelState.AddModelError("", "Ник пользователя не должен содержать слово 'admin'");
-            }
+            //if (userModel.UserName != null && userModel.UserName.Contains("admin"))
+            //{
+            //    ModelState.AddModelError("", "Ник пользователя не должен содержать слово 'admin'");
+            //}
 
             if (!ModelState.IsValid)
             {
@@ -207,6 +204,26 @@ namespace Ait.Auth.Api.Controllers
             return Ok(accessTokenResponse);
 
         }
+
+
+        [Authorize]
+        [HttpPost]
+        [HttpGet]
+        [Route("Claims")]
+        public IEnumerable<object> GetClaims()
+        {
+            //string token = "";
+            //Microsoft.Owin.Security.AuthenticationTicket ticket = Startup.OAuthBearerOptions.AccessTokenFormat.Unprotect(token);
+            var identity = User.Identity as ClaimsIdentity;
+
+            return identity.Claims.Select(c => new
+            {
+                Type = c.Type,
+                Value = c.Value
+            });
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {

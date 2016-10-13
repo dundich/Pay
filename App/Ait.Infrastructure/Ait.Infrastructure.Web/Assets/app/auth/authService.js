@@ -166,7 +166,11 @@
             });
 
             return deferred.promise;
+        };
 
+
+        var _getClaims = function () {
+            return $http.get(serviceBase + 'api/account/claims');
         };
 
         authServiceFactory.saveRegistration = _saveRegistration;
@@ -176,9 +180,13 @@
         authServiceFactory.authentication = _authentication;
         authServiceFactory.refreshToken = _refreshToken;
 
+        authServiceFactory.getClaims = _getClaims;
+
         authServiceFactory.obtainAccessToken = _obtainAccessToken;
         authServiceFactory.externalAuthData = _externalAuthData;
         authServiceFactory.registerExternal = _registerExternal;
+
+        _fillAuthData();
 
         return authServiceFactory;
     }]);

@@ -181,6 +181,26 @@
     });
 
 
+    app.factory('aitToast', function () {
+
+        return function (msg, type, t) {
+            var msg = msg.ExceptionMessage || msg;
+            var cls = '';
+            switch (type) {
+                case 'error':
+                    cls = 'red error';
+                    break;
+                case 'info':
+                    cls = '';
+                    break;
+            }
+
+            Materialize.toast(msg, t || 4000, cls);
+        };
+
+    });
+
+
     app.directive('aitDialog', function () {
 
         return {

@@ -255,6 +255,7 @@
     <Content Include="Assets\app\controllers\signInCtrl.js" />
     <Content Include="Assets\app\login\login.js" />
     <Content Include="Assets\app\signup\signup.js" />
+    <Content Include="Assets\app\home_\home_.js" />
     <Content Include="Assets\jquery\kladr\jquery.kladr.css" />
     <Content Include="Assets\jquery\kladr\jquery.kladr.js" />
     <Content Include="Assets\misc\modernizr.min.js" />
@@ -264,6 +265,8 @@
     <Content Include="content\fontawesome\css\font-awesome.css" />
     <Content Include="content\fontawesome\css\font-awesome.min.css" />
     <Content Include="content\fontawesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="content\loading-bar.css" />
+    <Content Include="content\loading-bar.min.css" />
     <Content Include="content\materialize\css\materialize.css" />
     <Content Include="content\materialize\css\materialize.min.css" />
     <Content Include="content\materialize\font\material-design-icons\LICENSE.txt" />
@@ -1155,6 +1158,8 @@
     <Content Include="Scripts\jquery.inputmask\jquery.inputmask.bundle.js" />
     <Content Include="Scripts\jquery.inputmask\jquery.inputmask.js" />
     <Content Include="Scripts\jquery.inputmask\jquery.inputmask.min.js" />
+    <Content Include="Scripts\loading-bar.js" />
+    <Content Include="Scripts\loading-bar.min.js" />
     <Content Include="Scripts\materialize\materialize.js" />
     <Content Include="Scripts\materialize\materialize.min.js" />
     <Content Include="Scripts\ngStorage.js" />

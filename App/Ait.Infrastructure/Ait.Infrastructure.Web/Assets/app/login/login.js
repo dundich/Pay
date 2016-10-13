@@ -2,11 +2,12 @@
 ; (function (angular, window, document, undefined) {
     'use strict';
 
-    var Comp = function ($routeParams, $location, $localStorage, emitter, authService) {
+    var Comp = function ($routeParams, $location, $localStorage, emitter, authService, serviceFactory, aitToast) {
 
         var self = this;
 
         this.message = '';
+        this.isAuthExternal = true;
 
         var state = this.state = {
             userName: '',
@@ -19,7 +20,7 @@
             self.message = '';
 
             authService.login(state).then(function (response) {
-                console.log('EHF!');
+                //console.log('EHF!');
             },
             function (err) {
                 if (err.error_description) {
@@ -35,19 +36,17 @@
 
         };
 
-
         this.$onDestroy = function () {
 
         };
-
     };
 
 
-    Comp.$inject = ['$routeParams', '$location', '$localStorage', 'aitEmitter', 'authService'];
+    Comp.$inject = ['$routeParams', '$location', '$localStorage', 'aitEmitter', 'authService', 'aitServiceFactory', 'aitToast'];
 
 
     angular
-      .module('login', ['ngRoute', 'ngSanitize', 'ngStorage', 'aitEmitter', 'authService', 'aitUI'])
+      .module('login', ['ngRoute', 'ngSanitize', 'ngStorage', 'aitEmitter', 'authService', 'aitUI', 'aitServiceFactory'])
 
       .config(['$routeProvider', function ($routeProvider) {
           $routeProvider
@@ -74,7 +73,7 @@
         <div class="row">\
             <p class="col s12">\
                 <br\>\
-                <button class="btn btn-md btn-info btn-block" type="submit" data-ng-click="$ctrl.login()">Войти</button>\
+                <button class="btn btn-large" type="submit" data-ng-click="$ctrl.login()">Войти</button>\
             </p>\
         </div>\
         <div data-ng-hide="$ctrl.message == \'\'" class="alert alert-danger">\
@@ -83,9 +82,8 @@
     </div>\
     <div class="col l6">\
         <p>Или вы можете войти в систему, используя один из социальных логинов ниже</p>\
-        <button class="btn btn-large btn-facebook btn-block blue" type="button" data-ng-click="authExternalProvider(\'Facebook\')"><i class="fa fa-facebook"></i> | Connect with Facebook</button>\
-        <br>\
-        <button class="btn btn-large btn-google-plus btn-block red" type="button" data-ng-click="authExternalProvider(\'Google\')"><i class="fa fa-google-plus"></i> | Connect with Google+</button>\
+        <button ng-class="{disabled:!$ctrl.isAuthExternal}" class="btn btn-large btn-floating blue" type="button" ng-click="authExternalProvider(\'Facebook\')"><i class="fa fa-facebook"></i></button>&nbsp;\
+        <button ng-class="{disabled:!$ctrl.isAuthExternal}" class="btn btn-large btn-floating red" type="button" ng-click="authExternalProvider(\'Google\')"><i class="fa fa-google-plus"></i></button>\
     </div>\
 </form>\
 '

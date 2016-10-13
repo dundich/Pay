@@ -51,13 +51,13 @@ namespace Ait.Auth.Api
         public async Task<bool> AddRefreshToken(RefreshToken token)
         {
 
-           var existingToken = _ctx.RefreshTokens.Where(r => r.Subject == token.Subject && r.ClientId == token.ClientId).SingleOrDefault();
+            var existingToken = _ctx.RefreshTokens.Where(r => r.Subject == token.Subject && r.ClientId == token.ClientId).SingleOrDefault();
 
-           if (existingToken != null)
-           {
-             var result = await RemoveRefreshToken(existingToken);
-           }
-          
+            if (existingToken != null)
+            {
+                var result = await RemoveRefreshToken(existingToken);
+            }
+
             _ctx.RefreshTokens.Add(token);
 
             return await _ctx.SaveChangesAsync() > 0;
@@ -65,20 +65,21 @@ namespace Ait.Auth.Api
 
         public async Task<bool> RemoveRefreshToken(string refreshTokenId)
         {
-           var refreshToken = await _ctx.RefreshTokens.FindAsync(refreshTokenId);
+            var refreshToken = await _ctx.RefreshTokens.FindAsync(refreshTokenId);
 
-           if (refreshToken != null) {
-               _ctx.RefreshTokens.Remove(refreshToken);
-               return await _ctx.SaveChangesAsync() > 0;
-           }
+            if (refreshToken != null)
+            {
+                _ctx.RefreshTokens.Remove(refreshToken);
+                return await _ctx.SaveChangesAsync() > 0;
+            }
 
-           return false;
+            return false;
         }
 
         public async Task<bool> RemoveRefreshToken(RefreshToken refreshToken)
         {
             _ctx.RefreshTokens.Remove(refreshToken);
-             return await _ctx.SaveChangesAsync() > 0;
+            return await _ctx.SaveChangesAsync() > 0;
         }
 
         public async Task<RefreshToken> FindRefreshToken(string refreshTokenId)
@@ -90,7 +91,7 @@ namespace Ait.Auth.Api
 
         public List<RefreshToken> GetAllRefreshTokens()
         {
-             return  _ctx.RefreshTokens.ToList();
+            return _ctx.RefreshTokens.ToList();
         }
 
         public async Task<IdentityUser> FindAsync(UserLoginInfo loginInfo)
@@ -110,9 +111,15 @@ namespace Ait.Auth.Api
         public async Task<IdentityResult> AddLoginAsync(string userId, UserLoginInfo login)
         {
             var result = await _userManager.AddLoginAsync(userId, login);
-
             return result;
         }
+
+
+        public IdentityResult CreateUser(IdentityUser user)
+        {
+            return _userManager.Create(user);
+        }
+
 
         public void Dispose()
         {

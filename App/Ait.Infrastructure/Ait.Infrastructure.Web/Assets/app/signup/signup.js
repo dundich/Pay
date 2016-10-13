@@ -2,7 +2,7 @@
 ; (function (angular, window, document, undefined) {
     'use strict';
 
-    var Comp = function ($routeParams, $location, $timeout, $sce, emitter, authService) {
+    var Comp = function ($routeParams, $location, $timeout, $sce, emitter, authService, authSettings) {
 
         var self = this;
 
@@ -20,7 +20,7 @@
         var startTimer = function () {
             var timer = $timeout(function () {
                 $timeout.cancel(timer);
-                $location.path(authService.uriLogin);
+                $location.path(authSettings.uriLogin);
             }, 2000);
         }
 
@@ -59,7 +59,7 @@
     };
 
 
-    Comp.$inject = ['$routeParams', '$location', '$timeout', '$sce', 'aitEmitter', 'authService'];
+    Comp.$inject = ['$routeParams', '$location', '$timeout', '$sce', 'aitEmitter', 'authService', 'authSettings'];
 
 
     angular
@@ -93,7 +93,7 @@
     <div class="col s12">\
         <p>\
             <br>\
-            <button type="submit" class="btn"\
+            <button type="submit" class="btn btn-large"\
                 ng-disabled="form.$invalid || $ctrl.isLoading"\
                 ng-class="{disabled:(form.$invalid || $ctrl.isLoading)}">\
                 Зарегистрировать\

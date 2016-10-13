@@ -273,3 +273,6 @@ build/
 /.vs
 /.vs/Ait.Pay.Web/v14/*.suo
 /packages
+
+
+/App_Data/Settings.txt

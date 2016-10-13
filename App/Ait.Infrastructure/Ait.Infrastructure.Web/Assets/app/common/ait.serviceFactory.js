@@ -1,6 +1,6 @@
 ﻿; (function (angular, window, undefined) {
 
-    // ///****** HOW USE *************
+    // ****** HOW USE *************
     //var Service = function (serviceFactory) {
     //	return serviceFactory({
     //		register: 'api/Account/Register'
@@ -19,7 +19,7 @@
     var app = angular.module('aitServiceFactory', []);
 
 
-    var ServiceFactory = function ($http, $q) {
+    var ServiceFactory = function ($http, $q, $timeout) {
 
         var createCallFunc = function (method, addr) {
             return function (data, config) {
@@ -27,7 +27,7 @@
             };
         };
 
-        function CreateService(config) {
+        var CreateService = function (config) {
 
             var serv = {};
 
@@ -46,13 +46,14 @@
             });
 
             return serv;
-        }
+        };
 
         return CreateService;
     };
 
 
-    ServiceFactory.$inject = ['$http', '$q'];
+    ServiceFactory.$inject = ['$http', '$q', '$timeout'];
+
 
     app.factory('aitServiceFactory', ServiceFactory);
 
