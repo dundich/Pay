@@ -6,6 +6,11 @@ namespace Ait.Auth.Api
 {
     public class AuthContext : IdentityDbContext<IdentityUser>
     {
+        static AuthContext()
+        {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, Ait.Auth.Api.Migrations.Configuration>());
+        }
+
 
         public AuthContext() : base("AuthContext")
         { }

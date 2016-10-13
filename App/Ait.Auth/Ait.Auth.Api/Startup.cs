@@ -33,7 +33,7 @@ namespace Ait.Auth.Api
 
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, Ait.Auth.Api.Migrations.Configuration>());
+           
         }
 
         public void ConfigureOAuth(IAppBuilder app)
