@@ -14,6 +14,8 @@ namespace Maybe2.Configuration
     {
         readonly IAppFileInfo[] fi;
 
+        public static string DefaultFileName = "Settings.txt";
+
         public SettingsProvider(params IAppFileInfo[] file)
         {
             this.fi = file;
@@ -22,6 +24,7 @@ namespace Maybe2.Configuration
         public IDictionary<string, string> LoadSettings()
         {
             var r = fi
+                .Where(f => f.IsExists)
                 .Reverse()
                 .Select(f =>
                 {
@@ -29,10 +32,13 @@ namespace Maybe2.Configuration
                     return text.GetLines()
                         .Select(c => new { c = c, i = c.IndexOf(':') })
                         .Where(c => c.i > 0)
-                        .Select(c => c.c.TrySubstring(0, c.i).Pack().PairWith(c.c.TrySubstring(c.i + 1).Pack()))
+                        .Select(c => c.c.TrySubstring(0, c.i).Pack()
+                            .PairWith(c.c.TrySubstring(c.i + 1).Pack()))
                         .Where(c => IsValid(ref c));
                 })
-                .Aggregate((c1, c2) => c1.Concat(c2.Except(c1)))
+                .Aggregate((c1, c2) =>
+                    c1.Concat(c2.Where(c => !c1.Any(k => k.Key == c.Key)))
+                )
                 .ToDictionary(c => c.Key, c => c.Value);
 
             return r;
@@ -56,10 +62,33 @@ namespace Maybe2.Configuration
             return !c.Key.IsNullOrWhiteSpace() && !c.Value.IsNullOrWhiteSpace();
         }
 
-        public static ISettingsProvider CreateProvider(bool isWebHost = true)
+        public static ISettingsProvider CreateProvider(string path = null, string filename = null, bool isWebHost = true)
         {
-            return new SettingsProvider((isWebHost ? new AppWebFileSystem() : new AppWinFileSystem())
-                .GetFileInfo("Settings.txt"));
+            var fs = isWebHost
+                ? new AppWebFileSystem()
+                : new AppWinFileSystem();
+
+            var dirs = fs.GetRootToSelfPaths(path).ToArray();
+
+            filename = filename.PackToNull() ?? DefaultFileName;
+
+            var files = dirs
+                .Select(d => d.EnsureTrailingSlash() + filename)
+                .Select(f => fs.GetFileInfo(f))
+                .ToArray();
+
+            return new SettingsProvider(files);
+        }
+    }
+
+
+    public static class SettingsProviderHelper
+    {
+        public static ISettingsProvider SaveSettings(this ISettingsProvider sett, params KeyValuePair<string, string>[] vals)
+        {
+            var d = vals.Where(c => !c.Key.IsNullOrWhiteSpace()).ToDictionary();
+            sett.SaveSettings(d);
+            return sett;
         }
     }
 

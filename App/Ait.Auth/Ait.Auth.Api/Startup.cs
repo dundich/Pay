@@ -6,7 +6,7 @@ using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using System;
-using System.Data.Entity;
+using System.Net.Http.Formatting;
 using System.Web.Http;
 
 [assembly: OwinStartup(typeof(Ait.Auth.Api.Startup))]
@@ -29,6 +29,10 @@ namespace Ait.Auth.Api
             ConfigureOAuth(app);
 
             HttpConfiguration config = new HttpConfiguration();
+            config.Formatters.Remove(config.Formatters.JsonFormatter); // RemoveAt(0);
+            //Newtonsoft.Json.JsonSerializer.
+            config.Formatters.Insert(0, new JsonMediaTypeFormatter());// new JsonMediaTypeFormatter() { });//  JsonNetFormatter());// JsonNetMediaTypeFormatter());
+
             WebApiConfig.Register(config);
 
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
@@ -48,8 +52,8 @@ namespace Ait.Auth.Api
                 AllowInsecureHttp = true,
                 TokenEndpointPath = new PathString("/token"),
                 AccessTokenExpireTimeSpan = TimeSpan.FromMinutes(30),
-                Provider = new SimpleAuthorizationServerProvider(),
-                RefreshTokenProvider = new SimpleRefreshTokenProvider()
+                Provider = new AuthServerProvider(),
+                RefreshTokenProvider = new RefreshTokenProvider()
             };
 
             // Token Generation

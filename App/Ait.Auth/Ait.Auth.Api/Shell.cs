@@ -7,7 +7,7 @@ namespace Ait.Auth.Api
     {
         const string DB_KEY = "Db";
 
-        public static Shell Default => new Shell();
+        private static Shell Default => new Shell();
 
         public Shell() : base(SettingsProvider.CreateProvider())
         {

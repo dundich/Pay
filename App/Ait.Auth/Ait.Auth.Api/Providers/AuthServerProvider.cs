@@ -1,7 +1,6 @@
 ﻿using Ait.Auth.Api.Entities;
 using Ait.Auth.Api.Modules;
 using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using System.Collections.Generic;
@@ -12,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Ait.Auth.Api.Providers
 {
-    public class SimpleAuthorizationServerProvider : OAuthAuthorizationServerProvider
+    public class AuthServerProvider : OAuthAuthorizationServerProvider
     {
 
         public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
@@ -35,12 +34,13 @@ namespace Ait.Auth.Api.Providers
                 //context.SetError("invalid_clientId", "ClientId should be sent.");
                 return Task.FromResult<object>(null);
             }
-            Client client = null;
 
             var _repo = context.OwinContext.Get<IAuthRepository>(OwinConsts.AuthRepository);
 
-            client = _repo.FindClient(context.ClientId);
+            var t =_repo.FindClientAsync(context.ClientId);
+            t.Wait();
 
+            Client client = t.Result;
 
             if (client == null)
             {

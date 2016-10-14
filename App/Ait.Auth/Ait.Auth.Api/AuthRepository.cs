@@ -10,16 +10,15 @@ using System.Threading.Tasks;
 namespace Ait.Auth.Api
 {
 
-    public class AuthRepository : IDisposable, IAuthRepository
+    public class AuthRepository : IAuthRepository
     {
-        private readonly AuthContext _ctx;
+        private readonly Func<AuthContext> getAuthCtx;
+        private readonly Func<UserManager<IdentityUser>> getUserCtx;
 
-        private UserManager<IdentityUser> _userManager;
-
-        public AuthRepository(AuthContext ctx)
+        public AuthRepository(Func<AuthContext> ctx)
         {
-            _ctx = ctx;// new AuthContext();
-            _userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(_ctx));
+            getAuthCtx = ctx;
+            getUserCtx = () => new UserManager<IdentityUser>(new UserStore<IdentityUser>(ctx()));
         }
 
         public async Task<IdentityResult> RegisterUser(UserModel userModel)
@@ -29,102 +28,125 @@ namespace Ait.Auth.Api
                 UserName = userModel.UserName
             };
 
-            var result = await _userManager.CreateAsync(user, userModel.Password);
-
-            return result;
+            using (var um = getUserCtx())
+            {
+                var result = await um.CreateAsync(user, userModel.Password);
+                return result;
+            }
         }
 
         public async Task<IdentityUser> FindUser(string userName, string password)
         {
-            IdentityUser user = await _userManager.FindAsync(userName, password);
+            using (var um = getUserCtx())
+            {
+                IdentityUser user = await um.FindAsync(userName, password);
+                return user;
+            }
+        }
 
-            return user;
+        public async Task<Client> FindClientAsync(string clientId)
+        {
+            using (var ctx = getAuthCtx())
+            {
+                var client = await ctx.Clients.FindAsync(clientId);
+                return client;
+            }
         }
 
         public Client FindClient(string clientId)
         {
-            var client = _ctx.Clients.Find(clientId);
-
-            return client;
+            using (var ctx = getAuthCtx())
+            {
+                var client = ctx.Clients.Find(clientId);
+                return client;
+            }
         }
 
         public async Task<bool> AddRefreshToken(RefreshToken token)
         {
-
-            var existingToken = _ctx.RefreshTokens.Where(r => r.Subject == token.Subject && r.ClientId == token.ClientId).SingleOrDefault();
-
-            if (existingToken != null)
+            using (var ctx = getAuthCtx())
             {
-                var result = await RemoveRefreshToken(existingToken);
+                var existingToken = ctx.RefreshTokens.Where(r => r.Subject == token.Subject && r.ClientId == token.ClientId).SingleOrDefault();
+
+                if (existingToken != null)
+                {
+                    var result = await RemoveRefreshToken(existingToken);
+                }
+
+                ctx.RefreshTokens.Add(token);
+
+                return await ctx.SaveChangesAsync() > 0;
             }
-
-            _ctx.RefreshTokens.Add(token);
-
-            return await _ctx.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> RemoveRefreshToken(string refreshTokenId)
         {
-            var refreshToken = await _ctx.RefreshTokens.FindAsync(refreshTokenId);
-
-            if (refreshToken != null)
+            using (var ctx = getAuthCtx())
             {
-                _ctx.RefreshTokens.Remove(refreshToken);
-                return await _ctx.SaveChangesAsync() > 0;
-            }
 
-            return false;
+                var refreshToken = await ctx.RefreshTokens.FindAsync(refreshTokenId);
+
+                if (refreshToken != null)
+                {
+                    ctx.RefreshTokens.Remove(refreshToken);
+                    return await ctx.SaveChangesAsync() > 0;
+                }
+
+                return false;
+            }
         }
 
         public async Task<bool> RemoveRefreshToken(RefreshToken refreshToken)
         {
-            _ctx.RefreshTokens.Remove(refreshToken);
-            return await _ctx.SaveChangesAsync() > 0;
+            using (var ctx = getAuthCtx())
+            {
+                ctx.RefreshTokens.Remove(refreshToken);
+                return await ctx.SaveChangesAsync() > 0;
+            }
         }
 
         public async Task<RefreshToken> FindRefreshToken(string refreshTokenId)
         {
-            var refreshToken = await _ctx.RefreshTokens.FindAsync(refreshTokenId);
-
-            return refreshToken;
+            using (var ctx = getAuthCtx())
+            {
+                var refreshToken = await ctx.RefreshTokens.FindAsync(refreshTokenId);
+                return refreshToken;
+            }
         }
 
         public List<RefreshToken> GetAllRefreshTokens()
         {
-            return _ctx.RefreshTokens.ToList();
+            using (var ctx = getAuthCtx())
+            {
+                return ctx.RefreshTokens.ToList();
+            }
         }
 
         public async Task<IdentityUser> FindAsync(UserLoginInfo loginInfo)
         {
-            IdentityUser user = await _userManager.FindAsync(loginInfo);
-
-            return user;
+            using (var ctx = getUserCtx())
+            {
+                IdentityUser user = await ctx.FindAsync(loginInfo);
+                return user;
+            }
         }
 
         public async Task<IdentityResult> CreateAsync(IdentityUser user)
         {
-            var result = await _userManager.CreateAsync(user);
-
-            return result;
+            using (var ctx = getUserCtx())
+            {
+                var result = await ctx.CreateAsync(user);
+                return result;
+            }
         }
 
         public async Task<IdentityResult> AddLoginAsync(string userId, UserLoginInfo login)
         {
-            var result = await _userManager.AddLoginAsync(userId, login);
-            return result;
-        }
-
-
-        public IdentityResult CreateUser(IdentityUser user)
-        {
-            return _userManager.Create(user);
-        }
-
-
-        public void Dispose()
-        {
-            _ctx.Dispose();
-            _userManager.Dispose();
+            using (var ctx = getUserCtx())
+            {
+                var result = await ctx.AddLoginAsync(userId, login);
+                return result;
+            }
         }
     }
 }

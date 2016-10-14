@@ -1,13 +1,12 @@
 ﻿using Ait.Auth.Api.Entities;
 using Ait.Auth.Api.Modules;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security.Infrastructure;
 using System;
 using System.Threading.Tasks;
 
 namespace Ait.Auth.Api.Providers
 {
-    public class SimpleRefreshTokenProvider : IAuthenticationTokenProvider
+    public class RefreshTokenProvider : IAuthenticationTokenProvider
     {
 
         public async Task CreateAsync(AuthenticationTokenCreateContext context)

@@ -89,5 +89,14 @@ namespace Maybe2
             otherMap.ForEach(kvp => thisMap[kvp.Key] = kvp.Value);
             return thisMap;
         }
+
+
+        public static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> otherMap)
+        {
+            var d = new Dictionary<TKey, TValue>();
+            d.Overload(otherMap);
+            return d;
+        }
+
     }
 }

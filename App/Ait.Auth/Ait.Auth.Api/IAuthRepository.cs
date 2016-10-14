@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Ait.Auth.Api.Entities;
+﻿using Ait.Auth.Api.Entities;
 using Ait.Auth.Api.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Ait.Auth.Api
 {
@@ -12,8 +12,8 @@ namespace Ait.Auth.Api
         Task<IdentityResult> AddLoginAsync(string userId, UserLoginInfo login);
         Task<bool> AddRefreshToken(RefreshToken token);
         Task<IdentityResult> CreateAsync(IdentityUser user);
-        IdentityResult CreateUser(IdentityUser user);
         Task<IdentityUser> FindAsync(UserLoginInfo loginInfo);
+        Task<Client> FindClientAsync(string clientId);
         Client FindClient(string clientId);
         Task<RefreshToken> FindRefreshToken(string refreshTokenId);
         Task<IdentityUser> FindUser(string userName, string password);

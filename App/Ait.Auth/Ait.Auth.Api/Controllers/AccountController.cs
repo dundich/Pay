@@ -215,7 +215,7 @@ namespace Ait.Auth.Api.Controllers
         {
             //string token = "";
             //Microsoft.Owin.Security.AuthenticationTicket ticket = Startup.OAuthBearerOptions.AccessTokenFormat.Unprotect(token);
-            var cl = _repo.FindClient("admin");
+            var cl = _repo.FindClientAsync("admin");
 
             var identity = User.Identity as ClaimsIdentity;
 

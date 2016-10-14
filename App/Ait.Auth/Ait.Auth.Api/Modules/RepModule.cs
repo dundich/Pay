@@ -1,10 +1,7 @@
-﻿using System;
+﻿using Microsoft.Owin;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using Microsoft.AspNet.Identity.Owin;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using AppFunc = System.Func<System.Collections.Generic.IDictionary<string, object>, System.Threading.Tasks.Task>;
 
 namespace Ait.Auth.Api.Modules
@@ -30,40 +27,31 @@ namespace Ait.Auth.Api.Modules
 
         public Task Invoke(IDictionary<string, object> env)
         {
-
-            AuthRepository _rep = null;
             try
             {
-                try
+                var tenat = env.GetTenat();
+
+                var _rep = new AuthRepository(() => new AuthContext(Shell.GetConnectionString()));
+
+                if (tenat == "moniki")
                 {
-                    _rep = new AuthRepository(new AuthContext(Shell.GetConnectionString()));
+                    var response = new OwinResponse(env);
+                    response.Redirect("/api/setup/" + tenat);
 
-                    env.Add(OwinConsts.AuthRepository, _rep as IAuthRepository);
-
-                    var cl = _rep.FindClient("admin");
-
-                    //var req = new Microsoft.Owin.OwinRequest(env);
-
-                    //var s = req.Query.Get("tenat") ?? "";
-
-                    //req.Set("ait:tenat", s);
-
-                    //Debug.WriteLine("{0} tenat: {1}", this._prefix, s);
+                    //return response.WriteAsync("About page");
                 }
-                catch (Exception ex)
-                {
-                    var tcs = new TaskCompletionSource<object>();
-                    tcs.SetException(ex);
-                    return tcs.Task;
-                }
+                env.Add(OwinConsts.AuthRepository, _rep as IAuthRepository);
 
-                return this._next(env);
+                //var cl = _rep.FindClient("admin");
             }
-            finally
+            catch (Exception ex)
             {
-                //if (_rep != null)
-                //    _rep.Dispose();
+                var tcs = new TaskCompletionSource<object>();
+                tcs.SetException(ex);
+                return tcs.Task;
             }
+
+            return this._next(env);
         }
     }
 }
