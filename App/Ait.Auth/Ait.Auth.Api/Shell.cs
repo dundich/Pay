@@ -4,14 +4,26 @@ using Maybe2.Configuration;
 
 namespace Ait.Auth.Api
 {
-    public class Shell : ShellSettings
+    public class Shell : IShell
     {
 
         public Shell(string tenat = null)
-            : base(SettingsProvider.CreateProvider(Normalize(tenat), null))
         {
             Tenat = Normalize(tenat);
             _rep = new LazyCache<IAuthRepository>(() => new AuthRepository(CreateAuthContext));
+            Provider = CreateProvider(tenat);
+            Settings = new ShellSettings(Provider);
+        }
+
+
+        public Shell CreateShell(string tenat)
+        {
+            return new Shell(tenat);
+        }
+
+        static ISettingsProvider CreateProvider(string tenat)
+        {
+            return SettingsProvider.CreateProvider(Normalize(tenat));
         }
 
         public static string Normalize(string tenat)
@@ -26,7 +38,7 @@ namespace Ait.Auth.Api
         /// <summary>
         /// Коннекшен считываем из настроек App_Data/Settings.txt
         /// </summary>
-        public string ConnectionString => GetSettings().GetOrDefault(DB_KEY) ?? DB_KEY;
+        public string ConnectionString => Settings.GetSettings().GetOrDefault(DB_KEY) ?? DB_KEY;
 
 
         internal AuthContext CreateAuthContext()
@@ -36,17 +48,15 @@ namespace Ait.Auth.Api
 
         private LazyCache<IAuthRepository> _rep = null;
 
-        public IAuthRepository AuthRepository
-        {
-            get
-            {
-                return _rep.Value;
-            }
-        }
+        public IAuthRepository AuthRepository => _rep.Value;
 
-        public override void Reset()
+        public ISettingsProvider Provider { get; private set; }
+
+        public IShellSettings Settings { get; private set; }
+
+        public virtual void Reset()
         {
-            base.Reset();
+            Settings.Reset();
             _rep.Reset();
         }
 

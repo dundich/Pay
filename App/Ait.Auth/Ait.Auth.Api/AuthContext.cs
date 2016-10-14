@@ -8,7 +8,7 @@ namespace Ait.Auth.Api
     {
         static AuthContext()
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, Ait.Auth.Api.Migrations.Configuration>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, Ait.Auth.Api.Migrations.Configuration>());
         }
 
 

@@ -13,7 +13,7 @@ namespace Ait.Auth.Api.Modules
         private readonly AppFunc _next;
         private readonly string _prefix;
 
-        private static readonly ConcurrentDictionary<string, Shell> shells = new ConcurrentDictionary<string, Shell>();
+        private static readonly ConcurrentDictionary<string, IShell> shells = new ConcurrentDictionary<string, IShell>();
 
 
         public TenantModule(AppFunc next, string prefix)

@@ -2,7 +2,7 @@
 using Microsoft.Owin;
 using System.Collections.Generic;
 
-namespace Ait.Auth.Api.Modules
+namespace Ait.Auth.Api
 {
     public static class OwinConsts
     {
@@ -14,9 +14,9 @@ namespace Ait.Auth.Api.Modules
             return env.GetOrDefault(TENAT).NoNull(c => c.ToString()) ?? "";
         }
 
-        public static Shell GetShell(this IOwinContext ctx)
+        public static IShell GetShell(this IOwinContext ctx)
         {
-            return ctx.Get<Shell>(OwinConsts.SHELL);
+            return ctx.Get<IShell>(OwinConsts.SHELL);
         }
 
         public static IAuthRepository GetAuthRep(this IOwinContext ctx)
