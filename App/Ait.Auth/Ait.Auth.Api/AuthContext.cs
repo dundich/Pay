@@ -11,6 +11,7 @@ namespace Ait.Auth.Api
         {
             Configuration.ProxyCreationEnabled = false;
             Configuration.LazyLoadingEnabled = false;
+
         }
 
         public DbSet<Client> Clients { get; set; }
