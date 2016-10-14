@@ -24,7 +24,7 @@ namespace Ait.Auth.Api
 
             app.Use<TenantModule>("Tenant Module >");
 
-            app.Use<RepModule>("Auth Repository >");
+            app.Use<SetupModule>("Setup Module >");
 
             ConfigureOAuth(app);
 
@@ -37,7 +37,7 @@ namespace Ait.Auth.Api
 
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
-           
+
         }
 
         public void ConfigureOAuth(IAppBuilder app)

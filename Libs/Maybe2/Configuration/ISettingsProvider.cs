@@ -62,13 +62,13 @@ namespace Maybe2.Configuration
             return !c.Key.IsNullOrWhiteSpace() && !c.Value.IsNullOrWhiteSpace();
         }
 
-        public static ISettingsProvider CreateProvider(string path = null, string filename = null, bool isWebHost = true)
+        public static ISettingsProvider CreateProvider(string dir = null, string filename = null, bool isWebHost = true)
         {
             var fs = isWebHost
                 ? new AppWebFileSystem()
                 : new AppWinFileSystem();
 
-            var dirs = fs.GetRootToSelfPaths(path).ToArray();
+            var dirs = fs.GetRootToSelfPaths(dir).ToArray();
 
             filename = filename.PackToNull() ?? DefaultFileName;
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -11,6 +12,9 @@ namespace Ait.Auth.Api.Modules
     {
         private readonly AppFunc _next;
         private readonly string _prefix;
+
+        private static readonly ConcurrentDictionary<string, Shell> shells = new ConcurrentDictionary<string, Shell>();
+
 
         public TenantModule(AppFunc next, string prefix)
         {
@@ -30,11 +34,15 @@ namespace Ait.Auth.Api.Modules
             {
                 var req = new Microsoft.Owin.OwinRequest(env);
 
-                var s = req.Query.Get("tenat") ?? "";
+                var tenat = req.Query.Get("tenat") ?? "";
+                tenat = tenat.ToUpper();
 
-                req.Set(OwinConsts.TENAT, s);
+                var sheel = shells.GetOrAdd(tenat, t => new Shell(t));
 
-                Debug.WriteLine("{0} tenat: {1}", this._prefix, s);
+                req.Set(OwinConsts.TENAT, sheel.Tenat);
+                req.Set(OwinConsts.SHELL, sheel);
+
+                Debug.WriteLine("{0} tenat: {1}", this._prefix, tenat);
             }
             catch (Exception ex)
             {

@@ -21,7 +21,7 @@ namespace Ait.Auth.Api.Controllers
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {
-        private IAuthRepository _repo => Request.GetOwinContext().Get<IAuthRepository>(OwinConsts.AuthRepository);
+        private IAuthRepository _repo => Request.GetOwinContext().Get<Shell>(OwinConsts.SHELL).AuthRepository;
 
         private IAuthenticationManager Authentication
         {

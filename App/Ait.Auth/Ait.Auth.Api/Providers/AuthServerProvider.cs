@@ -35,7 +35,7 @@ namespace Ait.Auth.Api.Providers
                 return Task.FromResult<object>(null);
             }
 
-            var _repo = context.OwinContext.Get<IAuthRepository>(OwinConsts.AuthRepository);
+            var _repo = context.OwinContext.GetAuthRep();
 
             var t =_repo.FindClientAsync(context.ClientId);
             t.Wait();
@@ -152,7 +152,7 @@ namespace Ait.Auth.Api.Providers
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
-            var _repo = context.OwinContext.Get<IAuthRepository>(OwinConsts.AuthRepository);
+            var _repo = context.OwinContext.GetAuthRep();
 
             IdentityUser user = await _repo.FindUser(context.UserName, context.Password);
 

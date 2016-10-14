@@ -6,13 +6,13 @@ using AppFunc = System.Func<System.Collections.Generic.IDictionary<string, objec
 
 namespace Ait.Auth.Api.Modules
 {
-    public class RepModule
+    public class SetupModule
     {
 
         private readonly AppFunc _next;
         private readonly string _prefix;
 
-        public RepModule(AppFunc next, string prefix)
+        public SetupModule(AppFunc next, string prefix)
         {
             if (next == null)
                 throw new ArgumentNullException("next");
@@ -31,16 +31,16 @@ namespace Ait.Auth.Api.Modules
             {
                 var tenat = env.GetTenat();
 
-                var _rep = new AuthRepository(() => new AuthContext(Shell.GetConnectionString()));
+                //var _rep = new AuthRepository(() => new AuthContext(Shell.GetConnectionString()));
 
-                if (tenat == "moniki")
+                if (tenat == "MONIKI")
                 {
                     var response = new OwinResponse(env);
                     response.Redirect("/api/setup/" + tenat);
 
                     //return response.WriteAsync("About page");
                 }
-                env.Add(OwinConsts.AuthRepository, _rep as IAuthRepository);
+                
 
                 //var cl = _rep.FindClient("admin");
             }

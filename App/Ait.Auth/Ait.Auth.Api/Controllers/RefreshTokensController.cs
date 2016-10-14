@@ -9,7 +9,7 @@ namespace Ait.Auth.Api.Controllers
     public class RefreshTokensController : ApiController
     {
 
-        private IAuthRepository _repo => Request.GetOwinContext().Get<IAuthRepository>(OwinConsts.AuthRepository);
+        private IAuthRepository _repo => Request.GetOwinContext().GetAuthRep();
 
         public RefreshTokensController()
         {

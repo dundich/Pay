@@ -21,19 +21,22 @@ namespace Maybe2.Configuration
     {
         readonly LazyCache<IDictionary<string, string>> cache;
 
-        public ShellSettings(ISettingsProvider settings)
+        protected readonly ISettingsProvider provider;
+
+        public ShellSettings(ISettingsProvider provider)
         {
+            this.provider = provider;
+
             cache = new LazyCache<IDictionary<string, string>>(() =>
-                settings.LoadSettings());
+                provider.LoadSettings());
         }
 
-        public IDictionary<string, string> GetSettings()
+        public virtual IDictionary<string, string> GetSettings()
         {
             return cache.Value;
         }
 
-
-        public void Reset()
+        public virtual void Reset()
         {
             cache.Reset();
         }

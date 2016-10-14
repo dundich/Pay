@@ -20,8 +20,7 @@ namespace Ait.Auth.Api.Providers
 
             var refreshTokenId = Guid.NewGuid().ToString("n");
 
-            var _repo = context.OwinContext.Get<AuthRepository>(OwinConsts.AuthRepository);
-
+            var _repo = context.OwinContext.GetAuthRep();
 
             var refreshTokenLifeTime = context.OwinContext.Get<string>("as:clientRefreshTokenLifeTime");
 
@@ -57,8 +56,7 @@ namespace Ait.Auth.Api.Providers
 
             string hashedTokenId = Helper.GetHash(context.Token);
 
-            var _repo = context.OwinContext.Get<IAuthRepository>(OwinConsts.AuthRepository);
-
+            var _repo = context.OwinContext.GetAuthRep();
 
             var refreshToken = await _repo.FindRefreshToken(hashedTokenId);
 
