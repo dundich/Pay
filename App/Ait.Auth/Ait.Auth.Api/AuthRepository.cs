@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 namespace Ait.Auth.Api
 {
 
-    public class AuthRepository : IDisposable
+    public class AuthRepository : IDisposable, IAuthRepository
     {
         private readonly AuthContext _ctx;
 
         private UserManager<IdentityUser> _userManager;
 
-        public AuthRepository()
+        public AuthRepository(AuthContext ctx)
         {
-            _ctx = new AuthContext();
+            _ctx = ctx;// new AuthContext();
             _userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>(_ctx));
         }
 
@@ -125,7 +125,6 @@ namespace Ait.Auth.Api
         {
             _ctx.Dispose();
             _userManager.Dispose();
-
         }
     }
 }

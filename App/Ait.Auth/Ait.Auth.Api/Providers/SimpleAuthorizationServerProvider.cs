@@ -1,5 +1,7 @@
 ﻿using Ait.Auth.Api.Entities;
+using Ait.Auth.Api.Modules;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using System.Collections.Generic;
@@ -18,7 +20,7 @@ namespace Ait.Auth.Api.Providers
 
             string clientId = string.Empty;
             string clientSecret = string.Empty;
-            Client client = null;
+
 
             if (!context.TryGetBasicCredentials(out clientId, out clientSecret))
             {
@@ -33,11 +35,12 @@ namespace Ait.Auth.Api.Providers
                 //context.SetError("invalid_clientId", "ClientId should be sent.");
                 return Task.FromResult<object>(null);
             }
+            Client client = null;
 
-            using (AuthRepository _repo = new AuthRepository())
-            {
-                client = _repo.FindClient(context.ClientId);
-            }
+            var _repo = context.OwinContext.Get<IAuthRepository>(OwinConsts.AuthRepository);
+
+            client = _repo.FindClient(context.ClientId);
+
 
             if (client == null)
             {
@@ -149,16 +152,16 @@ namespace Ait.Auth.Api.Providers
 
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { allowedOrigin });
 
-            using (AuthRepository _repo = new AuthRepository())
-            {
-                IdentityUser user = await _repo.FindUser(context.UserName, context.Password);
+            var _repo = context.OwinContext.Get<IAuthRepository>(OwinConsts.AuthRepository);
 
-                if (user == null)
-                {
-                    context.SetError("invalid_grant", "The user name or password is incorrect.");
-                    return;
-                }
+            IdentityUser user = await _repo.FindUser(context.UserName, context.Password);
+
+            if (user == null)
+            {
+                context.SetError("invalid_grant", "The user name or password is incorrect.");
+                return;
             }
+
 
             var identity = new ClaimsIdentity(context.Options.AuthenticationType);
             identity.AddClaim(new Claim(ClaimTypes.Name, context.UserName));

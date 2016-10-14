@@ -1,4 +1,5 @@
-﻿using Ait.Auth.Api.Providers;
+﻿using Ait.Auth.Api.Modules;
+using Ait.Auth.Api.Providers;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.Google;
@@ -20,13 +21,19 @@ namespace Ait.Auth.Api
 
         public void Configuration(IAppBuilder app)
         {
-            HttpConfiguration config = new HttpConfiguration();
+
+            app.Use<TenantModule>("Tenant Module >");
+
+            app.Use<RepModule>("Auth Repository >");
+
             ConfigureOAuth(app);
+
+            HttpConfiguration config = new HttpConfiguration();
             WebApiConfig.Register(config);
 
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<AuthContext, Ait.Auth.Api.Migrations.Configuration>());
+           
         }
 
         public void ConfigureOAuth(IAppBuilder app)
