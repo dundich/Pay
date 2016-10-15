@@ -1,2 +1,0 @@
-Db : Server=.;Database=AitAuth3;Trusted_Connection=true;Integrated Security=True
-dd : @!!
