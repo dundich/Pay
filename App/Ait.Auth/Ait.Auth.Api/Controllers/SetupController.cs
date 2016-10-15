@@ -1,4 +1,4 @@
-﻿using Ait.Auth.Api.Migrations;
+﻿using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Migrations;
@@ -12,46 +12,55 @@ namespace Ait.Auth.Api.Controllers
     [RoutePrefix("api/Setup")]
     public class SetupController : ApiController
     {
+        private static object lck = new { };
+
         public IHttpActionResult Get(string id)
         {
             var rep = Request.GetOwinContext().GetShell();
 
             var child = rep.CreateShell(id);
 
-            var provider = child.Provider;
+            var connectionInfo = new DbConnectionInfo(child.ConnectionString, "System.Data.SqlClient");
 
+            bool doMigration = true;
+            if (Database.Exists(child.ConnectionString))
+            {
+                var contextInfo = new DbContextInfo(typeof(AuthContext), connectionInfo);
+                var context = contextInfo.CreateInstance();
+                context.Configuration.LazyLoadingEnabled = true;
+                context.Configuration.ProxyCreationEnabled = true;
+                //contextInfo.OnModelCreating
+                try
+                {
+                    doMigration = !context.Database.CompatibleWithModel(true);
+                }
+                catch (NotSupportedException)
+                {
+                    //if there are no metadata for migration
+                    doMigration = true;
+                }
+            }
 
-            //new MigrateDatabaseToLatestVersion<AuthContext>( true, new Configuration( )
+            if (doMigration)
+            {
+                lock (lck)
+                {
+                    var migrationConfiguration = new Ait.Auth.Api.Migrations.Configuration();
+                    migrationConfiguration.TargetDatabase = connectionInfo;
+                    //migrationConfiguration.AutomaticMigrationDataLossAllowed = true;// false;
+                    migrationConfiguration.AutomaticMigrationsEnabled = true;
 
-            //var migr = new MigrateDatabaseToLatestVersion<AuthContext, Ait.Auth.Api.Migrations.Configuration>(child.ConnectionString);
+                    var migrator = new DbMigrator(migrationConfiguration);
+                    migrator.Update();
+                }
+            }
 
-            //new ArchiveMigratorDb().Update(targetMigration);
-            //Database.SetInitializer(migr);
-
-
-            var database = this.dataContext.Database;
-            var migrationConfiguration = new Configuration();            
-
-            migrationConfiguration.TargetDatabase = new DbConnectionInfo(database.Connection.ConnectionString, "System.Data.SqlClient");
-
-            new MigrateDatabaseToLatestVersion<AuthContext, Configuration>(true, migrationConfiguration);
-
-            var migrator = new DbMigrator(migrationConfiguration);
-            migrator.Update();
-
-
-            //System.Data.Entity.Infrastructure.LocalDbConnectionFactory
-
-            //new AddClientsAndRefreshTokenTables().Up();
-            //child.CreateAuthContext().Database.Connection.
-
-            child.CreateAuthContext().Database.Initialize(true);
 
 
             //migr.InitializeDatabase()
             var cl = child.AuthRepository.FindClient("admin");
 
-
+            var provider = child.Provider;
             var d = provider.LoadSettings();
 
             //provider.SaveSettings()

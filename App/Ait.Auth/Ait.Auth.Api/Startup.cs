@@ -22,22 +22,21 @@ namespace Ait.Auth.Api
         public void Configuration(IAppBuilder app)
         {
 
+            HttpConfiguration config = new HttpConfiguration();
+            config.Formatters.Remove(config.Formatters.JsonFormatter); // RemoveAt(0);
+            //Newtonsoft.Json.JsonSerializer.
+            config.Formatters.Insert(0, new JsonMediaTypeFormatter());
+
             app.Use<TenantModule>("Tenant Module >");
 
             app.Use<SetupModule>("Setup Module >");
 
             ConfigureOAuth(app);
 
-            HttpConfiguration config = new HttpConfiguration();
-            config.Formatters.Remove(config.Formatters.JsonFormatter); // RemoveAt(0);
-            //Newtonsoft.Json.JsonSerializer.
-            config.Formatters.Insert(0, new JsonMediaTypeFormatter());// new JsonMediaTypeFormatter() { });//  JsonNetFormatter());// JsonNetMediaTypeFormatter());
-
             WebApiConfig.Register(config);
 
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
-
         }
 
         public void ConfigureOAuth(IAppBuilder app)

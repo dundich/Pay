@@ -12,7 +12,7 @@ namespace Ait.Auth.Api
         }
 
 
-        public AuthContext() : base("AuthContext")
+        public AuthContext() : base()
         { }
 
         public AuthContext(string connstr)
