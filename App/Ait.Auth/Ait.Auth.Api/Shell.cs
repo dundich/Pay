@@ -39,7 +39,7 @@ namespace Ait.Auth.Api
         /// <summary>
         /// Коннекшен считываем из настроек App_Data/Settings.txt
         /// </summary>
-        public string ConnectionString => _settings.GetSettings().GetOrDefault(DB_KEY) ?? DB_KEY;
+        public string ConnectionString => this[DB_KEY] ?? DB_KEY;
 
 
         internal AuthContext CreateAuthContext()
