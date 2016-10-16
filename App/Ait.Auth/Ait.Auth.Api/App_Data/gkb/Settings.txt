@@ -1,0 +1,4 @@
+Db: Server=.;Database=AitAuth1;Trusted_Connection=true;Integrated Security=True
+
+
+
