@@ -260,6 +260,7 @@
     <Content Include="Assets\jquery\kladr\jquery.kladr.js" />
     <Content Include="Assets\misc\modernizr.min.js" />
     <Content Include="Assets\misc\respond.min.js" />
+    <Content Include="authComplete.html" />
     <Content Include="content\css\select2.css" />
     <Content Include="content\css\select2.min.css" />
     <Content Include="content\fontawesome\css\font-awesome.css" />
@@ -300,6 +301,8 @@
     <Content Include="Scripts\angular-touch.min.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\authComplete.js" />
+    <Content Include="Scripts\auth\authComplete.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-et.js" />
