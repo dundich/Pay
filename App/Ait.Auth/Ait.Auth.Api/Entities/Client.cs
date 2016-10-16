@@ -17,5 +17,7 @@ namespace Ait.Auth.Api.Entities
         public int RefreshTokenLifeTime { get; set; }
         [MaxLength(100)]
         public string AllowedOrigin { get; set; }
+        [MaxLength(128)]
+        public string Tag { get; set; }
     }
 }

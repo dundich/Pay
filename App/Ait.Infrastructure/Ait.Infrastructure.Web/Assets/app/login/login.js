@@ -2,7 +2,7 @@
 ; (function (angular, window, document, undefined) {
     'use strict';
 
-    var Comp = function ($routeParams, $location, $localStorage, emitter, authService, serviceFactory, aitToast) {
+    var Comp = function ($scope, $routeParams, $location, $localStorage, emitter, authSettings, authService, serviceFactory, aitToast) {
 
         var self = this;
 
@@ -32,17 +32,65 @@
             });
         };
 
+
+        this.authExternalProvider = function (provider) {
+
+            var redirectUri = window.location.origin + window.location.pathname + 'authcomplete.html';
+
+            var externalProviderUrl = authSettings.apiServiceBaseUri + "api/Account/ExternalLogin?provider=" + provider
+                                                                        + "&response_type=token&client_id=" + authSettings.clientId
+                                                                        + "&redirect_uri=" + redirectUri;
+            window.$windowScope = $scope;
+
+            var oauthWindow = window.open(externalProviderUrl, "Authenticate Account", "location=0,status=0,width=600,height=750");
+
+        };
+
+
+        $scope.authCompletedCB = function (fragment) {
+
+            $scope.$apply(function () {
+
+                if (fragment.haslocalaccount == 'False') {
+
+                    authService.logOut();
+
+                    authService.externalAuthData = {
+                        provider: fragment.provider,
+                        userName: fragment.external_user_name,
+                        externalAccessToken: fragment.external_access_token
+                    };
+
+                    $location.path('/associate');
+
+                }
+                else {
+                    //Obtain access token and redirect to orders
+                    var externalData = { provider: fragment.provider, externalAccessToken: fragment.external_access_token };
+                    authService.obtainAccessToken(externalData).then(function (response) {
+
+                        $location.path('/orders');
+
+                    },
+                 function (err) {
+                     $scope.message = err.error_description;
+                 });
+                }
+
+            });
+        }
+
         this.$onInit = function () {
 
         };
 
         this.$onDestroy = function () {
-
+            $scope.authCompletedCB = null;
         };
     };
 
 
-    Comp.$inject = ['$routeParams', '$location', '$localStorage', 'aitEmitter', 'authService', 'aitServiceFactory', 'aitToast'];
+    Comp.$inject = ['$scope', '$routeParams', '$location', '$localStorage', 'aitEmitter', 'authSettings', 'authService', 'aitServiceFactory', 'aitToast'];
 
 
     angular
@@ -82,8 +130,8 @@
     </div>\
     <div class="col l6">\
         <p>Или вы можете войти в систему, используя один из социальных логинов ниже</p>\
-        <button ng-class="{disabled:!$ctrl.isAuthExternal}" class="btn btn-large btn-floating blue" type="button" ng-click="authExternalProvider(\'Facebook\')"><i class="fa fa-facebook"></i></button>&nbsp;\
-        <button ng-class="{disabled:!$ctrl.isAuthExternal}" class="btn btn-large btn-floating red" type="button" ng-click="authExternalProvider(\'Google\')"><i class="fa fa-google-plus"></i></button>\
+        <button ng-class="{disabled:!$ctrl.isAuthExternal}" class="btn btn-large btn-floating blue" type="button" ng-click="$ctrl.authExternalProvider(\'Facebook\')"><i class="fa fa-facebook"></i></button>&nbsp;\
+        <button ng-class="{disabled:!$ctrl.isAuthExternal}" class="btn btn-large btn-floating red" type="button" ng-click="$ctrl.authExternalProvider(\'Google\')"><i class="fa fa-google-plus"></i></button>\
     </div>\
 </form>\
 '

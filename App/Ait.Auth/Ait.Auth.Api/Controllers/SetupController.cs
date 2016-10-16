@@ -47,9 +47,7 @@ namespace Ait.Auth.Api.Controllers
                 {
                     var migrationConfiguration = new Ait.Auth.Api.Migrations.Configuration();
                     migrationConfiguration.TargetDatabase = connectionInfo;
-                    //migrationConfiguration.AutomaticMigrationDataLossAllowed = true;// false;
                     migrationConfiguration.AutomaticMigrationsEnabled = true;
-
                     var migrator = new DbMigrator(migrationConfiguration);
                     migrator.Update();
                 }
