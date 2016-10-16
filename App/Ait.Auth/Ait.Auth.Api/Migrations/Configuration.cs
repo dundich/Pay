@@ -62,13 +62,13 @@ namespace Ait.Auth.Api.Migrations
             {
                 new Client
                 {
-                    Id = "ngAuthApp",
+                    Id = "ngAit",
                     Secret= Helper.GetHash("abc@123"),
                     Name="AngularJS front-end Application",
                     ApplicationType =  Models.ApplicationTypes.JavaScript,
                     Active = true,
                     RefreshTokenLifeTime = 7200,
-                    AllowedOrigin = "http://localhost:32150"
+                    AllowedOrigin = "http://localhost"
                 },
                 new Client
                 {

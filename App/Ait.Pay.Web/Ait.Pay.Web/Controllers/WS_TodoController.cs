@@ -42,47 +42,47 @@ namespace Ait.Pay.Web.Controllers
             return currentUser.todoItems;
         }
 
-        [HttpPost]
-        [Authorize]
-        public HttpResponseMessage PostTodoItem(TodoItemViewModel item)
-        {
-            var modelStateErrors = ModelState.Values.ToList();
+        //[HttpPost]
+        //[Authorize]
+        //public HttpResponseMessage PostTodoItem(TodoItemViewModel item)
+        //{
+        //    var modelStateErrors = ModelState.Values.ToList();
 
-            List<string> errors = new List<string>();
+        //    List<string> errors = new List<string>();
 
-            foreach (var s in modelStateErrors)
-                foreach (var e in s.Errors)
-                    if (e.ErrorMessage != null && e.ErrorMessage.Trim() != "")
-                        errors.Add(e.ErrorMessage);
+        //    foreach (var s in modelStateErrors)
+        //        foreach (var e in s.Errors)
+        //            if (e.ErrorMessage != null && e.ErrorMessage.Trim() != "")
+        //                errors.Add(e.ErrorMessage);
 
-            if (errors.Count == 0)
-            {
-                try
-                {
-                    string userId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
+        //    if (errors.Count == 0)
+        //    {
+        //        try
+        //        {
+        //            string userId = Request.GetOwinContext().Authentication.User.Identity.GetUserId();
 
-                    var currentUser = UserManager.FindById(userId);
-                    currentUser.todoItems.Add(new todoItem()
-                    {
-                        completed = false,
-                        task = item.task
-                    });
+        //            var currentUser = UserManager.FindById(userId);
+        //            currentUser.todoItems.Add(new todoItem()
+        //            {
+        //                completed = false,
+        //                task = item.task
+        //            });
 
-                    UserManager.Update(currentUser);
-                    return Request.CreateResponse(HttpStatusCode.Accepted);
-                }
-                catch
-                {
-                    return Request.CreateResponse(HttpStatusCode.InternalServerError);
-                }
-            }
-            else
-            {
-                return Request.CreateResponse<List<string>>(HttpStatusCode.BadRequest, errors);
-            }
+        //            UserManager.Update(currentUser);
+        //            return Request.CreateResponse(HttpStatusCode.Accepted);
+        //        }
+        //        catch
+        //        {
+        //            return Request.CreateResponse(HttpStatusCode.InternalServerError);
+        //        }
+        //    }
+        //    else
+        //    {
+        //        return Request.CreateResponse<List<string>>(HttpStatusCode.BadRequest, errors);
+        //    }
 
-            var user = db.Users.Where(u => u.firstName == "Test").FirstOrDefault();
-        }
+        //    var user = db.Users.Where(u => u.firstName == "Test").FirstOrDefault();
+        //}
 
         [HttpPost]
         [Authorize]

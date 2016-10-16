@@ -7,7 +7,9 @@
         'authInterceptorService',
         'login',
         'signup',
-        'home_']);
+        'home_',
+        'associate'
+    ]);
 
     app.run(['$rootScope', '$http', 'aitEmitter', function ($rootScope, $http, aitEmitter) {
 

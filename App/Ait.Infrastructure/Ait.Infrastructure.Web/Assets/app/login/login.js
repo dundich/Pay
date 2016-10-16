@@ -69,7 +69,7 @@
                     var externalData = { provider: fragment.provider, externalAccessToken: fragment.external_access_token };
                     authService.obtainAccessToken(externalData).then(function (response) {
 
-                        $location.path('/orders');
+                        $location.path('/');
 
                     },
                  function (err) {
@@ -86,6 +86,7 @@
 
         this.$onDestroy = function () {
             $scope.authCompletedCB = null;
+            window.$windowScope = null;
         };
     };
 

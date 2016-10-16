@@ -219,6 +219,7 @@
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Assets\app\ait.js" />
     <Content Include="Assets\app\app.js" />
+    <Content Include="Assets\app\associate\associate.js" />
     <Content Include="Assets\app\auth\authInterceptorService.js" />
     <Content Include="Assets\app\auth\authService.js" />
     <Content Include="Assets\app\auth\authSettings.js" />

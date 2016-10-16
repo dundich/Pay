@@ -14,7 +14,7 @@
     <RootNamespace>Ait.Auth.Api</RootNamespace>
     <AssemblyName>Ait.Auth.Api</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -139,6 +139,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\_Settings.txt" />
     <Content Include="App_Data\Settings.txt" />
     <Content Include="rm.txt" />
     <Content Include="Web.config">
@@ -218,7 +219,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>26264</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/Ait.Auth.Api</IISUrl>
+          <IISUrl>http://localhost:26264/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -2,7 +2,7 @@
 
 namespace Ait.Auth.Api
 {
-    public interface IShell
+    public interface IShell: IShellSettings
     {
         string Tenat { get; }
 
@@ -10,12 +10,10 @@ namespace Ait.Auth.Api
 
         IAuthRepository AuthRepository { get; }
 
-        IShellSettings Settings { get; }
-
         ISettingsProvider Provider { get; }
 
-        Shell CreateShell(string tenat);
+        IShell CreateShell(string tenat);
 
-        void Reset();
+        string this[string key] { get; }
     }
 }

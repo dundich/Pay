@@ -59,10 +59,14 @@ namespace Ait.Auth.Api
             app.UseOAuthAuthorizationServer(OAuthServerOptions);
             app.UseOAuthBearerAuthentication(OAuthBearerOptions);
 
+            var shell = new Shell();
+
+
             //Configure Google External Login
             googleAuthOptions = new GoogleOAuth2AuthenticationOptions()
             {
-
+                ClientId = shell["GoogleClientId"],
+                ClientSecret = shell["GoogleClientSecret"],
                 Provider = new GoogleAuthProvider()
             };
             app.UseGoogleAuthentication(googleAuthOptions);
