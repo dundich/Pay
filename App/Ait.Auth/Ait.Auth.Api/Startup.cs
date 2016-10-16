@@ -62,8 +62,7 @@ namespace Ait.Auth.Api
             //Configure Google External Login
             googleAuthOptions = new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "xxxxxx",
-                ClientSecret = "xxxxxx",
+
                 Provider = new GoogleAuthProvider()
             };
             app.UseGoogleAuthentication(googleAuthOptions);
