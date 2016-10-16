@@ -275,6 +275,5 @@ build/
 /packages
 
 
-App_Data/Settings.txt
 **/App_Data/gkb/Settings.txt
 /App/Ait.Auth/Ait.Auth.Api/App_Data/Settings.txt
