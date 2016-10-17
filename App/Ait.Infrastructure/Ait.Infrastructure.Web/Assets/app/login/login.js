@@ -58,6 +58,7 @@
                     authService.externalAuthData = {
                         provider: fragment.provider,
                         userName: fragment.external_user_name,
+                        userEmail: fragment.external_user_email,                        
                         externalAccessToken: fragment.external_access_token
                     };
 

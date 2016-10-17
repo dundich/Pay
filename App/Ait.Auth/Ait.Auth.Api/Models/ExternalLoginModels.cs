@@ -15,8 +15,11 @@ namespace Ait.Auth.Api.Models
     {
         [Required]
         public string UserName { get; set; }
+        
+        public string UserEmail { get; set; }
 
-         [Required]
+
+        [Required]
         public string Provider { get; set; }
 
          [Required]

@@ -52,8 +52,7 @@ if (window.opener && window.opener.$windowScope) {
     window.opener.$windowScope.authCompletedCB(fragment);
 }
 else {
-    window.location.href = '.'
+    window.location.href = '/'
 }
 
 window.close();
-

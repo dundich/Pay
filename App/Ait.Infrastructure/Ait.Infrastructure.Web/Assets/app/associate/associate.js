@@ -10,6 +10,7 @@
 
         var registerData = this.registerData = {
             userName: authService.externalAuthData.userName,
+            userEmail: authService.externalAuthData.userEmail,
             provider: authService.externalAuthData.provider,
             externalAccessToken: authService.externalAuthData.externalAccessToken
         };
@@ -69,10 +70,10 @@
           controller: Comp,
           template: '\
 <div>\
-    <h3 class="header">Связать ваш {{$ctrl.registerData.provider}} аккаунт?</h3>\
-    <p class="text-success">Вы успешно аутентифицированы в <strong>{{$ctrl.registerData.provider}} </strong>. \
+    <h3 class="header">Связать ваш {{$ctrl.registerData.provider}} аккаунт - ({{$ctrl.registerData.userEmail}}) ?</h3>\
+    <p class="text-success">Вы успешно аутентифицированы в <strong>{{$ctrl.registerData.provider}} </strong>. <br>\
     Пожалуйста, введите имя пользователя ниже для этого сайта и нажмите кнопку Зарегистрировать, чтобы войти.</p>\
-    <div class="col l8 offset-l2 s12">\
+    <div class="col l8 s12">\
         <br>\
         <form name="form" role="form">\
             <div class="row">\

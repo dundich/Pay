@@ -1,5 +1,6 @@
 ﻿using Ait.Auth.Api.Models;
 using Ait.Auth.Api.Results;
+using Maybe2;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -109,12 +110,13 @@ namespace Ait.Auth.Api.Controllers
 
             bool hasRegistered = user != null;
 
-            redirectUri = string.Format("{0}#external_access_token={1}&provider={2}&haslocalaccount={3}&external_user_name={4}",
+            redirectUri = string.Format("{0}#external_access_token={1}&provider={2}&haslocalaccount={3}&external_user_name={4}&external_user_email={5}",
                                             redirectUri,
                                             externalLogin.ExternalAccessToken,
                                             externalLogin.LoginProvider,
                                             hasRegistered.ToString(),
-                                            externalLogin.UserName);
+                                            externalLogin.UserName,
+                                            externalLogin.UserEmail);
 
             return Redirect(redirectUri);
 
@@ -134,7 +136,7 @@ namespace Ait.Auth.Api.Controllers
             var verifiedAccessToken = await VerifyExternalAccessToken(model.Provider, model.ExternalAccessToken);
             if (verifiedAccessToken == null)
             {
-                return BadRequest("Invalid Provider or External Access Token");
+                return BadRequest("Неверный провайдер или Токен доступа");
             }
 
             IdentityUser user = await _repo.FindAsync(new UserLoginInfo(model.Provider, verifiedAccessToken.user_id));
@@ -143,10 +145,14 @@ namespace Ait.Auth.Api.Controllers
 
             if (hasRegistered)
             {
-                return BadRequest("External user is already registered");
+                return BadRequest("Внешний пользователь уже зарегистрирован!");
             }
 
-            user = new IdentityUser() { UserName = model.UserName };
+            user = new IdentityUser()
+            {
+                UserName = model.UserName,
+                Email = model.UserEmail
+            };
 
             IdentityResult result = await _repo.CreateAsync(user);
             if (!result.Succeeded)
@@ -180,13 +186,13 @@ namespace Ait.Auth.Api.Controllers
 
             if (string.IsNullOrWhiteSpace(provider) || string.IsNullOrWhiteSpace(externalAccessToken))
             {
-                return BadRequest("Provider or external access token is not sent");
+                return BadRequest("Поставщик или внешний маркер доступа не передан");
             }
 
             var verifiedAccessToken = await VerifyExternalAccessToken(provider, externalAccessToken);
             if (verifiedAccessToken == null)
             {
-                return BadRequest("Invalid Provider or External Access Token");
+                return BadRequest("Неверный провайдер или Токен доступа");
             }
 
             IdentityUser user = await _repo.FindAsync(new UserLoginInfo(provider, verifiedAccessToken.user_id));
@@ -195,7 +201,7 @@ namespace Ait.Auth.Api.Controllers
 
             if (!hasRegistered)
             {
-                return BadRequest("External user is not registered");
+                return BadRequest("Внешний пользователь не зарегистрирован!");
             }
 
             //generate access token response
@@ -423,6 +429,7 @@ namespace Ait.Auth.Api.Controllers
             public string LoginProvider { get; set; }
             public string ProviderKey { get; set; }
             public string UserName { get; set; }
+            public string UserEmail { get; set; }
             public string ExternalAccessToken { get; set; }
 
             public static ExternalLoginData FromIdentity(ClaimsIdentity identity)
@@ -448,7 +455,8 @@ namespace Ait.Auth.Api.Controllers
                 {
                     LoginProvider = providerKeyClaim.Issuer,
                     ProviderKey = providerKeyClaim.Value,
-                    UserName = identity.FindFirstValue(ClaimTypes.Name),
+                    UserName = identity.FindFirstValue(ClaimTypes.Surname).PackToNull() ?? identity.FindFirstValue(ClaimTypes.Name),
+                    UserEmail = identity.FindFirstValue(ClaimTypes.Email),
                     ExternalAccessToken = identity.FindFirstValue("ExternalAccessToken"),
                 };
             }

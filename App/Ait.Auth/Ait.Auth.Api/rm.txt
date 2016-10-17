@@ -1,4 +1,8 @@
-﻿https://aaronparecki.com/2012/07/29/2/oauth2-simplified
+﻿http://professorweb.ru/my/ASP_NET/identity/level1/1_10.php
+
+
+
+https://aaronparecki.com/2012/07/29/2/oauth2-simplified
 
 Application access
 
