@@ -69,7 +69,7 @@
             .when('/home_', {
                 template: '\
 <div class="row">\
-    <div class="col s6 offset-s3">\
+    <div class="col m8 offset-m2">\
         <home_></home_>\
     </div>\
 </div>'
@@ -94,13 +94,13 @@
             <div class="collapsible-header"><i class="fa fa-key" aria-hidden="true"></i> Сменить пароль</div>\
             <div class="collapsible-body">\
 <form name="form" class="row" role="form"  ng-submit="$ctrl.signUp()" style="margin-top: 1em;">\
-    <div class="col s1">&nbsp;</div>\
+    <div class="col l1">&nbsp;</div>\
     <ait-field class="col l5 s12" ait-field-type="password" form="form" caption="Текущий пароль" ng-model="$ctrl.state.currentPassword" required="true">\
     </ait-field>\
     <ait-field class="col l5 s12" ait-field-type="password" form="form" caption="Новый пароль" ng-model="$ctrl.state.newPassword" required="true">\
     </ait-field>\
-    <div class="col s1">&nbsp;</div>\
-    <div class="offset-s1 col s10" >\
+    <div class="col l1">&nbsp;</div>\
+    <div class="offset-m1 col m10 s12" >\
             <br>\
             <br>\
             <button type="submit" class="btn"\
