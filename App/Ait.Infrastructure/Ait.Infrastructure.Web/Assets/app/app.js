@@ -5,17 +5,15 @@
         'ngAnimate',
         'angular-loading-bar',
         'authInterceptorService',
+        'authSettings',
         'login',
         'signup',
         'home_',
         'associate'
     ]);
 
-    app.run(['$rootScope', '$http', 'aitEmitter', function ($rootScope, $http, aitEmitter) {
 
-    }]);
-
-    app.config(['$httpProvider', function ($httpProvider) {
+    app.config(['$routeProvider', '$httpProvider', 'authSettings', function ($routeProvider, $httpProvider, authSettings) {
         //Enable cross domain calls
         $httpProvider.defaults.useXDomain = true;
 
@@ -24,6 +22,15 @@
 
         //AOuth
         $httpProvider.interceptors.push('authInterceptorService');
+
+        $routeProvider.otherwise({
+            redirectTo: function () { return authSettings.uriHome; }
+        });
+
+    }]);
+
+
+    app.run(['$rootScope', '$http', 'aitEmitter', function ($rootScope, $http, aitEmitter) {
 
     }]);
 

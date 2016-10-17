@@ -17,6 +17,7 @@ namespace Ait.Auth.Api
         Client FindClient(string clientId);
         Task<RefreshToken> FindRefreshToken(string refreshTokenId);
         Task<IdentityUser> FindUser(string userName, string password);
+        Task<IdentityResult> ChangePasswordAsync(string userId, string currentPassword, string newPassword);
         List<RefreshToken> GetAllRefreshTokens();
         Task<IdentityResult> RegisterUser(UserModel userModel);
         Task<bool> RemoveRefreshToken(string refreshTokenId);

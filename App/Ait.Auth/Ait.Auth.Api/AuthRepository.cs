@@ -148,5 +148,14 @@ namespace Ait.Auth.Api
                 return result;
             }
         }
+
+        public async Task<IdentityResult> ChangePasswordAsync(string userId, string currentPassword, string newPassword)
+        {
+            using (var ctx = getUserCtx())
+            {
+                var result = await ctx.ChangePasswordAsync(userId, currentPassword, newPassword);
+                return result;
+            }
+        }
     }
 }

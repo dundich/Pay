@@ -142,7 +142,7 @@
                 function setFocus() {
                     $timeout(function () {
                         var inputs = element.find('input');
-                        if (inputs.length) {                            
+                        if (inputs.length) {
                             inputs.select();
                         }
                         else {
@@ -187,7 +187,15 @@
 
     app.factory('aitToast', function () {
 
+
+
         return function (msg, t, type) {
+
+            if (angular.isString(t)) {
+                type = t;
+                t = null;
+            }
+
             var msg = msg.ExceptionMessage || msg;
             var cls = type;
             switch (type) {
