@@ -30,7 +30,12 @@
 
         this.getClaims = function () {
             authService.getClaims().then(function (d) {
-                aitToast(d);
+
+                var s = d.data.map(function (e, i) {
+                    return '<li>' + i + '. ' + e.type + " " + e.value + '</li>';
+                }).join('<br>');
+               
+                aitToast($('<ul>' + s + '</ul>'), 7000, 'info');
             });
         };
     };
@@ -48,7 +53,6 @@
                 template: '\
 <div class="row">\
     <div class="col s6 offset-s3">\
-        <h2 class="col s12 header">Hello</h2>\
         <home_></home_>\
     </div>\
 </div>'
@@ -58,24 +62,17 @@
       .component('home_', {
           controller: Comp,
           template: '\
-<div>USER:{{$ctrl.state.userName}}</div>\
-<div><button class="btn" type="button" ng-click="$ctrl.getClaims()">Claims</button>&nbsp;\</div>\
-<div>\
-    <ul class="list-inline">\
-        <li>\
-            <a href="#/home_">Home</a>\
-        </li>\
-        <li>\
-            <a href="#/login">Login</a>\
-        </li>\
-        <li>\
-            <a href="" ng-click="$ctrl.logout()" class="ng-binding">Sign Out</a>\
-        </li>\
-        <li ng-hide="loggedIn" class="">\
-            <a href="#/signup">sign up</a>\
-        </li>\
-    </ul>\
-</div>\
+<h2 class="col s12 header">Привет <strong>{{$ctrl.state.userName}}</strong>! <a ng-show="$ctrl.state.isAuth" href="" style="margin-left:3em;" ng-click="$ctrl.logout()" class="ng-binding">(выйти)</a></h2>\
+<p>\
+    <span ng-hide="$ctrl.state.isAuth">\
+        <a href="#/login" ng-click="$ctrl.logout()" class="ng-binding">Войти</a>\
+          <span style="margin:3em;"> | </span> \
+        <a href="#/login" ng-click="$ctrl.logout()" class="ng-binding">Регистрация</a>\
+    </span>\
+    <span ng-show="$ctrl.state.isAuth">\
+        <button class="btn" type="button" ng-click="$ctrl.getClaims()">Claims</button>&nbsp; \
+    </span>\
+</p>\
 '
       });
 

@@ -2,7 +2,7 @@
 ; (function (angular, window, document, undefined) {
     'use strict';
 
-    var Comp = function ($scope, $routeParams, $location, $localStorage, emitter, authSettings, authService, serviceFactory, aitToast) {
+    var LoginComp = function ($scope, $routeParams, $location, $localStorage, emitter, authSettings, authService, serviceFactory, aitToast) {
 
         var self = this;
 
@@ -19,8 +19,8 @@
 
             self.message = '';
 
-            authService.login(state).then(function (response) {
-                //console.log('EHF!');
+            return authService.login(state).then(function (response) {
+                emitter.emit('login', response);
             },
             function (err) {
                 if (err.error_description) {
@@ -68,14 +68,14 @@
                 else {
                     //Obtain access token and redirect to orders
                     var externalData = { provider: fragment.provider, externalAccessToken: fragment.external_access_token };
-                    authService.obtainAccessToken(externalData).then(function (response) {
 
-                        $location.path('/');
-
-                    },
-                 function (err) {
-                     $scope.message = err.error_description;
-                 });
+                    authService.obtainAccessToken(externalData)
+                        .then(function (response) {
+                            $location.path(authSettings.uriHome || '/');
+                        },
+                        function (err) {
+                             $scope.message = err.error_description;
+                        });
                 }
 
             });
@@ -92,11 +92,28 @@
     };
 
 
-    Comp.$inject = ['$scope', '$routeParams', '$location', '$localStorage', 'aitEmitter', 'authSettings', 'authService', 'aitServiceFactory', 'aitToast'];
+    LoginComp.$inject = ['$scope', '$routeParams', '$location', '$localStorage', 'aitEmitter', 'authSettings', 'authService', 'aitServiceFactory', 'aitToast'];
 
+
+
+    var Ctrl = function ($scope, $location, emitter, authSettings) {
+
+        var cbk = emitter.on('login', function () {
+            $location.path(authSettings.uriHome);
+        });
+
+        $scope.$on('$destroy', function () {
+            if (cbk)
+                cbk.off();
+        });
+    };
+
+    Ctrl.$inject = ['$scope', '$location', 'aitEmitter', 'authSettings'];
 
 
     var tmpl = {
+        controller: Ctrl,
+
         template: '\
 <div class="row">\
     <div class="col s12 l6 offset-l3">\
@@ -118,7 +135,7 @@
       }])
 
       .component('login', {
-          controller: Comp,
+          controller: LoginComp,
           template: '\
 <form name="form" role="form">\
     <div class="">\

@@ -187,15 +187,15 @@
 
     app.factory('aitToast', function () {
 
-        return function (msg, type, t) {
+        return function (msg, t, type) {
             var msg = msg.ExceptionMessage || msg;
-            var cls = '';
+            var cls = type;
             switch (type) {
                 case 'error':
                     cls = 'red error';
                     break;
                 case 'info':
-                    cls = '';
+                    cls = 'blue';
                     break;
             }
 

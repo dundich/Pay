@@ -4,6 +4,14 @@
     'use strict';
 
     //*****************************  EventDispatcher  ***************************
+    //  emitter.emit('eventName', 'param1', 20);
+    //
+    //  var cbk = emitter.on('eventName' function(type, param1, param2){
+    //      alert(type);
+    //  });
+    //  
+    //  cbk.off()
+    //***************************************************************************
     var EventDispatcher = function () {
         this._listeners = {};
     };
@@ -39,8 +47,7 @@
             }
         }
     };
-
-    //eventMan.notify('evName', 'param1', 20);
+    
     EventDispatcher.prototype.notify = function (type, listener) {
         var listeners;
 
@@ -56,9 +63,7 @@
         }
     };
 
-
     EventDispatcher.prototype.emit = EventDispatcher.prototype.notify;
-
 
     var Notifications = function () {
         return new EventDispatcher();
