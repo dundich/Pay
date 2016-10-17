@@ -1,5 +1,4 @@
 ﻿using Ait.Auth.Api.Entities;
-using Ait.Auth.Api.Modules;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
@@ -44,7 +43,7 @@ namespace Ait.Auth.Api.Providers
 
             if (client == null)
             {
-                context.SetError("invalid_clientId", string.Format("Client '{0}' is not registered in the system.", context.ClientId));
+                context.SetError("invalid_clientId", string.Format("Клиент '{0}' не зарегистрирован в системе.", context.ClientId));
                 return Task.FromResult<object>(null);
             }
 
@@ -52,14 +51,14 @@ namespace Ait.Auth.Api.Providers
             {
                 if (string.IsNullOrWhiteSpace(clientSecret))
                 {
-                    context.SetError("invalid_clientId", "Client secret should be sent.");
+                    context.SetError("invalid_clientId", "Клиентский ключ (Secret) не определен.");
                     return Task.FromResult<object>(null);
                 }
                 else
                 {
                     if (client.Secret != Helper.GetHash(clientSecret))
                     {
-                        context.SetError("invalid_clientId", "Client secret is invalid.");
+                        context.SetError("invalid_clientId", "Клиентский ключ (Secret), является недействительным.");
                         return Task.FromResult<object>(null);
                     }
                 }
@@ -67,7 +66,7 @@ namespace Ait.Auth.Api.Providers
 
             if (!client.Active)
             {
-                context.SetError("invalid_clientId", "Client is inactive.");
+                context.SetError("invalid_clientId", "Клиент отключен.");
                 return Task.FromResult<object>(null);
             }
 
@@ -136,7 +135,7 @@ namespace Ait.Auth.Api.Providers
             {
                 context.SetError(
                     "unauthorized_client",
-                    "The authenticated client is not authorized to use this authorization grant type");
+                    "Клиент не имеет права использовать этот тип авторизации (grant)");
             }
 
             return Task.FromResult(0);
@@ -158,7 +157,7 @@ namespace Ait.Auth.Api.Providers
 
             if (user == null)
             {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
+                context.SetError("invalid_grant", "Имя пользователя или пароль неверны!");
                 return;
             }
 
@@ -192,7 +191,7 @@ namespace Ait.Auth.Api.Providers
 
             if (originalClient != currentClient)
             {
-                context.SetError("invalid_clientId", "Refresh token is issued to a different clientId.");
+                context.SetError("invalid_clientId", "Маркер обновления выдается другой ClientID.");
                 return Task.FromResult<object>(null);
             }
 

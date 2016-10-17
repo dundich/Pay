@@ -142,8 +142,7 @@
                 function setFocus() {
                     $timeout(function () {
                         var inputs = element.find('input');
-                        if (inputs.length) {
-                            //inputs[0].focus();
+                        if (inputs.length) {                            
                             inputs.select();
                         }
                         else {
@@ -161,10 +160,15 @@
 
                 var aname = attrs.aitFocusOnName;// || element[0].id || element[0].name;
                 if (aname) {
-                    scope.$on('aitFocusOn', function (e, name) {
+
+                    var off = scope.$on('aitFocusOn', function (e, name) {
                         if (name === aname) {
                             setFocus();
                         }
+                    });
+
+                    scope.$on('$destroy', function () {
+                        off();
                     });
                 }
             }

@@ -11,7 +11,7 @@
         this.isLoading = false;
 
         var state = this.state = {
-            userName: "",
+            userName: $routeParams.username || "",
             password: "",
             confirmPassword: ""
         };
@@ -20,7 +20,8 @@
         var startTimer = function () {
             var timer = $timeout(function () {
                 $timeout.cancel(timer);
-                $location.path(authSettings.uriLogin);
+
+                $location.path(authSettings.uriLogin + '/' + state.userName);
             }, 2000);
         }
 
@@ -62,21 +63,25 @@
     Comp.$inject = ['$routeParams', '$location', '$timeout', '$sce', 'aitEmitter', 'authService', 'authSettings'];
 
 
+    var tmpl = {
+        template: 
+'<div class="row">\
+    <div class="col s4 offset-s4">\
+        <h2 class="col s12 header">Регистрация</h2>\
+        <signup></signup>\
+    </div>\
+</div>'
+    };
+
+
+
     angular
       .module('signup', ['ngRoute', 'ngSanitize', 'ngStorage', 'aitEmitter', 'authService', 'aitUI'])
 
       .config(['$routeProvider', function ($routeProvider) {
           $routeProvider
-            .when('/signup', {
-                template: '\
-<div class="row">\
-    <div class="col s4 offset-s4">\
-        <h2 class="col s12 header">Регистрация</h2>\
-        <signup></signup>\
-    </div>\
-</div>\
-                '
-            })
+            .when('/signup/:username', tmpl)
+            .when('/signup', tmpl)
           ;
       }])
 
@@ -84,9 +89,9 @@
           controller: Comp,
           template: '\
 <form name="form" class="form-login" role="form"  ng-submit="$ctrl.signUp()">\
-    <ait-field class="col s12" form="form" caption="Пользователь" ng-model="$ctrl.state.userName" required="true" ait-focus-on="true">\
+    <ait-field class="col s12" form="form" caption="Пользователь" ng-model="$ctrl.state.userName" required="true" ait-focus-on="::!$ctrl.state.userName">\
     </ait-field>\
-    <ait-field class="col s12" ait-field-type="password" form="form" caption="Пароль" ng-model="$ctrl.state.password" required="true">\
+    <ait-field class="col s12" ait-field-type="password" form="form" caption="Пароль" ng-model="$ctrl.state.password" required="true" ait-focus-on="::!!$ctrl.state.userName">\
     </ait-field>\
     <ait-field class="col s12" ait-field-type="password" form="form" caption="Повторите пароль" ng-model="$ctrl.state.confirmPassword" required="true">\
     </ait-field>\

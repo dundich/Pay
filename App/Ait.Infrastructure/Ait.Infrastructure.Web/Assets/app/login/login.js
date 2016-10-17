@@ -10,7 +10,7 @@
         this.isAuthExternal = true;
 
         var state = this.state = {
-            userName: '',
+            userName: $routeParams.username || '',
             password: '',
             useRefreshTokens: false,
         };
@@ -58,7 +58,7 @@
                     authService.externalAuthData = {
                         provider: fragment.provider,
                         userName: fragment.external_user_name,
-                        userEmail: fragment.external_user_email,                        
+                        userEmail: fragment.external_user_email,
                         externalAccessToken: fragment.external_access_token
                     };
 
@@ -95,45 +95,57 @@
     Comp.$inject = ['$scope', '$routeParams', '$location', '$localStorage', 'aitEmitter', 'authSettings', 'authService', 'aitServiceFactory', 'aitToast'];
 
 
+
+    var tmpl = {
+        template: '\
+<div class="row">\
+    <div class="col s12 l6 offset-l3">\
+        <h2 class="col s12 header">Войти</h2>\
+        <login></login>\
+    </div>\
+</div>'
+    };
+
+
+
     angular
       .module('login', ['ngRoute', 'ngSanitize', 'ngStorage', 'aitEmitter', 'authService', 'aitUI', 'aitServiceFactory'])
 
       .config(['$routeProvider', function ($routeProvider) {
           $routeProvider
-            .when('/login', {
-                template: '\
-<div class="row">\
-    <div class="col s6 offset-s3">\
-        <h2 class="col s12 header">Войти</h2>\
-        <login></login>\
-    </div>\
-</div>'
-            });
+            .when('/login/:username', tmpl)
+            .when('/login', tmpl);
       }])
 
       .component('login', {
           controller: Comp,
           template: '\
 <form name="form" role="form">\
-    <div class="col l6">\
-        <ait-field class="col s12" form="form" caption="Пользователь" ng-model="$ctrl.state.userName" required="true" ait-focus-on="true">\
+    <div class="">\
+        <ait-field class="col s12" form="form" caption="Пользователь" ng-model="$ctrl.state.userName" required="true" ait-focus-on="::!$ctrl.state.userName">\
         </ait-field>\
-        <ait-field class="col s12" ait-field-type="password" form="form" caption="Пароль" ng-model="$ctrl.state.password" required="true">\
+        <ait-field class="col s12" ait-field-type="password" form="form" caption="Пароль" ng-model="$ctrl.state.password" required="true" ait-focus-on="::!!$ctrl.state.userName">\
         </ait-field>\
+    </div>\
         <div class="row">\
             <p class="col s12">\
                 <br\>\
-                <button class="btn btn-large" type="submit" data-ng-click="$ctrl.login()">Войти</button>\
+                <button class="btn btn-large" type="submit"\
+                        ng-disabled="form.$invalid"\
+                        ng-class="{disabled:(form.$invalid)}"\
+                        data-ng-click="$ctrl.login()">Войти</button>\
+                <a style="float:right;" class="btn btn-large btn-flat" type="button" ng-href="#/signup/{{$ctrl.state.userName}}">Регистрация</a>&nbsp;\
             </p>\
         </div>\
         <div data-ng-hide="$ctrl.message == \'\'" class="alert alert-danger">\
             <ait-error-panel error="$ctrl.message"></ait-error-panel>\
         </div>\
-    </div>\
-    <div class="col l6">\
-        <p>Или вы можете войти в систему, используя один из социальных логинов ниже</p>\
-        <button ng-class="{disabled:!$ctrl.isAuthExternal}" class="btn btn-large btn-floating blue" type="button" ng-click="$ctrl.authExternalProvider(\'Facebook\')"><i class="fa fa-facebook"></i></button>&nbsp;\
-        <button ng-class="{disabled:!$ctrl.isAuthExternal}" class="btn btn-large btn-floating red" type="button" ng-click="$ctrl.authExternalProvider(\'Google\')"><i class="fa fa-google-plus"></i></button>\
+    <div class="col s12">\
+        <p>Войти через социальные сети</p>\
+        <p>\
+            <button ng-class="{disabled:!$ctrl.isAuthExternal}" class="btn-large btn-floating blue" type="button" ng-click="$ctrl.authExternalProvider(\'Facebook\')"><i class="fa fa-facebook"></i></button>&nbsp;\
+            <button ng-class="{disabled:!$ctrl.isAuthExternal}" class="btn-large btn-floating red" type="button" ng-click="$ctrl.authExternalProvider(\'Google\')"><i class="fa fa-google-plus"></i></button>\
+        </p>\
     </div>\
 </form>\
 '
