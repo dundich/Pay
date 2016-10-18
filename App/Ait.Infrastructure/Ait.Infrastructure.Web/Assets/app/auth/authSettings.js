@@ -6,7 +6,7 @@
         apiServiceBaseUri: '../Ait.Auth.Api/',
         clientId: 'ngAit',
         uriLogin: '/login',
-        uriHome: '/home_'
+        uriHome: '/userprofile'
     });
 
 })(angular, window);

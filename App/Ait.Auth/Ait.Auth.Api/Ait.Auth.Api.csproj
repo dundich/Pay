@@ -164,6 +164,7 @@
       <DependentUpon>201407121205456_AddClientsAndRefreshTokenTables.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ChangePasswordModel.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\ExternalLoginModels.cs" />
     <Compile Include="Models\UserModel.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="Providers\RefreshTokenProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Shell.cs" />
+    <Compile Include="ShellConsts.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Modules\TenantModule.cs" />
   </ItemGroup>

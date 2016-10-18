@@ -212,18 +212,12 @@ namespace Ait.Auth.Api.Controllers
         }
 
 
-        //[Authorize]
         [HttpPost]
         [HttpGet]
         [Route("Claims")]
         public IEnumerable<object> GetClaims()
         {
-            //string token = "";
-            //Microsoft.Owin.Security.AuthenticationTicket ticket = Startup.OAuthBearerOptions.AccessTokenFormat.Unprotect(token);
-            var cl = _repo.FindClientAsync("admin");
-
             var identity = User.Identity as ClaimsIdentity;
-
             return identity.Claims.Select(c => new
             {
                 Type = c.Type,
@@ -232,16 +226,33 @@ namespace Ait.Auth.Api.Controllers
         }
 
 
+        [HttpPost]
+        [Authorize]
+        [Route("ChangePassword")]
+        public async Task<IHttpActionResult> ChangePassword(ChangePasswordModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        _repo.Dispose();
-        //    }
+            var user = await _repo.FindUser(model.UserName, model.CurrentPassword);
 
-        //    base.Dispose(disposing);
-        //}
+            if (user == null)
+            {
+                ModelState.AddModelError("CurrentPassword", "Пароль неверен!");
+                return BadRequest(ModelState);
+            }
+
+            var result = await _repo.ChangePasswordAsync(user.Id, model.CurrentPassword, model.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                return GetErrorResult(result);
+            }
+
+            return Ok("Пароль успешно изменен");
+        }
 
         #region Helpers
 

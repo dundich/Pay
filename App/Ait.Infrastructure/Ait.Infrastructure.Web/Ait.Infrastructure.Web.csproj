@@ -256,7 +256,7 @@
     <Content Include="Assets\app\controllers\signInCtrl.js" />
     <Content Include="Assets\app\login\login.js" />
     <Content Include="Assets\app\signup\signup.js" />
-    <Content Include="Assets\app\home_\home_.js" />
+    <Content Include="Assets\app\userprofile\userprofile.js" />
     <Content Include="Assets\jquery\kladr\jquery.kladr.css" />
     <Content Include="Assets\jquery\kladr\jquery.kladr.js" />
     <Content Include="Assets\misc\modernizr.min.js" />

@@ -8,7 +8,7 @@
         'authSettings',
         'login',
         'signup',
-        'home_',
+        'userprofile',
         'associate'
     ]);
 

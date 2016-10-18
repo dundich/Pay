@@ -15,15 +15,17 @@ namespace Ait.Auth.Api.Models
     {
         [Required]
         public string UserName { get; set; }
-        
-        public string UserEmail { get; set; }
 
+        [EmailAddress]
+        [Display(Name = "Email")]
+        [Required]
+        public string UserEmail { get; set; }
 
         [Required]
         public string Provider { get; set; }
 
-         [Required]
-         public string ExternalAccessToken { get; set; }
+        [Required]
+        public string ExternalAccessToken { get; set; }
 
     }
 

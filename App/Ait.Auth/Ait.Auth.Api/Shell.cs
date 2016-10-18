@@ -32,7 +32,7 @@ namespace Ait.Auth.Api
             return (tenat ?? "").ToUpper();
         }
 
-        public virtual string DB_KEY => "Db";
+        public virtual string DB_KEY => ShellConsts.DB_KEY;
 
         public string Tenat { get; private set; }
 

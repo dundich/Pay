@@ -82,6 +82,42 @@
             //Eng
             parts = input.split('-');
             return new Date(parts[0], parts[1] - 1, parts[2]); // Note: months are 0-based
+        },
+
+        getErrorMsg: function (err) {
+            if (angular.isString(err)) {
+                return err;
+            }
+
+            if (err.status) {
+                err = err.data;
+            }
+
+            if (err.error_description) {
+                self.message = err.error_description.replace(/["']{1}/gi, "");
+            }
+
+            if (err.ExceptionMessage || err.exceptionMessage) {
+                return err.ExceptionMessage || err.exceptionMessage;
+            }
+
+            if (err.modelState) {
+                var msg = [];
+                angular.forEach(err.modelState, function (value, key) {
+                    msg.push(value);
+                });
+
+                if (msg.length > 1)
+                    msg.isMultiLine = true;
+
+                return msg.join('<br/>');
+            }
+
+            if (err.message)
+                err.message;
+
+            return err;
+
         }
     };
 
@@ -101,10 +137,14 @@
     app.component('aitErrorPanel', {
         bindings: { error: '<' },
         transclude: true,
-        controller: function () { },
+        controller: function () {
+            this.getError = function () {
+                return aitUtils.getErrorMsg(this.error);
+            };
+        },
         template: '<div class="red darken-1" ng-class="{active:$ctrl.error}"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> \
             <ng-transclude></ng-transclude> \
-            <span ng-bind="$ctrl.error.ExceptionMessage || $ctrl.error"></span>\
+            <span ng-bind="$ctrl.getError()"></span>\
         </div>'
     });
 
@@ -187,8 +227,6 @@
 
     app.factory('aitToast', function () {
 
-
-
         return function (msg, t, type) {
 
             if (angular.isString(t)) {
@@ -196,9 +234,15 @@
                 t = null;
             }
 
-            var msg = msg.ExceptionMessage || msg;
+            if (type == 'error') {
+                msg = $('<span>' + aitUtils.getErrorMsg(msg) + '</span>');
+            }
+
             var cls = type;
             switch (type) {
+                case 'ok':
+                    cls = 'green';
+                    break;
                 case 'error':
                     cls = 'red error';
                     break;

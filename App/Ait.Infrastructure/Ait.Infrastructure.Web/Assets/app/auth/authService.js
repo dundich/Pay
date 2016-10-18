@@ -204,6 +204,18 @@
             return $http.get(serviceBase + 'api/account/claims');
         };
 
+
+        var _changePassword = function (loginData) {
+            var data = {
+                userName: loginData.userName,
+                currentPassword: loginData.currentPassword,
+                newPassword: loginData.newPassword
+            };
+
+            return $http.post(serviceBase + 'api/account/changePassword', data);
+        }
+
+
         authServiceFactory.saveRegistration = _saveRegistration;
         authServiceFactory.login = _login;
         authServiceFactory.logOut = _logOut;
@@ -216,6 +228,7 @@
         authServiceFactory.obtainAccessToken = _obtainAccessToken;
         authServiceFactory.externalAuthData = _externalAuthData;
         authServiceFactory.registerExternal = _registerExternal;
+        authServiceFactory.changePassword = _changePassword;
 
         _fillAuthData();
 
