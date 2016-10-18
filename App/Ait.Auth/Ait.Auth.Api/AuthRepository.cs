@@ -70,7 +70,10 @@ namespace Ait.Auth.Api
 
                 if (existingToken != null)
                 {
-                    var result = await RemoveRefreshToken(existingToken);
+                    ctx.RefreshTokens.Remove(existingToken);
+                    var result = await ctx.SaveChangesAsync() > 0;
+
+                    //var result = await RemoveRefreshToken(existingToken);
                 }
 
                 ctx.RefreshTokens.Add(token);

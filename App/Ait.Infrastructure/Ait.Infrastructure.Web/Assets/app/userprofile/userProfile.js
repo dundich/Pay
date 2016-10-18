@@ -51,11 +51,14 @@
             load();
         };
 
-        this.isClaimsLoading = true;
 
-        this.loadClaims = function () {
-            if (state.claims) return;
 
+        this.loadClaims = function (forced) {
+
+            if (this.isClaimsLoading) return;
+            if (!forced && state.claims) return;
+
+            this.isClaimsLoading = true;
             this.getClaims().then(function (d) {
                 self.isClaimsLoading = false;
                 state.claims = d;
@@ -90,7 +93,7 @@
         </span>\
     </p>\
     <div ng-show="$ctrl.state.isAuth">\
-    <ul class="collapsible" data-collapsible="accordion">\
+      <ul class="collapsible" data-collapsible="accordion">\
         <li>\
             <div class="collapsible-header"><i class="fa fa-key" aria-hidden="true"></i> Сменить пароль</div>\
             <div class="collapsible-body">\
@@ -101,14 +104,15 @@
             <div class="collapsible-header"><i class="fa fa-credit-card" aria-hidden="true"></i> Удостоверения</div>\
             <div class="collapsible-body">\
                 <p>\
-                    <ait-loading ng-if="$ctrl.isClaimsLoading"></ait-loading>\
-                    <span class="row" ng-repeat="claim in $ctrl.state.claims">\
-                        {{$index+1}}. <span ng-bind="claim.type"></span> &#8594; <strong ng-bind="claim.value"></strong>\
-                    </span>\
+                   <ait-loading ng-if="$ctrl.isClaimsLoading"></ait-loading>\
+                   <a href="" ng-click="$ctrl.loadClaims(true)" style="float:right;"><i class="fa fa-refresh" aria-hidden="true"></i></a>\
+                   <span class="row" ng-repeat="claim in $ctrl.state.claims">\
+                       {{$index+1}}. <span ng-bind="claim.type"></span> &#8594; <strong ng-bind="claim.value"></strong>\
+                   </span>\
                 </p>\
             </div>\
         </li>\
-    </ul>\
+      </ul>\
     </div>\
 \
 '
@@ -158,7 +162,7 @@
                 })
                 .then(function (d) {
                     aitToast('Пароль успешно изменен!', 'ok');
-                    emitter.emit('password changed', d);
+                    emitter.emit('event:password_changed', d);
                     self.reset();
                     self.isLoading = false;
                 }, function (e) {

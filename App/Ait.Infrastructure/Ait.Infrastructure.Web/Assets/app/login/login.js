@@ -12,7 +12,7 @@
         var state = this.state = {
             userName: $routeParams.username || '',
             password: '',
-            useRefreshTokens: false,
+            useRefreshTokens: true
         };
 
         this.login = function () {
@@ -20,15 +20,9 @@
             self.message = '';
 
             return authService.login(state).then(function (response) {
-                emitter.emit('login', response);
-            },
-            function (err) {
-                if (err.error_description) {
-                    self.message = err.error_description.replace(/["']{1}/gi, "");
-                }
-                else {
-                    self.message = 'Ошибка!';
-                }
+                emitter.emit('event:login', response);
+            }, function (err) {
+                self.message = err;
             });
         };
 
@@ -74,7 +68,7 @@
                             $location.path(authSettings.uriHome || '/');
                         },
                         function (err) {
-                             $scope.message = err.error_description;
+                            $scope.message = err.error_description;
                         });
                 }
 
@@ -98,7 +92,7 @@
 
     var Ctrl = function ($scope, $location, emitter, authSettings) {
 
-        var cbk = emitter.on('login', function () {
+        var cbk = emitter.on('event:login', function () {
             $location.path(authSettings.uriHome);
         });
 

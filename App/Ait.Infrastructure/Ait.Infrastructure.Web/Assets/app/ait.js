@@ -1,9 +1,18 @@
 ﻿; (function (angular, window, undefined) {
-    var ait = angular.module('ait', [
+
+    var app = angular.module('ait', [
         'ngRoute',
         'ngAnimate',
 
         'aitEmitter',
         'aitUI'
     ]);
+
+
+    app.constant('ait', {
+        events: {
+            login: 'event:login'
+        }
+    });
+
 })(angular, window);

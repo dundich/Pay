@@ -85,6 +85,9 @@
         },
 
         getErrorMsg: function (err) {
+
+            if (!err) return err;
+
             if (angular.isString(err)) {
                 return err;
             }
@@ -94,7 +97,7 @@
             }
 
             if (err.error_description) {
-                self.message = err.error_description.replace(/["']{1}/gi, "");
+                return err.error_description.replace(/["']{1}/gi, "");
             }
 
             if (err.ExceptionMessage || err.exceptionMessage) {
@@ -116,8 +119,10 @@
             if (err.message)
                 err.message;
 
-            return err;
+            if (err.error)
+                err.error;
 
+            return err;
         }
     };
 

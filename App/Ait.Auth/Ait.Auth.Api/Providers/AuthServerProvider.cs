@@ -13,7 +13,7 @@ namespace Ait.Auth.Api.Providers
     public class AuthServerProvider : OAuthAuthorizationServerProvider
     {
 
-        public override Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
+        public override async Task ValidateClientAuthentication(OAuthValidateClientAuthenticationContext context)
         {
 
             string clientId = string.Empty;
@@ -30,21 +30,18 @@ namespace Ait.Auth.Api.Providers
                 //Remove the comments from the below line context.SetError, and invalidate context 
                 //if you want to force sending clientId/secrects once obtain access tokens. 
                 context.Validated();
-                //context.SetError("invalid_clientId", "ClientId should be sent.");
-                return Task.FromResult<object>(null);
+                //context.SetError("invalid_clientId", "ClientId should be sent.");                
+                return;//Task.FromResult<object>(null);
             }
 
             var _repo = context.OwinContext.GetAuthRep();
 
-            var t =_repo.FindClientAsync(context.ClientId);
-            t.Wait();
-
-            Client client = t.Result;
+            Client client = await _repo.FindClientAsync(context.ClientId);
 
             if (client == null)
             {
                 context.SetError("invalid_clientId", string.Format("Клиент '{0}' не зарегистрирован в системе.", context.ClientId));
-                return Task.FromResult<object>(null);
+                return;// Task.FromResult<object>(null);
             }
 
             if (client.ApplicationType == Models.ApplicationTypes.NativeConfidential)
@@ -52,14 +49,14 @@ namespace Ait.Auth.Api.Providers
                 if (string.IsNullOrWhiteSpace(clientSecret))
                 {
                     context.SetError("invalid_clientId", "Клиентский ключ (Secret) не определен.");
-                    return Task.FromResult<object>(null);
+                    return;// Task.FromResult<object>(null);
                 }
                 else
                 {
                     if (client.Secret != Helper.GetHash(clientSecret))
                     {
                         context.SetError("invalid_clientId", "Клиентский ключ (Secret), является недействительным.");
-                        return Task.FromResult<object>(null);
+                        return;// Task.FromResult<object>(null);
                     }
                 }
             }
@@ -67,7 +64,7 @@ namespace Ait.Auth.Api.Providers
             if (!client.Active)
             {
                 context.SetError("invalid_clientId", "Клиент отключен.");
-                return Task.FromResult<object>(null);
+                return;// Task.FromResult<object>(null);
             }
 
             context.OwinContext.Set<string>("as:clientAllowedOrigin", client.AllowedOrigin);
@@ -75,7 +72,7 @@ namespace Ait.Auth.Api.Providers
             context.OwinContext.Set<Client>("oauth:client", client);
 
             context.Validated();
-            return Task.FromResult<object>(null);
+            return;// Task.FromResult<object>(null);
         }
 
 
