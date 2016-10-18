@@ -9,7 +9,7 @@ namespace Ait.Auth.Api.Models
         public string UserName { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "Должно быть по крайней мере {2} символа(ов).", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "В пароле должно быть по крайней мере {2} символов.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }

@@ -1,8 +1,7 @@
 ﻿; (function (angular, window, undefined) {
 
     var app = angular.module('appAuth', [
-        'ngRoute',
-        'ngAnimate',
+        'ait',
         'angular-loading-bar',
         'authInterceptorService',
         'authSettings',

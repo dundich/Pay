@@ -2,9 +2,9 @@
 
     'use strict';
 
-    var app = angular.module('authService', ['ngStorage', 'authSettings']);
+    var app = angular.module('authService', ['ngStorage', 'authSettings', 'aitEmitter']);
 
-    app.factory('authService', ['$http', '$q', '$localStorage', 'authSettings', function ($http, $q, localStorageService, authSettings) {
+    app.factory('authService', ['$http', '$q', '$localStorage', 'authSettings', 'aitEmitter', function ($http, $q, localStorageService, authSettings, emitter) {
 
         var serviceBase = authSettings.apiServiceBaseUri;
 
@@ -60,6 +60,9 @@
                     _authentication.userName = loginData.userName;
                     _authentication.useRefreshTokens = loginData.useRefreshTokens;
 
+                    //-------------------
+                    emitter.emit('event:login', response);
+
                     return response;
                 }, function (err, status) {
                     _logOut();
@@ -72,6 +75,9 @@
             _authentication.isAuth = false;
             _authentication.userName = "";
             _authentication.useRefreshTokens = false;
+
+            //-------------------
+            emitter.emit('event:logout');
         };
 
         var _fillAuthData = function () {
@@ -178,7 +184,9 @@
 
 
         var _getClaims = function () {
-            return $http.get(serviceBase + 'api/account/claims');
+            return $http.get(serviceBase + 'api/account/claims').then(function (d) {
+                return d.data;
+            });
         };
 
 

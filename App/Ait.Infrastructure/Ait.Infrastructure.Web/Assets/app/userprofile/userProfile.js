@@ -52,9 +52,7 @@
         };
 
 
-
         this.loadClaims = function (forced) {
-
             if (this.isClaimsLoading) return;
             if (!forced && state.claims) return;
 
@@ -68,11 +66,8 @@
             });
         };
 
-
         this.getClaims = function () {
-            return authService.getClaims().then(function (d) {
-                return d.data;
-            });
+            return authService.getClaims();
         };
     };
 

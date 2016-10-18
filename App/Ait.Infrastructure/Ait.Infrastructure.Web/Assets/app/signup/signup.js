@@ -2,7 +2,7 @@
 ; (function (angular, window, document, undefined) {
     'use strict';
 
-    var Comp = function ($routeParams, $location, $timeout, $sce, emitter, authService, authSettings) {
+    var Comp = function ($routeParams, $location, $timeout, $sce, emitter, authService, authSettings, aitUtils, aitToast) {
 
         var self = this;
 
@@ -20,7 +20,6 @@
         var startTimer = function () {
             var timer = $timeout(function () {
                 $timeout.cancel(timer);
-
                 $location.path(authSettings.uriLogin + '/' + state.userName);
             }, 2000);
         }
@@ -29,23 +28,23 @@
 
             self.message = '';
             self.isLoading = true;
-            return authService.saveRegistration(state).then(function (response) {
-                self.isLoading = false;
-                self.savedSuccessfully = true;
-                self.message = "Пользователь был успешно зарегистрирован, вы будете перенаправлены на страницу входа через 2-е секунды.";
-                startTimer();
-            },
-            function (response) {
-                self.isLoading = false;
-                self.savedSuccessfully = false;
-                var errors = [];
-                for (var key in response.data.modelState) {
-                    for (var i = 0; i < response.data.modelState[key].length; i++) {
-                        errors.push(response.data.modelState[key][i]);
-                    }
-                }
-                self.message = $sce.trustAsHtml("Не удалось зарегистрировать пользователя: <br/>" + errors.join('<br/>'));
-            });
+            return authService.saveRegistration(state)
+                .then(function (response) {
+                    self.isLoading = false;
+                    self.savedSuccessfully = true;
+                    self.message = "Пользователь был успешно зарегистрирован, вы будете перенаправлены на страницу входа через 2-е секунды.";
+                    startTimer();
+                })
+                .catch(function (response) {
+                    self.isLoading = false;
+                    self.savedSuccessfully = false;
+
+                    var errors = "Не удалось зарегистрировать пользователя: <br/>" + aitUtils.getErrorMsg(response);
+
+                    aitToast(errors, 'error');
+
+                    self.message = errors;
+                });
         };
 
         this.$onInit = function () {
@@ -60,11 +59,11 @@
     };
 
 
-    Comp.$inject = ['$routeParams', '$location', '$timeout', '$sce', 'aitEmitter', 'authService', 'authSettings'];
+    Comp.$inject = ['$routeParams', '$location', '$timeout', '$sce', 'aitEmitter', 'authService', 'authSettings', 'aitUtils', 'aitToast'];
 
 
     var tmpl = {
-        template: 
+        template:
 '<div class="row">\
     <div class="col s4 offset-s4">\
         <h2 class="col s12 header">Регистрация</h2>\
@@ -76,7 +75,7 @@
 
 
     angular
-      .module('signup', ['ngRoute', 'ngSanitize', 'ngStorage', 'aitEmitter', 'authService', 'aitUI'])
+      .module('signup', ['ngRoute', 'ngSanitize', 'ngStorage', 'aitEmitter', 'authService', 'aitUI', 'aitUtils'])
 
       .config(['$routeProvider', function ($routeProvider) {
           $routeProvider

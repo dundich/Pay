@@ -11,7 +11,9 @@
 
     app.constant('ait', {
         events: {
-            login: 'event:login'
+            login: 'event:login',
+            logout: 'event:logout',
+            password_changed: 'event:password_changed'
         }
     });
 

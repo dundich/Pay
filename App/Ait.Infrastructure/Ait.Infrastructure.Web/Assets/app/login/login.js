@@ -16,12 +16,8 @@
         };
 
         this.login = function () {
-
             self.message = '';
-
-            return authService.login(state).then(function (response) {
-                emitter.emit('event:login', response);
-            }, function (err) {
+            return authService.login(state).catch(function (err) {
                 self.message = err;
             });
         };
@@ -31,13 +27,14 @@
 
             var redirectUri = window.location.origin + window.location.pathname + 'authcomplete.html';
 
-            var externalProviderUrl = authSettings.apiServiceBaseUri + "api/Account/ExternalLogin?provider=" + provider
-                                                                        + "&response_type=token&client_id=" + authSettings.clientId
-                                                                        + "&redirect_uri=" + redirectUri;
+            var externalProviderUrl = authSettings.apiServiceBaseUri
+                + "api/Account/ExternalLogin?provider=" + provider
+                + "&response_type=token&client_id=" + authSettings.clientId
+                + "&redirect_uri=" + redirectUri;
+
             window.$windowScope = $scope;
 
             var oauthWindow = window.open(externalProviderUrl, "Authenticate Account", "location=0,status=0,width=600,height=750");
-
         };
 
 
@@ -57,7 +54,6 @@
                     };
 
                     $location.path('/associate');
-
                 }
                 else {
                     //Obtain access token and redirect to orders
@@ -71,7 +67,6 @@
                             $scope.message = err.error_description;
                         });
                 }
-
             });
         }
 
