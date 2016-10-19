@@ -28,6 +28,7 @@
 
     var NEXT_ID = 1;
 
+
     var aitUtils = {
 
         Re: {
@@ -84,45 +85,61 @@
             return new Date(parts[0], parts[1] - 1, parts[2]); // Note: months are 0-based
         },
 
+        getErrorMsgs: function () {
+            var errors = [];
+
+            for (var i = 0; i < arguments.length; i++) {
+
+                var err = arguments[i];
+
+                if (!err) continue;
+
+                if (angular.isString(err)) {
+                    errors.push(err);
+                    continue;
+                }
+
+                if (err.status) {
+                    err = err.data;
+                }
+
+                if (err.error_description) {
+                    errors.push(err.error_description);
+                    continue;
+                }
+
+                if (err.ExceptionMessage || err.exceptionMessage) {
+                    errors.push(err.ExceptionMessage || err.exceptionMessage);
+                    continue;
+                }
+
+                if (err.modelState) {
+                    angular.forEach(err.modelState, function (value, key) {
+                        errors.push(value);
+                    });
+                    continue;
+                }
+
+                if (err.message) {
+                    errors.push(err.message);
+                    continue;
+                }
+
+                if (err.error) {
+                    errors.push(err.error);
+                    continue;
+                }
+
+                errors.push(err);
+            }
+
+            return errors;
+        },
+
+
         getErrorMsg: function (err) {
-
-            if (!err) return err;
-
-            if (angular.isString(err)) {
-                return err;
-            }
-
-            if (err.status) {
-                err = err.data;
-            }
-
-            if (err.error_description) {
-                return err.error_description.replace(/["']{1}/gi, "");
-            }
-
-            if (err.ExceptionMessage || err.exceptionMessage) {
-                return err.ExceptionMessage || err.exceptionMessage;
-            }
-
-            if (err.modelState) {
-                var msg = [];
-                angular.forEach(err.modelState, function (value, key) {
-                    msg.push(value);
-                });
-
-                if (msg.length > 1)
-                    msg.isMultiLine = true;
-
-                return msg.join('<br/>');
-            }
-
-            if (err.message)
-                err.message;
-
-            if (err.error)
-                err.error;
-
-            return err;
+            var errors = aitUtils.getErrorMsgs.apply(aitUtils, arguments);
+            return errors.join('<br>');
         }
     };
 

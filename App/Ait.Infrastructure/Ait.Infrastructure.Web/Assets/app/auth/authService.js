@@ -4,7 +4,7 @@
 
     var app = angular.module('authService', ['ngStorage', 'authSettings', 'aitEmitter']);
 
-    app.factory('authService', ['$http', '$q', '$localStorage', 'authSettings', 'aitEmitter', function ($http, $q, localStorageService, authSettings, emitter) {
+    app.factory('authService', ['$http', '$q', '$timeout', '$localStorage', 'authSettings', 'aitEmitter', function ($http, $q, $timeout, localStorageService, authSettings, emitter) {
 
         var serviceBase = authSettings.apiServiceBaseUri;
 
@@ -40,12 +40,15 @@
                 .then(function (d) {
                     var response = d.data;
                     if (loginData.useRefreshTokens) {
+
                         localStorageService.authorizationData = {
                             token: response.access_token,
                             userName: loginData.userName,
                             refreshToken: response.refresh_token,
                             useRefreshTokens: true
                         };
+
+                        _startRefreshTokenTimer(response.expires_in);
                     }
                     else {
                         localStorageService.authorizationData = {
@@ -70,12 +73,38 @@
                 });
         };
 
+        var _refreshTokenTimer = null;//$interval(updateTime, 1000);
+
+        var _stopRefreshTokenTimer = function () {
+            if (_refreshTokenTimer) {
+                try {
+                    $timeout.cancel(_refreshTokenTimer);
+                }
+                finally {
+                    _refreshTokenTimer = null;
+                }
+            }
+        };
+
+        var _startRefreshTokenTimer = function (expires_in) {
+            _stopRefreshTokenTimer();
+            expires_in = (expires_in || 3 * 60) * 1000;
+
+            if (expires_in < 30000) //min 30 sec
+                expires_in = 30000;
+
+            expires_in = expires_in - 10000; //before the time
+
+            _refreshTokenTimer = $timeout(_refreshToken, expires_in);
+        };
+
         var _logOut = function () {
+            _stopRefreshTokenTimer();
+
             delete localStorageService.authorizationData;
             _authentication.isAuth = false;
             _authentication.userName = "";
             _authentication.useRefreshTokens = false;
-
             //-------------------
             emitter.emit('event:logout');
         };
@@ -111,6 +140,8 @@
                             refreshToken: response.refresh_token,
                             useRefreshTokens: true
                         };
+
+                        _startRefreshTokenTimer(response.expires_in);
 
                         return response;
 

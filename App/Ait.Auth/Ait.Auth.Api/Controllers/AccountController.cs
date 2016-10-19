@@ -213,6 +213,7 @@ namespace Ait.Auth.Api.Controllers
 
 
         [HttpPost]
+        [Authorize]
         [HttpGet]
         [Route("Claims")]
         public IEnumerable<object> GetClaims()

@@ -1,5 +1,4 @@
 ﻿using Ait.Auth.Api.Entities;
-using Ait.Auth.Api.Modules;
 using Microsoft.Owin.Security.Infrastructure;
 using System;
 using System.Threading.Tasks;
@@ -30,7 +29,7 @@ namespace Ait.Auth.Api.Providers
                 ClientId = clientid,
                 Subject = context.Ticket.Identity.Name,
                 IssuedUtc = DateTime.UtcNow,
-                ExpiresUtc = DateTime.UtcNow.AddMinutes(3)//Convert.ToDouble(refreshTokenLifeTime))
+                ExpiresUtc = DateTime.UtcNow.AddMinutes(Convert.ToDouble(refreshTokenLifeTime))
             };
 
             context.Ticket.Properties.IssuedUtc = token.IssuedUtc;
