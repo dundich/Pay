@@ -1,3 +1,12 @@
 Db: Server=.;Database=AitAuth1;Trusted_Connection=true;Integrated Security=True
-GoogleClientId: xxxxxx.apps.googleusercontent.com
-GoogleClientSecret: xxxxx
+
+OAuthGoogleClientId: xxxxxx.apps.googleusercontent.com
+OAuthGoogleClientSecret: xxxxx
+
+SmtpClientUserName: xxxxxx@gmail.com
+SmtpClientPassword: xxxxxxx
+SmtpClientHost: smtp.gmail.com
+SmtpClientPort: 587
+SmtpClientEnableSsl: true
+SmtpClientUseDefaultCredentials: false
+SmtpClientDeliveryMethod: Network

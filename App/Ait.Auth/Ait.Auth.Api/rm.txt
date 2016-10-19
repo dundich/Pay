@@ -1,4 +1,10 @@
-﻿http://professorweb.ru/my/ASP_NET/identity/level1/1_10.php
+﻿gmail 
+http://ru.stackoverflow.com/questions/470829/%D0%9E%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0-%D0%BC%D1%8B%D0%BB%D0%B0-%D1%81-gmail-%D0%B2-%D0%B0%D1%81%D0%BF%D0%B5
+https://security.google.com/settings/security/apppasswords?pli=1
+https://security.google.com/settings/security/apppasswords
+
+
+http://professorweb.ru/my/ASP_NET/identity/level1/1_10.php
 
 
 
