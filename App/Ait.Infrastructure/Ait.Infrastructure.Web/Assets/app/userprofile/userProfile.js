@@ -178,7 +178,7 @@
         template: '\
 <form name="form" class="row" role="form"  ng-submit="$ctrl.changePassword()" style="margin-top: 1em;">\
     <div class="col l1">&nbsp;</div>\
-    <ait-field class="col l5 s12" ait-field-type="password" form="form" caption="Текущий пароль" ng-model="$ctrl.state.currentPassword" required="true">\
+    <ait-field class="col l5 s12" ait-field-type="password" form="form" caption="Текущий пароль" ng-model="$ctrl.state.currentPassword">\
     </ait-field>\
     <ait-field class="col l5 s12" ait-field-type="password" form="form" caption="Новый пароль" ng-model="$ctrl.state.newPassword" required="true">\
     </ait-field>\

@@ -97,10 +97,10 @@
 
                 var expires_in_ms = (authData.expires_in || 3 * 60) * 1000;
 
-                if (expires_in_ms < 5000) //min 5 sec
-                    expires_in_ms = 5000;
+                if (expires_in_ms < 10000) //min 5 sec
+                    expires_in_ms = 10000;
 
-                expires_in_ms = expires_in_ms - 1000; //before the time
+                expires_in_ms = expires_in_ms - 5000; //before the time
 
                 _refreshTokenTimer = $timeout(_refreshToken, expires_in_ms);
             }
