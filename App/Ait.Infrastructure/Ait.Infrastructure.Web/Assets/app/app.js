@@ -8,7 +8,8 @@
         'login',
         'signup',
         'userprofile',
-        'associate'
+        'associate',
+        'email'
     ]);
 
 

@@ -2,7 +2,7 @@
 ; (function (angular, window, document, undefined) {
     'use strict';
 
-    var LoginComp = function ($scope, $routeParams, $location, $localStorage, emitter, authSettings, authService, serviceFactory, aitToast) {
+    var LoginComp = function ($scope, $routeParams, $location, $localStorage, emitter, authSettings, authService, aitToast) {
 
         var self = this;
 
@@ -81,7 +81,7 @@
     };
 
 
-    LoginComp.$inject = ['$scope', '$routeParams', '$location', '$localStorage', 'aitEmitter', 'authSettings', 'authService', 'aitServiceFactory', 'aitToast'];
+    LoginComp.$inject = ['$scope', '$routeParams', '$location', '$localStorage', 'aitEmitter', 'authSettings', 'authService', 'aitToast'];
 
 
 
@@ -115,7 +115,7 @@
 
 
     angular
-      .module('login', ['ngRoute', 'ngSanitize', 'ngStorage', 'aitEmitter', 'authService', 'aitUI', 'aitServiceFactory'])
+      .module('login', ['ngRoute', 'ngSanitize', 'ngStorage', 'aitEmitter', 'authService', 'aitUI'])
 
       .config(['$routeProvider', function ($routeProvider) {
           $routeProvider

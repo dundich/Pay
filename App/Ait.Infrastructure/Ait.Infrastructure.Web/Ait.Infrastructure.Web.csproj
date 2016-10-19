@@ -254,6 +254,8 @@
     <Content Include="Assets\app\common\tmpls\ait-field-tmpls.js" />
     <Content Include="Assets\app\controllers\registerCtrl.js" />
     <Content Include="Assets\app\controllers\signInCtrl.js" />
+    <Content Include="Assets\app\email\email.js" />
+    <Content Include="Assets\app\email\email.service.js" />
     <Content Include="Assets\app\login\login.js" />
     <Content Include="Assets\app\signup\signup.js" />
     <Content Include="Assets\app\userprofile\userprofile.js" />

@@ -53,16 +53,11 @@ namespace Ait.Auth.Api.Controllers
                 }
             }
 
-
-
             //migr.InitializeDatabase()
-            var cl = child.AuthRepository.FindClient("admin");
+            //var cl = child.AuthRepository.FindClient("admin");
 
             var provider = child.Provider;
             var d = provider.LoadSettings();
-
-            //provider.SaveSettings()
-            //sett.SaveSettings("dd".PairWith("!!!"), "dd".PairWith("@!!"));            
 
             return Json(d);
         }
