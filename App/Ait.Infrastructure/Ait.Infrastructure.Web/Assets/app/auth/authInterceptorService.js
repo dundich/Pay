@@ -24,20 +24,19 @@
             if (rejection.status === 401) {
 
                 var authService = $injector.get('authService');
-                var authData = localStorageService.authorizationData;
-
-                if (authData && authData.useRefreshTokens) {
-                    return authService
-                        .refreshToken()
-                        .then(function () {
-                            //needed try again...    
-                            return $q.reject(rejection);
-                        }, function () {
-                            authService.logOut();
-                            $location.path(authSettings.uriLogin);
-                            return $q.reject(rejection);
-                        });
-                }
+                //var authData = localStorageService.authorizationData;
+                //if (authData && authData.useRefreshTokens) {
+                //    return authService
+                //        .refreshToken()
+                //        .then(function () {
+                //            //needed try again...    
+                //            return $q.reject(rejection);
+                //        }, function () {
+                //            authService.logOut();
+                //            $location.path(authSettings.uriLogin);
+                //            return $q.reject(rejection);
+                //        });
+                //}
 
                 authService.logOut();
                 $location.path(authSettings.uriLogin);

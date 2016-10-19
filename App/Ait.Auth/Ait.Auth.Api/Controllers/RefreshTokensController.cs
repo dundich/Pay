@@ -1,5 +1,4 @@
-﻿using Ait.Auth.Api.Modules;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -13,7 +12,6 @@ namespace Ait.Auth.Api.Controllers
 
         public RefreshTokensController()
         {
-            //_repo = new AuthRepository();
         }
 
         [Authorize(Users = "Admin")]
@@ -35,15 +33,5 @@ namespace Ait.Auth.Api.Controllers
             }
             return BadRequest("Token Id does not exist");
         }
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        _repo.Dispose();
-        //    }
-
-        //    base.Dispose(disposing);
-        //}
     }
 }

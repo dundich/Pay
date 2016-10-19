@@ -45,17 +45,19 @@
                             token: response.access_token,
                             userName: loginData.userName,
                             refreshToken: response.refresh_token,
-                            useRefreshTokens: true
+                            useRefreshTokens: true,
+                            expires_in: response.expires_in
                         };
 
-                        _startRefreshTokenTimer(response.expires_in);
+                        _startRefreshTokenTimer();
                     }
                     else {
                         localStorageService.authorizationData = {
                             token: response.access_token,
                             userName: loginData.userName,
                             refreshToken: "",
-                            useRefreshTokens: false
+                            useRefreshTokens: false,
+                            expires_in: 0
                         };
                     }
 
@@ -86,16 +88,22 @@
             }
         };
 
-        var _startRefreshTokenTimer = function (expires_in) {
+        var _startRefreshTokenTimer = function () {
             _stopRefreshTokenTimer();
-            expires_in = (expires_in || 3 * 60) * 1000;
 
-            if (expires_in < 30000) //min 30 sec
-                expires_in = 30000;
+            var authData = localStorageService.authorizationData;
 
-            expires_in = expires_in - 10000; //before the time
+            if (authData && authData.useRefreshTokens) {
 
-            _refreshTokenTimer = $timeout(_refreshToken, expires_in);
+                var expires_in_ms = (authData.expires_in || 3 * 60) * 1000;
+
+                if (expires_in_ms < 5000) //min 5 sec
+                    expires_in_ms = 5000;
+
+                expires_in_ms = expires_in_ms - 1000; //before the time
+
+                _refreshTokenTimer = $timeout(_refreshToken, expires_in_ms);
+            }
         };
 
         var _logOut = function () {
@@ -138,10 +146,11 @@
                             token: response.access_token,
                             userName: response.userName,
                             refreshToken: response.refresh_token,
-                            useRefreshTokens: true
+                            useRefreshTokens: true,
+                            expires_in: response.expires_in
                         };
 
-                        _startRefreshTokenTimer(response.expires_in);
+                        _startRefreshTokenTimer();
 
                         return response;
 
@@ -246,6 +255,8 @@
         authServiceFactory.changePassword = _changePassword;
 
         _fillAuthData();
+
+        _startRefreshTokenTimer();
 
         return authServiceFactory;
     }]);
