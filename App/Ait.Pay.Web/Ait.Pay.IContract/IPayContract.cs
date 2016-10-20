@@ -14,10 +14,10 @@ namespace Ait.Pay.IContract
     }
 
 
-    /// <summary>
-    /// На всяк случай...
-    /// </summary>
-    public class ExtProps : Dictionary<string, string> { }
+    ///// <summary>
+    ///// На всяк случай...
+    ///// </summary>
+    //public class ExtProps : Dictionary<string, string> { }
 
 
     public class PayIdValue
@@ -27,12 +27,12 @@ namespace Ait.Pay.IContract
         public string Value { get; set; }
 
 
-        public ExtProps _extProps { get; set; }
+        //public ExtProps _extProps { get; set; }
 
 
         public PayIdValue()
         {
-            _extProps = null;
+            //_extProps = null;
         }
     }
 
