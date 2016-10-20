@@ -1200,7 +1200,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Emails\_ViewStart.cshtml" />
     <Content Include="Views\Emails\Web.config" />
-    <Content Include="Views\Emails\_EmailLayout.cshtml.cshtml" />
+    <Content Include="Views\Emails\_EmailLayout.cshtml" />
     <Content Include="Views\Emails\ResetPassword.cshtml" />
     <Content Include="Views\Emails\ResetPassword.html.cshtml" />
   </ItemGroup>

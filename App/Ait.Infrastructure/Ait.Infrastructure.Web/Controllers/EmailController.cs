@@ -6,7 +6,11 @@ using System.Web.Http;
 
 namespace Ait.Infrastructure.Web.Controllers
 {
-
+    /// <summary>
+    /// https://security.google.com/settings/security/apppasswords
+    /// 
+    /// http://localhost:16807/Email/MultiPart?format=html
+    /// </summary>
     [RoutePrefix("api/Email")]
     public class EmailController : ApiController
     {
@@ -31,9 +35,10 @@ namespace Ait.Infrastructure.Web.Controllers
 
         public class EmailMessage : Email
         {
-            public EmailMessage() : base("ResetPassword")
+            public EmailMessage() : base("ResetPassword.html")
             {
             }
+
 
 
             [Display(Name = "Куда"), EmailAddress]
@@ -64,22 +69,22 @@ namespace Ait.Infrastructure.Web.Controllers
             {
                 var shell = new InfraShell();
 
-                var email = new EmailMessage();
+                EmailMessage email = new EmailMessage();
 
                 var em = shell.EmailService;
 
-
-                email.To = "XXXX@mail.ru";
-                email.Subject = "тест";
-                email.PersonName = "Иванов И И";
-                email.Message = id;
+                email.ViewData["From"] = "XXX@gmail.com";
+                email.ViewData["To"] = "xxx@mail.ru";
+                email.ViewData["Subject"] = "тест";
+                email.ViewData["PersonName"] = "Иванов И И";
+                email.ViewData["Message"] = id;
 
                 em.Send(email);
             }
             catch (Exception e)
             {
-                throw e;
-                //return BadRequest(e.Message);
+                //throw e;
+                return BadRequest(e.Message);
             }
             return Ok();
 

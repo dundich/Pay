@@ -11,6 +11,7 @@
 <div class="row">\
     <div class="col m8 offset-m2">\
         <userprofile></userprofile>\
+        <a href="api/email/send/text">email</a>\
     </div>\
 </div>'
           });

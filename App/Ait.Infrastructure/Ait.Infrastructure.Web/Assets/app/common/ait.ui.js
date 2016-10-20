@@ -99,12 +99,12 @@
                     continue;
                 }
 
-                if (err.status) {
-                    err = err.data;
+                if (err.status || err.Status) {
+                    err = err.data || err.Data;
                 }
 
-                if (err.error_description) {
-                    errors.push(err.error_description);
+                if (err.error_description || err.Error_description) {
+                    errors.push(err.error_description || err.Error_description);
                     continue;
                 }
 
@@ -113,20 +113,20 @@
                     continue;
                 }
 
-                if (err.modelState) {
-                    angular.forEach(err.modelState, function (value, key) {
+                if (err.modelState || err.ModelState) {
+                    angular.forEach(err.modelState || err.ModelState, function (value, key) {
                         errors.push(value);
                     });
                     continue;
                 }
 
-                if (err.message) {
-                    errors.push(err.message);
+                if (err.message || err.Message) {
+                    errors.push(err.message || err.Message);
                     continue;
                 }
 
-                if (err.error) {
-                    errors.push(err.error);
+                if (err.error || err.Error) {
+                    errors.push(err.error || err.Error);
                     continue;
                 }
 

@@ -10,6 +10,8 @@ http://professorweb.ru/my/ASP_NET/identity/level1/1_10.php
 
 https://aaronparecki.com/2012/07/29/2/oauth2-simplified
 
+http://aboutcode.net/postal/
+
 Application access
 
 In some cases, applications may wish to update their own information such as their website URL or application icon, or they may wish to get statistics about the users of the app. In this case, applications need a way to get an access token for their own account, outside the context of any specific user. OAuth provides the client_credentials grant type for this purpose.
