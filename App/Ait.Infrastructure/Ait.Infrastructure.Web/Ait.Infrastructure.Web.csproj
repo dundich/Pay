@@ -95,6 +95,14 @@
     <Reference Include="Owin">
       <HintPath>..\..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Postal, Version=1.0.0.0, Culture=neutral, PublicKeyToken=45719375b8b4d528, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Postal.Mvc5.1.2.0\lib\net45\Postal.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RazorEngine, Version=3.9.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\RazorEngine.3.9.0\lib\net45\RazorEngine.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -216,6 +224,8 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\Settings.txt" />
+    <Content Include="App_Data\_Settings.txt" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Assets\app\ait.js" />
     <Content Include="Assets\app\app.js" />
@@ -1185,9 +1195,13 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Emails\_ViewStart.cshtml" />
+    <Content Include="Views\Emails\Web.config" />
+    <Content Include="Views\Emails\_EmailLayout.cshtml.cshtml" />
+    <Content Include="Views\Emails\ResetPassword.cshtml" />
+    <Content Include="Views\Emails\ResetPassword.html.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\App\" />
   </ItemGroup>
   <ItemGroup>
@@ -1298,6 +1312,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\jquery-2.1.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Libs\Maybe2\Maybe2.csproj">
+      <Project>{16abf6cb-4ee5-411a-b9c6-2173de870456}</Project>
+      <Name>Maybe2</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
