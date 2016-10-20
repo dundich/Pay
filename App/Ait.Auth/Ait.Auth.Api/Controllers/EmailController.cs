@@ -8,8 +8,7 @@ namespace Ait.Auth.Api.Controllers
 {
     [RoutePrefix("api/Email")]
     public class EmailController : ApiController
-    {
-
+    { 
         public class EmailFormModel
         {
             [Display(Name = "От кого")]

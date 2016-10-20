@@ -9,7 +9,7 @@ namespace Ait.Auth.Api.Models
         public string UserName { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "Пароль должен быть по крайней мере {2} символов.", MinimumLength = ShellConsts.PasswordMinimumLength)]
+        [StringLength(100, ErrorMessage = "Пароль должен быть по крайней мере {2} символов.", MinimumLength = AuthConsts.PasswordMinimumLength)]
         [DataType(DataType.Password)]
         [Display(Name = "Старый пароль")]
         public string CurrentPassword { get; set; }
@@ -17,7 +17,7 @@ namespace Ait.Auth.Api.Models
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Новый пароль")]
-        [StringLength(100, ErrorMessage = "Новый пароль должен быть по крайней мере {2} символов.", MinimumLength = ShellConsts.PasswordMinimumLength)]
+        [StringLength(100, ErrorMessage = "Новый пароль должен быть по крайней мере {2} символов.", MinimumLength = AuthConsts.PasswordMinimumLength)]
         public string NewPassword { get; set; }
     }
 }

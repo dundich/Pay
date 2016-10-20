@@ -2,9 +2,9 @@
 using Microsoft.Owin;
 using System.Collections.Generic;
 
-namespace Ait.Auth.Api
+namespace Ait.Infrastructure.Web
 {
-    public static class OwinConsts
+    public static class OwinHelper
     {
         public const string TENAT = "ait:tenat";
         public const string SHELL = "ait:shell";
@@ -14,15 +14,9 @@ namespace Ait.Auth.Api
             return env.GetOrDefault(TENAT).NoNull(c => c.ToString()) ?? "";
         }
 
-        public static IAuthShell GetShell(this IOwinContext ctx)
+        public static InfraShell GetShell(this IOwinContext ctx)
         {
-            return ctx.Get<IAuthShell>(OwinConsts.SHELL);
+            return ctx.Get<InfraShell>(SHELL);
         }
-
-        public static IAuthRepository GetAuthRep(this IOwinContext ctx)
-        {
-            return ctx.Get<AuthShell>(OwinConsts.SHELL).AuthRepository;
-        }
-
     }
 }

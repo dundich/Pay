@@ -18,7 +18,7 @@ namespace Ait.Auth.Api.Controllers
         {
             var rep = Request.GetOwinContext().GetShell();
 
-            var child = rep.CreateShell(id);
+            var child = rep.CreateChild(id);
 
             var connectionInfo = new DbConnectionInfo(child.ConnectionString, "System.Data.SqlClient");
 

@@ -1,31 +1,29 @@
-﻿using Maybe2;
-using Maybe2.Classes;
-using Maybe2.Configuration;
+﻿using Maybe2.Classes;
+using System;
 using System.Collections.Generic;
 
-namespace Ait.Auth.Api
+namespace Maybe2.Configuration
 {
     public class Shell : IShell
     {
 
+        private readonly LazyCache<DynamicDictionary<string>> _config;
+
         public Shell(string tenat = null)
         {
             Tenat = Normalize(tenat);
-            _rep = new LazyCache<IAuthRepository>(() => new AuthRepository(CreateAuthContext));
             Provider = CreateProvider(tenat);
             _settings = new ShellSettings(Provider);
+            _config = new LazyCache<DynamicDictionary<string>>(() => new DynamicDictionary<string>(_settings.GetSettings()));
         }
 
 
-        public IShell CreateShell(string tenat)
+        public virtual IShell CreateChild(string tenat)
         {
             return new Shell(tenat);
         }
 
-        static ISettingsProvider CreateProvider(string tenat)
-        {
-            return SettingsProvider.CreateProvider(Normalize(tenat));
-        }
+        public static Func<string, ISettingsProvider> CreateProvider = (string tenat) => SettingsProvider.CreateProvider(Normalize(tenat));
 
         public static string Normalize(string tenat)
         {
@@ -39,17 +37,7 @@ namespace Ait.Auth.Api
         /// <summary>
         /// Коннекшен считываем из настроек App_Data/Settings.txt
         /// </summary>
-        public string ConnectionString => this[DB_KEY] ?? DB_KEY;
-
-
-        internal AuthContext CreateAuthContext()
-        {
-            return new AuthContext(ConnectionString);
-        }
-
-        private LazyCache<IAuthRepository> _rep = null;
-
-        public IAuthRepository AuthRepository => _rep.Value;
+        public string ConnectionString => GetSettings().GetOrDefault(DB_KEY) ?? DB_KEY;
 
         public ISettingsProvider Provider { get; private set; }
 
@@ -57,8 +45,8 @@ namespace Ait.Auth.Api
 
         public virtual void Reset()
         {
-            _settings.Reset();
-            _rep.Reset();
+            _config.Reset();
+            _settings.Reset();            
         }
 
         public IDictionary<string, string> GetSettings()
@@ -66,12 +54,6 @@ namespace Ait.Auth.Api
             return _settings.GetSettings();
         }
 
-        public string this[string key]
-        {
-            get
-            {
-                return GetSettings().GetOrDefault(key);
-            }
-        }
+        public DynamicDictionary<string> Config => _config.Value;
     }
 }

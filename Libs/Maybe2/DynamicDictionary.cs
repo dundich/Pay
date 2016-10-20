@@ -32,32 +32,46 @@ namespace Maybe2
 
         public bool ContainsKey(string key)
         {
-            return _dictionary.ContainsKey(getKey(key));
+            return _dictionary.ContainsKey(NormalizeKey(key));
         }
 
 
         public bool Remove(string key)
         {
-            return _dictionary.Remove(getKey(key));
+            return _dictionary.Remove(NormalizeKey(key));
         }
 
-        private static string getKey(string key)
+        protected virtual string NormalizeKey(string key)
         {
-            return (key ?? "").ToLower();
+            return (key ?? "");//.ToLower();
         }
 
         public override bool TryGetMember(
             GetMemberBinder binder, out object result)
         {
-            string name = getKey(binder.Name);
+            string name = NormalizeKey(binder.Name);
             result = _dictionary.GetOrDefault(name);
             return true;
         }
 
         public override bool TrySetMember(SetMemberBinder binder, object value)
         {
-            _dictionary[getKey(binder.Name)] = (T)value;
+            _dictionary[NormalizeKey(binder.Name)] = (T)value;
             return true;
+        }
+
+
+        public T this[string key]
+        {
+            get
+            {
+                return _dictionary.GetOrDefault(NormalizeKey(key));
+
+            }
+            set
+            {
+                _dictionary[NormalizeKey(key)] = value;
+            }
         }
     }
 }

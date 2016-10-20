@@ -13,7 +13,7 @@ namespace Ait.Auth.Api.Modules
         private readonly AppFunc _next;
         private readonly string _prefix;
 
-        private static readonly ConcurrentDictionary<string, IShell> shells = new ConcurrentDictionary<string, IShell>();
+        private static readonly ConcurrentDictionary<string, IAuthShell> shells = new ConcurrentDictionary<string, IAuthShell>();
 
 
         public TenantModule(AppFunc next, string prefix)
@@ -37,7 +37,7 @@ namespace Ait.Auth.Api.Modules
                 var tenat = req.Query.Get("tenat") ?? "";
                 tenat = tenat.ToUpper();
 
-                var sheel = shells.GetOrAdd(tenat, t => new Shell(t));
+                var sheel = shells.GetOrAdd(tenat, t => new AuthShell(t));
 
                 req.Set(OwinConsts.TENAT, sheel.Tenat);
                 req.Set(OwinConsts.SHELL, sheel);

@@ -14,7 +14,7 @@
     <RootNamespace>Ait.Auth.Api</RootNamespace>
     <AssemblyName>Ait.Auth.Api</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -159,7 +159,7 @@
     <Compile Include="Entities\RefreshToken.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="IAuthRepository.cs" />
-    <Compile Include="IShell.cs" />
+    <Compile Include="IAuthShell.cs" />
     <Compile Include="Migrations\201407121205456_AddClientsAndRefreshTokenTables.cs" />
     <Compile Include="Migrations\201407121205456_AddClientsAndRefreshTokenTables.Designer.cs">
       <DependentUpon>201407121205456_AddClientsAndRefreshTokenTables.cs</DependentUpon>
@@ -177,8 +177,8 @@
     <Compile Include="Providers\AuthServerProvider.cs" />
     <Compile Include="Providers\RefreshTokenProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
-    <Compile Include="Shell.cs" />
-    <Compile Include="ShellConsts.cs" />
+    <Compile Include="AuthShell.cs" />
+    <Compile Include="AuthConsts.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Modules\TenantModule.cs" />
   </ItemGroup>

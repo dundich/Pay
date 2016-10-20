@@ -15,6 +15,8 @@ namespace Ait.Auth.Api
 {
     public class Startup
     {
+        public AuthShell Shell => new AuthShell();
+
         public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
         public static GoogleOAuth2AuthenticationOptions googleAuthOptions { get; private set; }
         public static FacebookAuthenticationOptions facebookAuthOptions { get; private set; }
@@ -59,14 +61,12 @@ namespace Ait.Auth.Api
             app.UseOAuthAuthorizationServer(OAuthServerOptions);
             app.UseOAuthBearerAuthentication(OAuthBearerOptions);
 
-            var shell = new Shell();
-
-
             //Configure Google External Login
             googleAuthOptions = new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = shell["GoogleClientId"],
-                ClientSecret = shell["GoogleClientSecret"],
+                ClientId = Shell.Config[AuthConsts.OAuthGoogleClientId_KEY],
+                ClientSecret = Shell.Config[AuthConsts.OAuthGoogleClientSecret_KEY],
+
                 Provider = new GoogleAuthProvider()
             };
             app.UseGoogleAuthentication(googleAuthOptions);
