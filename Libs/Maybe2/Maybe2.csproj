@@ -34,6 +34,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationInfo.cs" />
@@ -47,6 +48,8 @@
     <Compile Include="Configuration\IShellSettings.cs" />
     <Compile Include="Decliner.cs" />
     <Compile Include="DictionaryExtensions.cs" />
+    <Compile Include="DynamicDictionary.cs" />
+    <Compile Include="DynamicXMLNode.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="FileSystems\AppFileSystem.cs" />
     <Compile Include="FileSystems\AppFileSystemHelper.cs" />

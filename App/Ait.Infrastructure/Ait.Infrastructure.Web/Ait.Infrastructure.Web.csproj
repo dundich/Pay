@@ -1202,6 +1202,7 @@
     <Content Include="Views\Emails\ResetPassword.html.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Services\Email\" />
     <Folder Include="Views\App\" />
   </ItemGroup>
   <ItemGroup>

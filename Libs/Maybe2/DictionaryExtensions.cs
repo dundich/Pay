@@ -98,5 +98,10 @@ namespace Maybe2
             return d;
         }
 
+
+        public static DynamicDictionary<V> GetDynamicDictionary<V>(this IDictionary<string, V> dict)
+        {
+            return new DynamicDictionary<V>(dict);
+        }
     }
 }
