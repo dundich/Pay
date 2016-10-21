@@ -74,7 +74,7 @@ namespace Ait.Infrastructure.Web.Controllers
                 var em = shell.EmailService;
 
                 email.ViewData["From"] = "XXX@gmail.com";
-                email.ViewData["To"] = "xxx@mail.ru";
+                email.ViewData["To"] = "dundich_@mail.ru";
                 email.ViewData["Subject"] = "тест";
                 email.ViewData["PersonName"] = "Иванов И И";
                 email.ViewData["Message"] = id;

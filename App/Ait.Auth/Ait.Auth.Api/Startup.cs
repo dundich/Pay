@@ -1,5 +1,6 @@
 ﻿using Ait.Auth.Api.Modules;
 using Ait.Auth.Api.Providers;
+using Maybe2;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Facebook;
 using Microsoft.Owin.Security.Google;
@@ -15,7 +16,8 @@ namespace Ait.Auth.Api
 {
     public class Startup
     {
-        public AuthShell Shell => new AuthShell();
+
+        readonly AuthShell rootShell = new AuthShell();
 
         public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
         public static GoogleOAuth2AuthenticationOptions googleAuthOptions { get; private set; }
@@ -61,24 +63,30 @@ namespace Ait.Auth.Api
             app.UseOAuthAuthorizationServer(OAuthServerOptions);
             app.UseOAuthBearerAuthentication(OAuthBearerOptions);
 
-            //Configure Google External Login
-            googleAuthOptions = new GoogleOAuth2AuthenticationOptions()
+            if (!rootShell.Config[AuthConsts.OAuthGoogleClientId_KEY].IsNullOrWhiteSpace())
             {
-                ClientId = Shell.Config[AuthConsts.OAuthGoogleClientId_KEY],
-                ClientSecret = Shell.Config[AuthConsts.OAuthGoogleClientSecret_KEY],
+                //Configure Google External Login
+                googleAuthOptions = new GoogleOAuth2AuthenticationOptions()
+                {
+                    ClientId = rootShell.Config[AuthConsts.OAuthGoogleClientId_KEY],
+                    ClientSecret = rootShell.Config[AuthConsts.OAuthGoogleClientSecret_KEY],
 
-                Provider = new GoogleAuthProvider()
-            };
-            app.UseGoogleAuthentication(googleAuthOptions);
+                    Provider = new GoogleAuthProvider()
+                };
+                app.UseGoogleAuthentication(googleAuthOptions);
+            }
 
-            //Configure Facebook External Login
-            facebookAuthOptions = new FacebookAuthenticationOptions()
+            if (!rootShell.Config[AuthConsts.OAuthFacebookAppId_KEY].IsNullOrWhiteSpace())
             {
-                AppId = "xxxxxx",
-                AppSecret = "xxxxxx",
-                Provider = new FacebookAuthProvider()
-            };
-            app.UseFacebookAuthentication(facebookAuthOptions);
+                //Configure Facebook External Login
+                facebookAuthOptions = new FacebookAuthenticationOptions()
+                {
+                    AppId = rootShell.Config[AuthConsts.OAuthFacebookAppId_KEY],
+                    AppSecret = rootShell.Config[AuthConsts.OAuthFacebookAppSecret_KEY],
+                    Provider = new FacebookAuthProvider()
+                };
+                app.UseFacebookAuthentication(facebookAuthOptions);
+            }
 
         }
     }

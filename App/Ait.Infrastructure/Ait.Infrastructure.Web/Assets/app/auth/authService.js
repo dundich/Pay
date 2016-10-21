@@ -199,7 +199,7 @@
 
             return $http
                 .post(serviceBase + 'api/account/registerexternal', registerExternalData)
-                .then(function (response) {
+                .then(function (d) {
                     var response = d.data;
 
                     localStorageService.authorizationData = {

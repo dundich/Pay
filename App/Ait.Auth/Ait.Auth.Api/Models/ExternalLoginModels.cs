@@ -16,9 +16,9 @@ namespace Ait.Auth.Api.Models
         [Required]
         public string UserName { get; set; }
 
-        [EmailAddress]
+        //[EmailAddress]
         [Display(Name = "Email")]
-        [Required]
+        //[Required]
         public string UserEmail { get; set; }
 
         [Required]

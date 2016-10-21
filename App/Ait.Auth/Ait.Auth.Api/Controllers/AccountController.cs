@@ -22,7 +22,7 @@ namespace Ait.Auth.Api.Controllers
     public class AccountController : ApiController
     {
         private IAuthRepository _repo => Request.GetOwinContext().GetAuthRep();
-
+        private IAuthShell _shell => Request.GetOwinContext().GetShell();
         private IAuthenticationManager Authentication
         {
             get { return Request.GetOwinContext().Authentication; }
@@ -353,7 +353,7 @@ namespace Ait.Auth.Api.Controllers
             {
                 //You can get it from here: https://developers.facebook.com/tools/accesstoken/
                 //More about debug_tokn here: http://stackoverflow.com/questions/16641083/how-does-one-get-the-app-access-token-for-debug-token-inspection-on-facebook
-                var appToken = "xxxxxx";
+                var appToken = _shell.Config[AuthConsts.OAuthFacebookAppToken_KEY];
                 verifyTokenEndPoint = string.Format("https://graph.facebook.com/debug_token?input_token={0}&access_token={1}", accessToken, appToken);
             }
             else if (provider == "Google")
@@ -463,11 +463,13 @@ namespace Ait.Auth.Api.Controllers
                     return null;
                 }
 
+                var username = (identity.FindFirstValue(ClaimTypes.Surname).PackToNull() ?? identity.FindFirstValue(ClaimTypes.Name)).Replace(" ", "");
+
                 return new ExternalLoginData
                 {
                     LoginProvider = providerKeyClaim.Issuer,
                     ProviderKey = providerKeyClaim.Value,
-                    UserName = identity.FindFirstValue(ClaimTypes.Surname).PackToNull() ?? identity.FindFirstValue(ClaimTypes.Name),
+                    UserName = username,
                     UserEmail = identity.FindFirstValue(ClaimTypes.Email),
                     ExternalAccessToken = identity.FindFirstValue("ExternalAccessToken"),
                 };

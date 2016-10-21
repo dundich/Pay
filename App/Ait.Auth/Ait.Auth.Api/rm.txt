@@ -1,22 +1,25 @@
-﻿gmail 
+﻿https://www.asp.net/mvc/overview/security/create-an-aspnet-mvc-5-app-with-facebook-and-google-oauth2-and-openid-sign-on
+
+
+Facebook 
+https://developers.facebook.com/apps  your Facebook credentials.
+
+
+
+
+
+gmail 
 http://ru.stackoverflow.com/questions/470829/%D0%9E%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%BA%D0%B0-%D0%BC%D1%8B%D0%BB%D0%B0-%D1%81-gmail-%D0%B2-%D0%B0%D1%81%D0%BF%D0%B5
-https://security.google.com/settings/security/apppasswords?pli=1
+
+https://console.developers.google.com/apis/api?project=seismic-sentry-146920
 https://security.google.com/settings/security/apppasswords
+https://security.google.com/settings/security/permissions?pli=1
 
 
 http://professorweb.ru/my/ASP_NET/identity/level1/1_10.php
 
 
-
 https://aaronparecki.com/2012/07/29/2/oauth2-simplified
-
-http://aboutcode.net/postal/
-
-Application access
-
-In some cases, applications may wish to update their own information such as their website URL or application icon, or they may wish to get statistics about the users of the app. In this case, applications need a way to get an access token for their own account, outside the context of any specific user. OAuth provides the client_credentials grant type for this purpose.
-
-To use the client credentials grant type, make a POST request like the following:
 
 
 
