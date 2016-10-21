@@ -1,8 +1,8 @@
 Db: Server=.;Database=AitAuth1;Trusted_Connection=true;Integrated Security=True
 
-OAuthGoogleClientId: xxxxxx.apps.googleusercontent.com
-OAuthGoogleClientSecret: xxxxx
+OAuthGoogleClientId:		xxxxxx.apps.googleusercontent.com
+OAuthGoogleClientSecret:	xxxxx
 
-OAuthFacebookAppId:		xxxx
-OAuthFacebookAppSecret: xxxx
+OAuthFacebookAppId:			xxxx
+OAuthFacebookAppSecret:		xxxx
 OAuthFacebookAppToken:		xxxx
