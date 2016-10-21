@@ -69,6 +69,8 @@ namespace Ait.Infrastructure.Web.Controllers
             {
                 var shell = new InfraShell();
 
+
+
                 EmailMessage email = new EmailMessage();
 
                 var em = shell.EmailService;
