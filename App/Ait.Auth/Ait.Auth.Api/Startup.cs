@@ -7,6 +7,7 @@ using Microsoft.Owin.Security.Google;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using System;
+using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 
@@ -83,8 +84,14 @@ namespace Ait.Auth.Api
                 {
                     AppId = rootShell.Config[AuthConsts.OAuthFacebookAppId_KEY],
                     AppSecret = rootShell.Config[AuthConsts.OAuthFacebookAppSecret_KEY],
+                    UserInformationEndpoint = "https://graph.facebook.com/v2.4/me?fields=id,name,email,first_name,last_name",
+                    BackchannelHttpHandler = new FacebookBackChannelHandler(),
+                    Scope = { "email" },
                     Provider = new FacebookAuthProvider()
                 };
+
+                //facebookAuthOptions.Scope.Add("email");
+
                 app.UseFacebookAuthentication(facebookAuthOptions);
             }
 
