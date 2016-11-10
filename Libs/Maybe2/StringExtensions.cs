@@ -58,6 +58,37 @@ namespace Maybe2
             return string.IsNullOrWhiteSpace(s) ? null : s;
         }
 
+        /// <summary>
+        /// Форматировать вывод телефонов
+        /// 79291111111 => +7 (929) 111-11-11
+        /// </summary>
+        public static string FormatPhoneNumber(this string input)
+        {
+            //value = new System.Text.RegularExpressions.Regex(@"\D").Replace(value, string.Empty);
+            if (input == null)
+                return null;
+
+            var value = input.PackToNumber();
+
+            if (value.Length == 11)
+            {
+                var v = String.Format("{0:# (###) ###-##-##}", Convert.ToInt64(value));
+
+                if (v.StartsWith("7"))
+                    return "+" + v;
+
+                return v;
+            }
+
+            if (value.Length == 10)
+            {
+                return String.Format("{0:8 (###) ###-##-##}", Convert.ToInt64(value));
+            }
+
+            return input;
+        }
+
+
         public static string format(this string o, params object[] args)
         {
             return string.Format(o ?? "{0}", args);
@@ -303,5 +334,6 @@ namespace Maybe2
 
             return result;
         }
+
     }
 }

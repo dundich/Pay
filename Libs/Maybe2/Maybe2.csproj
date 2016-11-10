@@ -49,6 +49,7 @@
     <Compile Include="Configuration\IShellSettings.cs" />
     <Compile Include="Configuration\Shell.cs" />
     <Compile Include="Configuration\ShellConsts.cs" />
+    <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="Decliner.cs" />
     <Compile Include="DictionaryExtensions.cs" />
     <Compile Include="DynamicDictionary.cs" />
