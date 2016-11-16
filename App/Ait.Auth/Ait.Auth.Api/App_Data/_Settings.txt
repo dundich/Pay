@@ -6,3 +6,11 @@ OAuthGoogleClientSecret:	xxxxx
 OAuthFacebookAppId:			xxxx
 OAuthFacebookAppSecret:		xxxx
 OAuthFacebookAppToken:		xxxx
+
+SmtpClientUserName: xxxxxx@gmail.com
+SmtpClientPassword: xxxxxxx
+SmtpClientHost: smtp.gmail.com
+SmtpClientPort: 587
+SmtpClientEnableSsl: true
+SmtpClientUseDefaultCredentials: false
+SmtpClientDeliveryMethod: Network

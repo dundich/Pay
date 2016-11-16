@@ -38,6 +38,7 @@ namespace Ait.Auth.Api.Controllers
         [Route("Register")]
         public async Task<IHttpActionResult> Register(UserModel userModel)
         {
+
             //if (userModel.UserName != null && userModel.UserName.Contains("admin"))
             //{
             //    ModelState.AddModelError("", "Ник пользователя не должен содержать слово 'admin'");

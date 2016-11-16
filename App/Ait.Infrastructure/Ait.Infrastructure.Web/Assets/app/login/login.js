@@ -133,19 +133,19 @@
         <ait-field class="col s12" ait-field-type="password" form="form" caption="Пароль" ng-model="$ctrl.state.password" required="true" ait-focus-on="::!!$ctrl.state.userName">\
         </ait-field>\
     </div>\
-        <div class="row">\
-            <p class="col s12">\
-                <br\>\
-                <button class="btn btn-large" type="submit"\
-                        ng-disabled="form.$invalid"\
-                        ng-class="{disabled:(form.$invalid)}"\
-                        data-ng-click="$ctrl.login()">Войти</button>\
-                <a style="float:right;" class="btn btn-large btn-flat" type="button" ng-href="#/signup/{{$ctrl.state.userName}}">Регистрация</a>&nbsp;\
-            </p>\
-        </div>\
-        <div data-ng-hide="$ctrl.message == \'\'" class="alert alert-danger">\
-            <ait-error-panel error="$ctrl.message"></ait-error-panel>\
-        </div>\
+    <div class="row">\
+        <p class="col s12">\
+            <br\>\
+            <button class="btn btn-large" type="submit"\
+                    ng-disabled="form.$invalid"\
+                    ng-class="{disabled:(form.$invalid)}"\
+                    data-ng-click="$ctrl.login()">Войти</button>\
+            <a style="float:right;" class="btn btn-large btn-flat" type="button" ng-href="#/signup/{{$ctrl.state.userName}}">Регистрация</a>&nbsp;\
+        </p>\
+    </div>\
+    <div data-ng-hide="$ctrl.message == \'\'" class="alert alert-danger">\
+        <ait-error-panel error="$ctrl.message"></ait-error-panel>\
+    </div>\
     <div class="col s12">\
         <p>Войти через социальные сети</p>\
         <p>\
